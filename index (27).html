@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<title>Anna Seghers – Der Ausflug der toten Mädchen</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+html,body{
+  margin:0; height:100%;
+  font-family: Georgia, serif;
+  background:#000;
+}
+.hero{
+  position:relative;
+  height:100vh;
+  overflow:hidden;
+  color:#f5f5f5;
+}
+.hero img{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+.overlay{
+  position:absolute;
+  inset:0;
+  background:rgba(0,0,0,.45);
+}
+.content{
+  position:relative;
+  z-index:2;
+  height:100%;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  padding:2rem;
+}
+h1{font-size:3rem; margin-bottom:.5rem}
+h2{font-size:1.6rem; font-weight:normal; margin-top:0}
+nav{
+  margin-top:2rem;
+  display:flex;
+  flex-direction:column;
+  gap:1rem;
+}
+a{
+  color:#fff;
+  text-decoration:none;
+  font-size:1.1rem;
+  padding:.6rem 1.2rem;
+  border:1px solid rgba(255,255,255,.6);
+}
+a:hover{background:rgba(255,255,255,.15)}
+</style>
+</head>
+<body>
+
+<section class="hero">
+  <img src="img/mainz_ueberblendung.gif" alt="Überblendung Mainz – Vergangenheit und Gegenwart">
+  <div class="overlay"></div>
+  <div class="content">
+    <h1>Anna Seghers</h1>
+    <h2>Der Ausflug der toten Mädchen</h2>
+
+    <nav>
+      <a href="materials.html">Texte (PDF)</a>
+      <a href="close-reading.html">Close Reading</a>
+      <a href="essay.html">Essay</a>
+    </nav>
+  </div>
+</section>
+
+</body>
+</html>

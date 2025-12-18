@@ -1,0 +1,316 @@
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<title>Anna Seghers – Ausflug der toten Mädchen | Fragen</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+:root{--overlay-hero:rgba(255,255,255,.8);--overlay-body:rgba(255,255,255,.88);}
+body{margin:0;font-family:Georgia,serif;background:
+linear-gradient(var(--overlay-body),var(--overlay-body)),
+url('mexiko_wueste_blur.jpg') center/cover fixed;}
+.hero{min-height:60vh;display:flex;align-items:center;justify-content:center;text-align:center;
+background:linear-gradient(var(--overlay-hero),var(--overlay-hero)),
+url('anna_seghers_portrait_blur.jpg') center/cover;}
+main{max-width:1100px;margin:auto;padding:3rem;}
+textarea{width:100%;min-height:180px;padding:1rem;}
+.feedback{font-style:italic;margin-top:.3rem;}
+.controls,.progress{position:fixed;right:10px;background:#fff;padding:10px;border-radius:10px;}
+.controls{top:10px} .progress{bottom:10px}
+@media print{.controls,.progress{display:none} body{background:white}}
+</style>
+<script>
+const TEACHER_PW="seghers";
+const QUESTIONS = {
+q1: {
+  fields: [['gegenwart', 'jetzt', 'exil'], ['vergangenheit', 'erinner', 'kindheit'], ['denken', 'reflekt', 'bewusst']],
+  hint: "Beziehe Gegenwartssituation und Erinnerungsbewegung explizit aufeinander."
+},
+q2: {
+  fields: [['name', 'ruf', 'netty'], ['erinner', 'assozi'], ['identitaet', 'vergangen']],
+  hint: "Achte auf emotionale Reaktionen und die Bedeutung von Namen."
+},
+q3: {
+  fields: [['schaukel', 'beweg'], ['ueberblend', 'wechsel'], ['landschaft', 'ort']],
+  hint: "Beschreibe die Bewegung zwischen Räumen und Zeiten."
+},
+q4: {
+  fields: [['leni'], ['sorglos', 'leicht'], ['erlebt', 'schicksal'], ['treffen', 'begegn']],
+  hint: "Beziehe Charakterisierung und Lebensweg zusammen."
+},
+q5: {
+  fields: [['marianne'], ['ns', 'nationalsozial'], ['andeut', 'indirekt'], ['tochter', 'kind']],
+  hint: "Achte auf Andeutungen statt explizite Aussagen."
+},
+q6: {
+  fields: [['frau mees'], ['kreuz', 'symbol'], ['haltung', 'einstellung']],
+  hint: "Deute das Kreuz symbolisch."
+},
+q7: {
+  fields: [['nora'], ['entwicklung', 'veraender'], ['ns', 'zeit'], ['verhalten']],
+  hint: "Betone Entwicklung und Kontext."
+},
+q8: {
+  fields: [['lore'], ['denunzi', 'verrat'], ['naziliebhaber'], ['beschuld']],
+  hint: "Beziehe Denunziation und Folgen ein."
+},
+q9: {
+  fields: [['ida'], ['heirat'], ['leben', 'biografie'], ['ende', 'tod']],
+  hint: "Strukturiere Leben – Entscheidung – Ende."
+},
+q10: {
+  fields: [['gerda'], ['suizid', 'selbstmord'], ['vertilg', 'ausloesch']],
+  hint: "Gehe auf Deutung der Formulierung ein."
+},
+q11: {
+  fields: [['otto fresenius'], ['schicksal'], ['dampfer', 'rahmen']],
+  hint: "Beachte die Rahmenfunktion."
+},
+q12: {
+  fields: [['zukunft'], ['abhaeng'], ['liebespaar']],
+  hint: "Erkläre die Abhängigkeit metaphorisch."
+},
+q13: {
+  fields: [['entfremd'], ['vergleich', 'unterschied'], ['otto', 'gustav']],
+  hint: "Vergleiche Figuren gezielt."
+},
+q14: {
+  fields: [['herr neeb'], ['einfluss', 'auswirk'], ['handlung']],
+  hint: "Fokussiere auf Handlungsauslösung."
+},
+q15: {
+  fields: [['else'], ['ebi'], ['beziehung', 'geschichte']],
+  hint: "Deute die Beziehung im Kontext."
+},
+q16: {
+  fields: [['verschr'], ['ueberblend'], ['schiff', 'reise']],
+  hint: "Betone Struktur und Bewegung."
+},
+q17: {
+  fields: [['auftrag'], ['bericht', 'schreiben'], ['ich']],
+  hint: "Erkläre Anlass und Funktion."
+},
+q18: {
+  fields: [['aussicht'], ['deutsche geschichte'], ['heimat']],
+  hint: "Verknüpfe Landschaft und Geschichte."
+},
+q19: {
+  fields: [['greis'], ['ueberlebt'], ['schueler']],
+  hint: "Deute symbolisch."
+},
+q20: {
+  fields: [['abschied'], ['tod'], ['kind', 'ueberlebt']],
+  hint: "Beziehe Zukunftsperspektive ein."
+},
+q21: {
+  fields: [['heimkehr'], ['weg', 'rueckkehr'], ['vorahn']],
+  hint: "Unterscheide wörtlich und übertragen."
+},
+q22: {
+  fields: [['muedig'], ['traum'], ['mexiko']],
+  hint: "Verbinde Traum und Realität."
+},
+q23: {
+  fields: [['zeit'], ['strom'], ['unermess']],
+  hint: "Deute metaphorisch."
+},
+q24: {
+  fields: [['lehrerin'], ['auftrag'], ['ausflug']],
+  hint: "Schließe den Bogen zum Ganzen."
+},};
+function norm(t){return t.toLowerCase().replace(/ä/g,"ae").replace(/ö/g,"oe").replace(/ü/g,"ue");}
+function check(id){
+ const t=norm(document.getElementById(id).value);
+ let hit=0;
+ QUESTIONS[id].fields.forEach(f=>{if(f.some(w=>t.includes(w))) hit++;});
+ const fb=document.getElementById(id+"_fb");
+ if(hit>=2){fb.textContent="Zentrale Aspekte sind erkennbar."; }
+ else{fb.textContent=QUESTIONS[id].hint;}
+ updateProgress();
+}
+function save(id){localStorage.setItem(id,document.getElementById(id).value);}
+function load(){document.querySelectorAll("textarea").forEach(t=>{const v=localStorage.getItem(t.id);if(v)t.value=v;});updateProgress();}
+function updateProgress(){let d=0;for(let i=1;i<=24;i++){if(document.getElementById("q"+i).value.trim().length>30)d++;}
+document.getElementById("progressText").textContent="Bearbeitet: "+d+" / 24";}
+function exportPDF(){window.print();}
+window.onload=load;
+</script>
+</head>
+<body>
+<div class="controls"><button onclick="exportPDF()">Als PDF exportieren</button></div>
+<div class="progress"><span id="progressText"></span></div>
+<section class="hero"><h1>Ausflug der toten Mädchen</h1></section>
+<main>
+
+<section class="question">
+  <h2>1. Ausgangssituation</h2>
+  <p>Kommentieren Sie die Ausgangssituation der Erzählung! Wo befindet sich das Ich und worüber denkt es nach? Wie reflektiert es seine Gegenwart und seine Vergangenheit?</p>
+  <textarea id="q1" oninput="save('q1'); check('q1');"></textarea>
+  <div id="q1_fb" class="feedback"></div>
+</section>
+
+<section class="question">
+  <h2>2. Netty</h2>
+  <p>Was löst der Rufname Netty beim Ich aus? Was können wir über seine Vorgeschichte erahnen? Was erfahren wir über sein Verhältnis zu Namen?</p>
+  <textarea id="q2" oninput="save('q2'); check('q2');"></textarea>
+  <div id="q2_fb" class="feedback"></div>
+</section>
+
+<section class="question">
+  <h2>3. Schaukel</h2>
+  <p>Was löst die Schaukel aus? Erklären Sie die Überblendungen der Landschaften!</p>
+  <textarea id="q3" oninput="save('q3'); check('q3');"></textarea>
+  <div id="q3_fb" class="feedback"></div>
+</section>
+
+<section class="question">
+  <h2>4. Leni</h2>
+  <p>Wie wird Leni beschrieben? Wie kommentiert das Ich deren Sorglosigkeit? Was hat sie alles erlebt? Wo hat das Ich sie zuletzt getroffen?</p>
+  <textarea id="q4" oninput="save('q4'); check('q4');"></textarea>
+  <div id="q4_fb" class="feedback"></div>
+</section>
+
+<section class="question">
+  <h2>5. Marianne</h2>
+  <p>Welche Geschichte erzählt das Ich über Marianne? Was können wir über ihr Verhalten während der NS-Zeit erahnen? Was erfahren wir indirekt? Was geschah mit Lenis Tochter?</p>
+  <textarea id="q5" oninput="save('q5'); check('q5');"></textarea>
+  <div id="q5_fb" class="feedback"></div>
+</section>
+
+<section class="question">
+  <h2>6. Frau Mees</h2>
+  <p>Wie wird Frau Mees beschrieben? Was bedeutet das klobige Kreuz? Wie wird ihre Haltung beschrieben?</p>
+  <textarea id="q6" oninput="save('q6'); check('q6');"></textarea>
+  <div id="q6_fb" class="feedback"></div>
+</section>
+
+<section class="question">
+  <h2>7. Nora</h2>
+  <p>Was erfahren wir über Nora? Welche Rolle spielte sie als Mädchen und wie entwickelte sie sich als Erwachsene während der NS-Zeit? Wie verändert sich ihr Verhalten Fräulein Sichel gegenüber?</p>
+  <textarea id="q7" oninput="save('q7'); check('q7');"></textarea>
+  <div id="q7_fb" class="feedback"></div>
+</section>
+
+<section class="question">
+  <h2>8. Lore</h2>
+  <p>Fassen Sie das Schicksal von Lore zusammen! Wie denunzierte sie ihr eifersüchtiger Naziliebhaber? Wessen wurde sie bezichtigt?</p>
+  <textarea id="q8" oninput="save('q8'); check('q8');"></textarea>
+  <div id="q8_fb" class="feedback"></div>
+</section>
+
+<section class="question">
+  <h2>9. Ida</h2>
+  <p>Fassen Sie das Leben von Ida zusammen! Warum heiratete sie nicht? Was erfahren wir über ihr Ende?</p>
+  <textarea id="q9" oninput="save('q9'); check('q9');"></textarea>
+  <div id="q9_fb" class="feedback"></div>
+</section>
+
+<section class="question">
+  <h2>10. Gerda</h2>
+  <p>Beschreiben Sie Gerda! Wie verlief ihr Leben und warum beendete sie es? Interpretieren Sie den Satz zur Vertilgbarkeit ihres Lebens.</p>
+  <textarea id="q10" oninput="save('q10'); check('q10');"></textarea>
+  <div id="q10_fb" class="feedback"></div>
+</section>
+
+<section class="question">
+  <h2>11. Otto Fresenius</h2>
+  <p>Fassen Sie das Schicksal von Otto Fresenius zusammen! Kommentieren Sie die Rahmung durch die Dampferfahrt.</p>
+  <textarea id="q11" oninput="save('q11'); check('q11');"></textarea>
+  <div id="q11_fb" class="feedback"></div>
+</section>
+
+<section class="question">
+  <h2>12. Liebespaar</h2>
+  <p>Interpretieren Sie den Satz zur Abhängigkeit von Lenis Zukunft vom Liebespaar.</p>
+  <textarea id="q12" oninput="save('q12'); check('q12');"></textarea>
+  <div id="q12_fb" class="feedback"></div>
+</section>
+
+<section class="question">
+  <h2>13. Entfremdung</h2>
+  <p>Erklären Sie die erzählerische Darstellung der Entfremdung von Leni und Marianne. Was erfahren wir über Otto Fresenius? Was unterscheidet ihn von Gustav Liebig?</p>
+  <textarea id="q13" oninput="save('q13'); check('q13');"></textarea>
+  <div id="q13_fb" class="feedback"></div>
+</section>
+
+<section class="question">
+  <h2>14. Herr Neeb</h2>
+  <p>Welche Auswirkungen hat Herr Neeb auf den weiteren Verlauf der Handlung?</p>
+  <textarea id="q14" oninput="save('q14'); check('q14');"></textarea>
+  <div id="q14_fb" class="feedback"></div>
+</section>
+
+<section class="question">
+  <h2>15. Else und Ebi</h2>
+  <p>Interpretieren Sie die Geschichte von Else und Ebi!</p>
+  <textarea id="q15" oninput="save('q15'); check('q15');"></textarea>
+  <div id="q15_fb" class="feedback"></div>
+</section>
+
+<section class="question">
+  <h2>16. Verschränkung</h2>
+  <p>Zeigen Sie, wie die Geschichten miteinander verschränkt werden! Erklären Sie die Überblendungen der Handlungsstränge! Wohin bricht das Schiff auf?</p>
+  <textarea id="q16" oninput="save('q16'); check('q16');"></textarea>
+  <div id="q16_fb" class="feedback"></div>
+</section>
+
+<section class="question">
+  <h2>17. Auftrag</h2>
+  <p>Wie kommt das Ich zum Auftrag, einen Bericht zu schreiben?</p>
+  <textarea id="q17" oninput="save('q17'); check('q17');"></textarea>
+  <div id="q17_fb" class="feedback"></div>
+</section>
+
+<section class="question">
+  <h2>18. Aussicht</h2>
+  <p>Wie wird mit der Aussichtsbeschreibung die deutsche Geschichte kommentiert? Interpretieren Sie den zitierten Satz zur Heimat.</p>
+  <textarea id="q18" oninput="save('q18'); check('q18');"></textarea>
+  <div id="q18_fb" class="feedback"></div>
+</section>
+
+<section class="question">
+  <h2>19. Greis</h2>
+  <p>Interpretieren Sie den Umstand, dass der Greis alle seine Schüler überlebt!</p>
+  <textarea id="q19" oninput="save('q19'); check('q19');"></textarea>
+  <div id="q19_fb" class="feedback"></div>
+</section>
+
+<section class="question">
+  <h2>20. Abschied</h2>
+  <p>Deuten Sie die Abschiedsszene nach dem Ausflug! Wie werden Marianne und Leni sterben? Warum überlebt ihr Kind?</p>
+  <textarea id="q20" oninput="save('q20'); check('q20');"></textarea>
+  <div id="q20_fb" class="feedback"></div>
+</section>
+
+<section class="question">
+  <h2>21. Heimkehr</h2>
+  <p>Analysieren Sie die doppelte Bedeutung der Heimkehr! Wie erlebt das Ich den Weg? Welche Vorahnungen bewahrheiten sich?</p>
+  <textarea id="q21" oninput="save('q21'); check('q21');"></textarea>
+  <div id="q21_fb" class="feedback"></div>
+</section>
+
+<section class="question">
+  <h2>22. Müdigkeit</h2>
+  <p>Erläutern Sie die Müdigkeit! Was verbirgt sich in ihr? Wie transponiert sich die Traumrealität in die mexikanische?</p>
+  <textarea id="q22" oninput="save('q22'); check('q22');"></textarea>
+  <div id="q22_fb" class="feedback"></div>
+</section>
+
+<section class="question">
+  <h2>23. Zeitstrom</h2>
+  <p>Wie lesen Sie den Satz zum unermesslichen Strom von Zeit?</p>
+  <textarea id="q23" oninput="save('q23'); check('q23');"></textarea>
+  <div id="q23_fb" class="feedback"></div>
+</section>
+
+<section class="question">
+  <h2>24. Lehrerin</h2>
+  <p>Inwiefern erhält der Auftrag der Lehrerin während des Ausflugs eine neue Bedeutung? Was ist aus diesem Ausflug geworden?</p>
+  <textarea id="q24" oninput="save('q24'); check('q24');"></textarea>
+  <div id="q24_fb" class="feedback"></div>
+</section>
+
+</main>
+</body>
+</html>

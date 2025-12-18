@@ -1,46 +1,39 @@
-
 <!DOCTYPE html>
 <html lang="de">
 <head>
 <meta charset="UTF-8">
-<title>Anna Seghers – Ausflug der toten Mädchen | Close Reading</title>
+<title>Close Reading</title>
 <style>
-body{font-family:Georgia,serif; line-height:1.6; margin:40px; max-width:1000px;}
-h1,h2{margin-top:2em;}
-textarea{width:100%; min-height:120px; padding:10px; margin-bottom:20px;}
-.teacher{background:#eef4fb;}
+body{
+  font-family: Georgia, serif;
+  background:url("img/mexiko_wueste_blur.jpg") center/cover fixed;
+  margin:0;
+}
+section{
+  background:rgba(255,255,255,0.92);
+  max-width:900px;
+  margin:2rem auto;
+  padding:2rem;
+}
+textarea{width:100%;min-height:140px;}
+.hint{margin-top:.5rem;font-style:italic;}
 </style>
 <script>
-function save(){document.querySelectorAll('textarea').forEach(t=>localStorage.setItem(t.id,t.value));}
-function load(){document.querySelectorAll('textarea').forEach(t=>{const v=localStorage.getItem(t.id); if(v) t.value=v;});}
-window.onload=load;
+function hint(id,text){
+  document.getElementById(id).innerText = text;
+}
 </script>
 </head>
 <body>
-<h1>Anna Seghers: <em>Ausflug der toten Mädchen</em></h1>
 
-<h2>1. Erinnerung & Erzählsituation</h2>
-<p>Wie ist die Erzählsituation gestaltet? Von welchem Zeitpunkt aus wird erinnert?</p>
-<textarea id="q1" oninput="save()"></textarea>
-
-<h2>2. Zeitebenen</h2>
-<p>Wie überlagern sich Vergangenheit und Gegenwart? Wo verschwimmen die Ebenen?</p>
-<textarea id="q2" oninput="save()"></textarea>
-
-<h2>3. Motiv der Hitze</h2>
-<p>Welche Funktion hat die Hitze für Wahrnehmung, Erinnerung und Stimmung?</p>
-<textarea id="q3" oninput="save()"></textarea>
-
-<h2>4. Figuren</h2>
-<p>Wähle zwei Mädchen aus und beschreibe, was wir über ihr späteres Schicksal erfahren.</p>
-<textarea id="q4" oninput="save()"></textarea>
-
-<h2>5. Geschichte & Vorwissen</h2>
-<p>Wie verändert das Wissen um Nationalsozialismus und Holocaust die Lektüre?</p>
-<textarea id="q5" oninput="save()"></textarea>
-
-<h2>Lehrer*innen-Kommentar</h2>
-<textarea id="teacher" class="teacher" oninput="save()"></textarea>
+<section>
+<h1>Close Reading – Anfang</h1>
+<p>Analysieren Sie die Bild- und Hitzemetaphorik.</p>
+<textarea></textarea>
+<button onclick="hint('h1','Achten Sie auf Wahrnehmungsverzerrung, Temperatur, Stillstand, Erinnerungsmechanik.')">
+Rückmeldung anzeigen</button>
+<div id="h1" class="hint"></div>
+</section>
 
 </body>
 </html>

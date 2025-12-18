@@ -1,0 +1,133 @@
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<title>Close Reading</title>
+<style>
+body{font-family:Georgia,serif;padding:2rem;background:#f6f4ef}
+.locked{opacity:.35;pointer-events:none}
+.correct{color:green}
+.wrong{color:red}
+.solution{display:none;color:#555}
+#progress{margin:1rem 0;font-weight:bold}
+textarea{width:100%;height:90px}
+button{margin:.3rem 0}
+@media print{button{display:none}}
+</style>
+<script>
+let unlocked = 1;
+let total = 5;
+let teacher = false;
+
+function setPassword(){
+  const p=prompt("Neues Passwort setzen:");
+  if(p){ localStorage.setItem("teacherPass",p); alert("Passwort gespeichert.");}
+}
+function teacherMode(){
+  const stored = localStorage.getItem("teacherPass") || "seghers";
+  const p=prompt("Passwort Lehrer:innen-Modus:");
+  if(p===stored){
+    teacher=true; unlocked=total;
+    for(let i=1;i<=total;i++){document.getElementById("kap"+i)?.classList.remove("locked");}
+    document.querySelectorAll('.solution').forEach(s=>s.style.display="block");
+    updateProgress();
+    alert("Lehrer:innen-Modus aktiv.");
+  }
+}
+function updateProgress(){
+  document.getElementById("progress").innerText="Fortschritt: "+unlocked+" / "+total;
+}
+function check(q,correct,hint){
+  const v=document.querySelector('input[name="'+q+'"]:checked');
+  const out=document.getElementById(q+'out');
+  if(!v){out.innerHTML="Bitte auswählen.";return;}
+  if(v.value===correct){
+    out.innerHTML="✔ richtig"; out.className="correct";
+    unlocked=Math.max(unlocked, parseInt(q.replace("q",""))+1);
+    document.getElementById("kap"+unlocked)?.classList.remove("locked");
+  } else {
+    out.innerHTML="✖ falsch – Hinweis: "+hint; out.className="wrong";
+  }
+  updateProgress();
+}
+function save(id){localStorage.setItem(id,document.getElementById(id).value);}
+function load(id){if(localStorage.getItem(id))document.getElementById(id).value=localStorage.getItem(id);}
+
+function exportJSON(){
+  const data={progress:unlocked,total:total,notes:{}};
+  document.querySelectorAll('textarea').forEach(t=>data.notes[t.id]=t.value);
+  const blob=new Blob([JSON.stringify(data,null,2)],{type:"application/json"});
+  const a=document.createElement("a");
+  a.href=URL.createObjectURL(blob);
+  a.download="seghers_fortschritt.json";
+  a.click();
+}
+</script>
+</head>
+<body onload="updateProgress();['notes1','notes2','notes3','notes4'].forEach(load)">
+
+<h1>Close Reading</h1>
+<div id="progress"></div>
+<button onclick="teacherMode()">Lehrer:innen-Modus</button>
+<button onclick="setPassword()">Passwort setzen</button>
+<button onclick="exportJSON()">Fortschritt exportieren (JSON)</button>
+
+<div id="kap1">
+<h2>1. Mexiko – Hitze</h2>
+<p>Welche Funktion hat die Hitze?</p>
+<label><input type="radio" name="q1" value="a"> Kulisse</label><br>
+<label><input type="radio" name="q1" value="b"> Schwellenzustand</label><br>
+<button onclick="check('q1','b','Hitze destabilisiert Wahrnehmung.')">prüfen</button>
+<span id="q1out"></span>
+<div class="solution">Lösung: Hitze = Schwellenzustand.</div>
+<textarea id="notes1" oninput="save('notes1')"></textarea>
+</div>
+
+<div id="kap2" class="locked">
+<h2>2. Müdigkeit</h2>
+<p>Die Müdigkeit ist …</p>
+<label><input type="radio" name="q2" value="a"> Schwäche</label><br>
+<label><input type="radio" name="q2" value="b"> Übergang</label><br>
+<button onclick="check('q2','b','Müdigkeit ermöglicht Erinnerung.')">prüfen</button>
+<span id="q2out"></span>
+<div class="solution">Lösung: Übergangszustand.</div>
+<textarea id="notes2" oninput="save('notes2')"></textarea>
+</div>
+
+<div id="kap3" class="locked">
+<h2>3. Netty</h2>
+<p>Was bewirkt der Name?</p>
+<label><input type="radio" name="q3" value="a"> Nostalgie</label><br>
+<label><input type="radio" name="q3" value="b"> Identitätsauflösung</label><br>
+<button onclick="check('q3','b','Der Name löscht spätere Rollen.')">prüfen</button>
+<span id="q3out"></span>
+<div class="solution">Lösung: Auflösung späterer Identitäten.</div>
+<textarea id="notes3" oninput="save('notes3')"></textarea>
+</div>
+
+<div id="kap4" class="locked">
+<h2>4. Überblendungen</h2>
+<p>Wie ist Zeit organisiert?</p>
+<label><input type="radio" name="q4" value="a"> linear</label><br>
+<label><input type="radio" name="q4" value="b"> überlagernd</label><br>
+<button onclick="check('q4','b','Gegenwart und Vergangenheit koexistieren.')">prüfen</button>
+<span id="q4out"></span>
+<div class="solution">Lösung: Überlagerung.</div>
+<textarea id="notes4" oninput="save('notes4')"></textarea>
+</div>
+
+<div id="kap5" class="locked">
+<h2>5. Die Mädchen</h2>
+<p>Warum werden sie erinnert?</p>
+<label><input type="radio" name="q5" value="a"> Heroisierung</label><br>
+<label><input type="radio" name="q5" value="b"> Bewahrung</label><br>
+<button onclick="check('q5','b','Erinnerung rettet ohne Heroisierung.')">prüfen</button>
+<span id="q5out"></span>
+<div class="solution">Lösung: Bewahrung ohne Verklärung.</div>
+</div>
+
+<p><a href="essay.html">→ Essay-Modul</a></p>
+<button onclick="window.print()">Notizen als PDF exportieren</button>
+</body>
+</html>

@@ -1,0 +1,44 @@
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<title>Essay-Modul</title>
+<style>
+body{font-family:Georgia,serif;padding:2rem;background:#fdfdfb}
+textarea{width:100%;height:120px;margin-bottom:1rem}
+h2{margin-top:2rem}
+</style>
+<script>
+function save(id){localStorage.setItem(id,document.getElementById(id).value);}
+function load(id){if(localStorage.getItem(id))document.getElementById(id).value=localStorage.getItem(id);}
+function exportEssay(){
+  const data={
+    these:document.getElementById("these").value,
+    argument:document.getElementById("argument").value,
+    textbezug:document.getElementById("textbezug").value
+  };
+  const blob=new Blob([JSON.stringify(data,null,2)],{type:"application/json"});
+  const a=document.createElement("a");
+  a.href=URL.createObjectURL(blob);
+  a.download="seghers_essay.json";
+  a.click();
+}
+</script>
+</head>
+<body onload="['these','argument','textbezug'].forEach(load)">
+<h1>Essay-Modul</h1>
+
+<h2>These</h2>
+<textarea id="these" oninput="save('these')"></textarea>
+
+<h2>Argument</h2>
+<textarea id="argument" oninput="save('argument')"></textarea>
+
+<h2>Textbezug (Zitate / Szenen)</h2>
+<textarea id="textbezug" oninput="save('textbezug')"></textarea>
+
+<button onclick="exportEssay()">Essay exportieren (JSON)</button>
+<button onclick="window.print()">Essay als PDF</button>
+</body>
+</html>

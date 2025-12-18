@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<title>Close Reading – Anna Seghers</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body{
+  margin:0;
+  font-family: Georgia, serif;
+  background: url("img/mexiko_wueste_blur.jpg") center/cover fixed;
+}
+main{
+  max-width: 900px;
+  margin: 3rem auto;
+  padding: 2.5rem;
+  background: rgba(255,255,255,0.95);
+}
+h1{margin-top:0;}
+h2{margin-top:2.5rem;}
+p.lead{
+  font-style:italic;
+}
+textarea{
+  width:100%;
+  min-height:180px;
+  font-family: Georgia, serif;
+  font-size:1rem;
+}
+button{
+  margin-top:.5rem;
+  font-size:1rem;
+}
+.feedback{
+  margin-top:1rem;
+  padding:1rem;
+  background:#f3f3f3;
+  border-left:5px solid #555;
+  font-style:italic;
+}
+</style>
+<script>
+function showHint(id, text){
+  document.getElementById(id).innerHTML = text;
+}
+</script>
+</head>
+
+<body>
+<main>
+
+<h1>Close Reading</h1>
+<p class="lead">
+Untersuchen Sie zentrale Textstellen genau. Arbeiten Sie sprachliche Details, Motive und erzählerische Verfahren heraus.
+</p>
+
+<h2>Kapitel 1 – Hitze und Stillstand</h2>
+<p>Analysieren Sie, wie die Hitze sprachlich dargestellt wird und welche Wirkung sie auf Wahrnehmung und Denken hat.</p>
+<textarea></textarea><br>
+<button onclick="showHint('c1',
+'Stichworte: Hitze als Lähmung, Körperempfinden, verlangsamte Wahrnehmung, Stillstand als Voraussetzung des Erinnerns.')">Rückmeldung anzeigen</button>
+<div id="c1" class="feedback"></div>
+
+<h2>Kapitel 2 – Auslösung der Erinnerung</h2>
+<p>Untersuchen Sie den Moment, in dem die Erinnerung einsetzt. Ist er bewusst gesteuert oder unwillkürlich?</p>
+<textarea></textarea><br>
+<button onclick="showHint('c2',
+'Stichworte: plötzlicher Erinnerungsimpuls, unwillkürlich, sinnliche Wahrnehmung als Auslöser, Gegenwart öffnet Vergangenheit.')">Rückmeldung anzeigen</button>
+<div id="c2" class="feedback"></div>
+
+<h2>Kapitel 3 – Überblendung von Zeiten</h2>
+<p>Beschreiben Sie, wie Gegenwart und Vergangenheit im Erzählen ineinander übergehen.</p>
+<textarea></textarea><br>
+<button onclick="showHint('c3',
+'Stichworte: Überblendung, keine klare Trennung der Zeitebenen, Gleichzeitigkeit, erinnerndes Erzählen.')">Rückmeldung anzeigen</button>
+<div id="c3" class="feedback"></div>
+
+<h2>Kapitel 4 – Die Mädchen als Figuren</h2>
+<p>Analysieren Sie die Darstellung der Mädchen. Welche erzählerische Funktion erfüllen sie?</p>
+<textarea></textarea><br>
+<button onclick="showHint('c4',
+'Stichworte: kollektive Erinnerung, Individualisierung durch Namen, verlorene Generation, emotionale Verdichtung.')">Rückmeldung anzeigen</button>
+<div id="c4" class="feedback"></div>
+
+<h2>Kapitel 5 – Erzählinstanz und Perspektive</h2>
+<p>Untersuchen Sie die Rolle der Ich-Erzählerin im Close Reading.</p>
+<textarea></textarea><br>
+<button onclick="showHint('c5',
+'Stichworte: Ich-Erzählung, retrospektiv, subjektiv, reflektierend, Nähe und Distanz zugleich.')">Rückmeldung anzeigen</button>
+<div id="c5" class="feedback"></div>
+
+<h2>Kapitel 6 – Sprache des Verlusts</h2>
+<p>Analysieren Sie, wie Tod und Verlust sprachlich gefasst werden.</p>
+<textarea></textarea><br>
+<button onclick="showHint('c6',
+'Stichworte: Andeutung statt Ausformulierung, Nachträglichkeit, leise Sprache, Trauer durch Erinnerung.')">Rückmeldung anzeigen</button>
+<div id="c6" class="feedback"></div>
+
+<h2>Meta-Reflexion</h2>
+<p>Was leistet das Close Reading für das Verständnis des Textes insgesamt?</p>
+<textarea></textarea><br>
+<button onclick="showHint('c7',
+'Stichworte: vertieftes Textverständnis, Wahrnehmung sprachlicher Details, Zusammenhang von Form und Inhalt.')">Rückmeldung anzeigen</button>
+<div id="c7" class="feedback"></div>
+
+</main>
+</body>
+</html>

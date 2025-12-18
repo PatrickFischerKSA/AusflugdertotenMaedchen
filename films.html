@@ -2,7 +2,8 @@
 <html lang="de">
 <head>
 <meta charset="UTF-8">
-<title>Filme – Anna Seghers</title>
+<title>Filme & Reflexion – Anna Seghers</title>
+
 <style>
 body{
   font-family: Georgia, serif;
@@ -17,78 +18,226 @@ h1, h2{
   margin-bottom: 4rem;
 }
 iframe{
-  width: 100%;
-  height: 480px;
-  border: none;
-  margin: 1rem 0 1.5rem 0;
+  width:100%;
+  height:420px;
+  border:none;
+  margin:1rem 0;
+}
+textarea, input{
+  width:100%;
+  font-family: Georgia, serif;
+  font-size:1rem;
+  padding:0.6rem;
+  margin-top:0.5rem;
+}
+textarea{
+  min-height:160px;
 }
 .notes{
-  font-size: 0.95rem;
-  color: #333;
-  background: #f3f1eb;
-  padding: 1rem;
+  background:#f3f1eb;
+  padding:1rem;
+  margin-top:1rem;
 }
-.nav{
-  margin-bottom: 2rem;
+.teacher-only{
+  display:none;
+  background:#eef0ff;
+  padding:1rem;
+  margin-top:1rem;
 }
-a{
-  color: #333;
-  text-decoration: none;
+.meta{
+  font-size:0.9rem;
+  color:#444;
+  margin-top:0.5rem;
 }
-a:hover{
-  text-decoration: underline;
+button{
+  padding:0.6rem 1.2rem;
+  font-size:1rem;
+  margin:0.3rem 0.5rem 1.2rem 0;
+}
+.progress{
+  font-size:0.95rem;
+  margin-bottom:2rem;
 }
 @media print{
-  iframe{display:none}
+  iframe, button, .meta {display:none}
+  textarea{border:none}
 }
 </style>
+
+<script>
+let teacherPassword = localStorage.getItem("teacher_pw") || "seghers";
+let teacherMode = false;
+
+function enterTeacherMode(){
+  const pw = prompt("Lehrer:innen-Passwort:");
+  if(pw === teacherPassword){
+    teacherMode = true;
+    document.querySelectorAll(".teacher-only")
+      .forEach(el => el.style.display = "block");
+  } else {
+    alert("Falsches Passwort");
+  }
+}
+
+function setNewPassword(){
+  const pw = document.getElementById("newPw").value.trim();
+  if(pw.length < 4){
+    alert("Passwort zu kurz");
+    return;
+  }
+  teacherPassword = pw;
+  localStorage.setItem("teacher_pw", pw);
+  alert("Passwort geändert");
+}
+
+function saveAll(){
+  document.querySelectorAll("textarea").forEach(t=>{
+    localStorage.setItem(t.id, t.value);
+  });
+  updateProgress();
+}
+
+function loadAll(){
+  document.querySelectorAll("textarea").forEach(t=>{
+    const v = localStorage.getItem(t.id);
+    if(v) t.value = v;
+  });
+  updateProgress();
+}
+
+function updateProgress(){
+  const total = document.querySelectorAll(".student-note").length;
+  let filled = 0;
+  document.querySelectorAll(".student-note").forEach(t=>{
+    if(t.value.trim().length > 30) filled++;
+  });
+  document.getElementById("progress").innerText =
+    "Fortschritt: " + filled + " von " + total + " Film-Notizen bearbeitet";
+}
+
+function exportPDF(){
+  window.print();
+}
+
+function exportJSON(){
+  const data = {
+    timestamp: new Date().toISOString(),
+    notes: {}
+  };
+  document.querySelectorAll("textarea").forEach(t=>{
+    data.notes[t.id] = t.value;
+  });
+  const blob = new Blob(
+    [JSON.stringify(data, null, 2)],
+    {type:"application/json"}
+  );
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = "seghers_filme_notizen.json";
+  a.click();
+}
+
+window.onload = loadAll;
+</script>
 </head>
+
 <body>
 
-<div class="nav">
-  <a href="index.html">← zurück zur Startseite</a>
-</div>
+<a href="index.html">← zurück zur Startseite</a>
 
 <h1>Filme zu Anna Seghers</h1>
 
-<div class="section">
-  <h2>1. Der Ausflug der toten Mädchen – Lesung</h2>
-  <iframe 
-    src="https://www.youtube.com/embed/Tc4q6SLRCQY"
-    title="Der Ausflug der toten Mädchen – Lesung"
-    allowfullscreen>
-  </iframe>
-  <div class="notes">
-    <strong>Beobachtungsauftrag (global):</strong><br>
-    Achte auf Stimme, Tempo und Pausen der Lesung.
-    Inwiefern verändert das Hören des Textes dein Textverständnis?
-  </div>
+<button onclick="exportPDF()">🖨️ PDF</button>
+<button onclick="exportJSON()">📥 JSON</button>
+<button onclick="enterTeacherMode()">🔐 Lehrer:innen-Modus</button>
+
+<div class="progress" id="progress"></div>
+
+<div class="section" id="film1">
+<h2>1. Der Ausflug der toten Mädchen – Lesung</h2>
+<div class="meta">
+🔗 Bezug: <a href="close-reading.html#kapitel-1">Close Reading – Einstieg</a>
+</div>
+<iframe src="https://www.youtube.com/embed/Tc4q6SLRCQY" allowfullscreen></iframe>
+
+<div class="notes">
+<strong>Notizen (Schüler:innen):</strong>
+<textarea id="f1_student" class="student-note" oninput="saveAll()"></textarea>
 </div>
 
-<div class="section">
-  <h2>2. Anna Seghers in Mainz (SWR Retro)</h2>
-  <iframe 
-    src="https://www.ardmediathek.de/embed/Y3JpZDovL3N3ci5kZS9hZXgvbzEzMjQ0NzQ"
-    title="Anna Seghers in Mainz – SWR"
-    allowfullscreen>
-  </iframe>
-  <div class="notes">
-    <strong>Beobachtungsauftrag (global):</strong><br>
-    Welche Rolle spielen Herkunft, Stadt und Erinnerung in Seghers’ Selbstbeschreibung?
-  </div>
+<div class="teacher-only">
+<strong>Kommentar (Lehrer:in):</strong>
+<textarea id="f1_teacher" oninput="saveAll()"></textarea>
+</div>
 </div>
 
-<div class="section">
-  <h2>3. Autorin Anna Seghers spricht über ihr Werk (NDR)</h2>
-  <iframe 
-    src="https://www.ardmediathek.de/embed/Y3JpZDovL25kci5kZS8xZjllZTYxNy03NGEzLTQ4MTUtYWUxMi1lNzA3NDIxOWM5MmI"
-    title="Anna Seghers spricht über ihr Werk – NDR"
-    allowfullscreen>
-  </iframe>
-  <div class="notes">
-    <strong>Beobachtungsauftrag (global):</strong><br>
-    Welche Begriffe und Denkfiguren verwendet Seghers, um ihr eigenes Schreiben zu erklären?
-  </div>
+<div class="section" id="film2">
+<h2>2. Lesung mit Anna Seghers</h2>
+<div class="meta">
+🔗 Bezug: <a href="close-reading.html#kapitel-netty">Close Reading – „Netty“</a>
+</div>
+<iframe src="https://www.youtube.com/embed/OtBP7T33W0o" allowfullscreen></iframe>
+
+<div class="notes">
+<strong>Notizen (Schüler:innen):</strong>
+<textarea id="f2_student" class="student-note" oninput="saveAll()"></textarea>
+</div>
+
+<div class="teacher-only">
+<strong>Kommentar (Lehrer:in):</strong>
+<textarea id="f2_teacher" oninput="saveAll()"></textarea>
+</div>
+</div>
+
+<div class="section" id="film3">
+<h2>3. Das alte Mainz (SWR)</h2>
+<div class="meta">
+🔗 Bezug: <a href="close-reading.html#kapitel-mainz">Close Reading – Erinnerung & Ort</a>
+</div>
+<p>
+▶ <a target="_blank"
+href="https://www.ardmediathek.de/video/swr-retro-abendschau/anna-seghers-in-mainz/swr/Y3JpZDovL3N3ci5kZS9hZXgvbzEzMjQ0NzQ">
+Film in der ARD-Mediathek öffnen</a>
+</p>
+
+<div class="notes">
+<strong>Notizen (Schüler:innen):</strong>
+<textarea id="f3_student" class="student-note" oninput="saveAll()"></textarea>
+</div>
+
+<div class="teacher-only">
+<strong>Kommentar (Lehrer:in):</strong>
+<textarea id="f3_teacher" oninput="saveAll()"></textarea>
+</div>
+</div>
+
+<div class="section" id="film4">
+<h2>4. Anna Seghers spricht über ihr Werk (NDR)</h2>
+<div class="meta">
+🔗 Bezug: <a href="close-reading.html#kapitel-poetik">Close Reading – Schreiben als Zeugnis</a>
+</div>
+<p>
+▶ <a target="_blank"
+href="https://www.ardmediathek.de/video/kultur-im-norden/autorin-anna-seghers-spricht-ueber-ihr-werk/ndr/Y3JpZDovL25kci5kZS8xZjllZTYxNy03NGEzLTQ4MTUtYWUxMi1lNzA3NDIxOWM5MmI">
+Film in der ARD-Mediathek öffnen</a>
+</p>
+
+<div class="notes">
+<strong>Notizen (Schüler:innen):</strong>
+<textarea id="f4_student" class="student-note" oninput="saveAll()"></textarea>
+</div>
+
+<div class="teacher-only">
+<strong>Kommentar (Lehrer:in):</strong>
+<textarea id="f4_teacher" oninput="saveAll()"></textarea>
+</div>
+</div>
+
+<div class="teacher-only">
+<h2>🔧 Lehrer:innen-Einstellungen</h2>
+<label>Neues Passwort:</label>
+<input id="newPw" type="text">
+<button onclick="setNewPassword()">Passwort ändern</button>
 </div>
 
 </body>

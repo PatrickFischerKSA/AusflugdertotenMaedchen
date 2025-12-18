@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<title>Lehrer:innen-Übersicht – Anna Seghers</title>
+<style>
+body{font-family:Georgia,serif;padding:2rem;background:#f7f7fb}
+h1,h2{font-weight:normal}
+.card{background:white;padding:1.2rem;margin-bottom:1.5rem;border-left:4px solid #556}
+.hidden{display:none}
+button{padding:0.5rem 1rem;margin-top:0.5rem}
+</style>
+<script>
+function login(){
+  const pw=document.getElementById("pw").value;
+  const real=localStorage.getItem("teacher_pw")||"seghers";
+  if(pw===real){
+    document.getElementById("login").style.display="none";
+    document.getElementById("dash").style.display="block";
+    render();
+  } else alert("Falsches Passwort");
+}
+function render(){
+  const mods=[
+    ["f1_student","Film 1 – Lesung"],
+    ["f2_student","Film 2 – Seghers spricht"],
+    ["f3_student","Film 3 – Mainz"],
+    ["f4_student","Film 4 – Werk"]
+  ];
+  const box=document.getElementById("modules");
+  box.innerHTML="";
+  mods.forEach(m=>{
+    const v=localStorage.getItem(m[0])||"";
+    const ok=v.trim().length>30?"✔ bearbeitet":"✖ offen";
+    box.innerHTML+=`<div class="card"><strong>${m[1]}</strong><br>Status: ${ok}<br><a href="films.html#${m[0]}">→ öffnen</a></div>`;
+  });
+}
+</script>
+</head>
+<body>
+<div id="login">
+<h1>🔐 Lehrer:innen-Login</h1>
+<input id="pw" type="password">
+<button onclick="login()">Login</button>
+</div>
+<div id="dash" class="hidden">
+<h1>📊 Dashboard</h1>
+<div id="modules"></div>
+</div>
+</body>
+</html>

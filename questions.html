@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<title>Alle Lektürefragen – Anna Seghers</title>
+<style>
+body{font-family:Georgia,serif;margin:0}
+.hero{position:relative;min-height:40vh;
+background:linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)),url("img/Anna_Seghers.jpg") center/cover no-repeat;}
+.hero::after{content:"";position:absolute;inset:0;backdrop-filter:blur(6px);}
+.hero h1{position:relative;color:white;padding:3rem;font-weight:normal}
+.section{padding:2rem}
+textarea{width:100%;min-height:160px;font-family:Georgia,serif}
+.feedback{margin-top:0.5rem;font-size:0.9rem}
+.correct{color:green}
+.hint{color:#444}
+button{margin-top:0.5rem}
+@media print{button,.feedback{display:none}}
+</style>
+<script>
+function check(id,groups,hint){
+const t=document.getElementById(id).value.toLowerCase();
+let score=0;
+groups.forEach(g=>{g.forEach(w=>{if(t.includes(w))score++;});});
+const fb=document.getElementById(id+"_fb");
+if(score>=2){fb.innerHTML="✔ Antwort geht in eine stimmige Richtung.";fb.className="feedback correct";}
+else{fb.innerHTML="✖ Hinweis: "+hint;fb.className="feedback hint";}
+}
+</script>
+</head>
+<body>
+<div class="hero"><h1>Alle Lektürefragen<br><small>Anna Seghers – Der Ausflug der toten Mädchen</small></h1></div>
+<div class="section">
+<h2>Frage 1</h2>
+<p>Welche Funktion hat die Gegenwartssituation in Mexiko für die Erinnerungserzählung?</p>
+<textarea id="q1"></textarea>
+<button onclick="check('q1',[['mexiko','exil','wüste'],['erinnerung','vergangenheit','gegenwart']], 'Achte auf den Kontrast zwischen äußerer Situation und innerem Erinnerungsraum.')">Antwort prüfen</button>
+<div id="q1_fb" class="feedback"></div>
+</div>
+</body>
+</html>

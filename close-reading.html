@@ -1,133 +1,145 @@
-
 <!DOCTYPE html>
 <html lang="de">
 <head>
 <meta charset="UTF-8">
-<title>Close Reading</title>
+<title>Close Reading – Ausflug der toten Mädchen</title>
 <style>
 body{font-family:Georgia,serif;padding:2rem;background:#f6f4ef}
-.locked{opacity:.35;pointer-events:none}
-.correct{color:green}
-.wrong{color:red}
-.solution{display:none;color:#555}
-#progress{margin:1rem 0;font-weight:bold}
-textarea{width:100%;height:90px}
+.chapter{margin-bottom:4rem}
+textarea{width:100%;min-height:90px;margin:.5rem 0}
+.big{min-height:160px}
+.meta{min-height:120px;background:#faf8f3}
+.feedback{font-size:.9rem;color:#444}
+.hints{display:none;font-size:.9rem;color:#555;margin-top:.3rem}
+.locked{opacity:.4;pointer-events:none}
+#progress{font-weight:bold;margin-bottom:1rem}
 button{margin:.3rem 0}
 @media print{button{display:none}}
 </style>
 <script>
-let unlocked = 1;
-let total = 5;
-let teacher = false;
-
-function setPassword(){
-  const p=prompt("Neues Passwort setzen:");
-  if(p){ localStorage.setItem("teacherPass",p); alert("Passwort gespeichert.");}
-}
-function teacherMode(){
-  const stored = localStorage.getItem("teacherPass") || "seghers";
-  const p=prompt("Passwort Lehrer:innen-Modus:");
-  if(p===stored){
-    teacher=true; unlocked=total;
-    for(let i=1;i<=total;i++){document.getElementById("kap"+i)?.classList.remove("locked");}
-    document.querySelectorAll('.solution').forEach(s=>s.style.display="block");
-    updateProgress();
-    alert("Lehrer:innen-Modus aktiv.");
-  }
-}
-function updateProgress(){
-  document.getElementById("progress").innerText="Fortschritt: "+unlocked+" / "+total;
-}
-function check(q,correct,hint){
-  const v=document.querySelector('input[name="'+q+'"]:checked');
-  const out=document.getElementById(q+'out');
-  if(!v){out.innerHTML="Bitte auswählen.";return;}
-  if(v.value===correct){
-    out.innerHTML="✔ richtig"; out.className="correct";
-    unlocked=Math.max(unlocked, parseInt(q.replace("q",""))+1);
-    document.getElementById("kap"+unlocked)?.classList.remove("locked");
-  } else {
-    out.innerHTML="✖ falsch – Hinweis: "+hint; out.className="wrong";
-  }
-  updateProgress();
-}
+let total=5;
+let unlocked=1;
+const chapters={
+1:{keywords:["schwelle","körper","wahrnehmung","zeit"],hints:["Körperwahrnehmung","Zeitdehnung","Übergang"]},
+2:{keywords:["übergang","erinnerung","bewusstsein"],hints:["Schwellenzustand","Erzählfunktion"]},
+3:{keywords:["identität","kindheit","name"],hints:["Namensmagie","Nähe","Auflösung"]},
+4:{keywords:["überlagerung","gleichzeitigkeit"],hints:["Tempus","fließende Übergänge"]},
+5:{keywords:["bewahrung","erinnerung","ethik"],hints:["Verantwortung","Nüchternheit"]}
+};
 function save(id){localStorage.setItem(id,document.getElementById(id).value);}
 function load(id){if(localStorage.getItem(id))document.getElementById(id).value=localStorage.getItem(id);}
-
-function exportJSON(){
-  const data={progress:unlocked,total:total,notes:{}};
-  document.querySelectorAll('textarea').forEach(t=>data.notes[t.id]=t.value);
-  const blob=new Blob([JSON.stringify(data,null,2)],{type:"application/json"});
-  const a=document.createElement("a");
-  a.href=URL.createObjectURL(blob);
-  a.download="seghers_fortschritt.json";
-  a.click();
+function updateProgress(){document.getElementById("progress").innerText="Fortschritt: "+(unlocked-1)+" / "+total;}
+function checkText(ch,id){
+ const txt=document.getElementById(id).value.toLowerCase();
+ const found=chapters[ch].keywords.filter(k=>txt.includes(k));
+ document.getElementById(id+"fb").innerText=found.length>0?"✔ zentrale Aspekte angesprochen":"⚠️ zentrale Aspekte fehlen noch";
+ if(found.length>0 && unlocked<ch+1){unlocked=ch+1;document.getElementById("chap"+unlocked)?.classList.remove("locked");updateProgress();}
 }
+function toggleHints(id){const e=document.getElementById(id);e.style.display=e.style.display==="none"?"block":"none";}
 </script>
 </head>
-<body onload="updateProgress();['notes1','notes2','notes3','notes4'].forEach(load)">
+<body onload="updateProgress();
+['q1a','q1b','o1','m1','q2a','q2b','o2','m2','q3a','q3b','o3','m3','q4a','q4b','o4','m4','q5a','q5b','o5','m5'].forEach(load)">
 
 <h1>Close Reading</h1>
 <div id="progress"></div>
-<button onclick="teacherMode()">Lehrer:innen-Modus</button>
-<button onclick="setPassword()">Passwort setzen</button>
-<button onclick="exportJSON()">Fortschritt exportieren (JSON)</button>
 
-<div id="kap1">
-<h2>1. Mexiko – Hitze</h2>
-<p>Welche Funktion hat die Hitze?</p>
-<label><input type="radio" name="q1" value="a"> Kulisse</label><br>
-<label><input type="radio" name="q1" value="b"> Schwellenzustand</label><br>
-<button onclick="check('q1','b','Hitze destabilisiert Wahrnehmung.')">prüfen</button>
-<span id="q1out"></span>
-<div class="solution">Lösung: Hitze = Schwellenzustand.</div>
-<textarea id="notes1" oninput="save('notes1')"></textarea>
+<div class="chapter" id="chap1">
+<h2>1. Mexiko / Hitze</h2>
+<p>Welche Funktion hat die Hitze im Text?</p>
+<textarea id="q1a" oninput="save('q1a')"></textarea>
+<button onclick="checkText(1,'q1a')">überprüfen</button><div class="feedback" id="q1afb"></div>
+
+<p>Welche Wirkung hat sie auf Wahrnehmung und Zeit?</p>
+<textarea id="q1b" oninput="save('q1b')"></textarea>
+<button onclick="checkText(1,'q1b')">überprüfen</button><div class="feedback" id="q1bfb"></div>
+
+<p><strong>Beobachtung:</strong></p>
+<textarea class="big" id="o1" oninput="save('o1')"></textarea>
+<button onclick="toggleHints('h1')">Hinweise einblenden</button>
+<div class="hints" id="h1">Körper – Wahrnehmung – Übergang – Zeit</div>
+
+<p><strong>Meta-Reflexion:</strong></p>
+<textarea class="meta" id="m1" oninput="save('m1')" placeholder="Was verändert diese Beobachtung an deinem Verständnis des Textanfangs?"></textarea>
 </div>
 
-<div id="kap2" class="locked">
+<div class="chapter locked" id="chap2">
 <h2>2. Müdigkeit</h2>
-<p>Die Müdigkeit ist …</p>
-<label><input type="radio" name="q2" value="a"> Schwäche</label><br>
-<label><input type="radio" name="q2" value="b"> Übergang</label><br>
-<button onclick="check('q2','b','Müdigkeit ermöglicht Erinnerung.')">prüfen</button>
-<span id="q2out"></span>
-<div class="solution">Lösung: Übergangszustand.</div>
-<textarea id="notes2" oninput="save('notes2')"></textarea>
+<p>Welche erzählerische Funktion hat die Müdigkeit?</p>
+<textarea id="q2a" oninput="save('q2a')"></textarea>
+<button onclick="checkText(2,'q2a')">überprüfen</button><div class="feedback" id="q2afb"></div>
+
+<p>Warum greift eine psychologische Deutung zu kurz?</p>
+<textarea id="q2b" oninput="save('q2b')"></textarea>
+<button onclick="checkText(2,'q2b')">überprüfen</button><div class="feedback" id="q2bfb"></div>
+
+<p><strong>Beobachtung:</strong></p>
+<textarea class="big" id="o2" oninput="save('o2')"></textarea>
+<button onclick="toggleHints('h2')">Hinweise einblenden</button>
+<div class="hints" id="h2">Schwellenzustand – Erinnerung – Erzählen</div>
+
+<p><strong>Meta-Reflexion:</strong></p>
+<textarea class="meta" id="m2" oninput="save('m2')" placeholder="Wie verändert sich dein Blick auf Erinnerung durch diese Beobachtungen?"></textarea>
 </div>
 
-<div id="kap3" class="locked">
-<h2>3. Netty</h2>
-<p>Was bewirkt der Name?</p>
-<label><input type="radio" name="q3" value="a"> Nostalgie</label><br>
-<label><input type="radio" name="q3" value="b"> Identitätsauflösung</label><br>
-<button onclick="check('q3','b','Der Name löscht spätere Rollen.')">prüfen</button>
-<span id="q3out"></span>
-<div class="solution">Lösung: Auflösung späterer Identitäten.</div>
-<textarea id="notes3" oninput="save('notes3')"></textarea>
+<div class="chapter locked" id="chap3">
+<h2>3. „Netty“</h2>
+<p>Was bewirkt die Namensnennung?</p>
+<textarea id="q3a" oninput="save('q3a')"></textarea>
+<button onclick="checkText(3,'q3a')">überprüfen</button><div class="feedback" id="q3afb"></div>
+
+<p>Welche Distanz würde ein anderer Name erzeugen?</p>
+<textarea id="q3b" oninput="save('q3b')"></textarea>
+<button onclick="checkText(3,'q3b')">überprüfen</button><div class="feedback" id="q3bfb"></div>
+
+<p><strong>Beobachtung:</strong></p>
+<textarea class="big" id="o3" oninput="save('o3')"></textarea>
+<button onclick="toggleHints('h3')">Hinweise einblenden</button>
+<div class="hints" id="h3">Identität – Kindheit – Nähe</div>
+
+<p><strong>Meta-Reflexion:</strong></p>
+<textarea class="meta" id="m3" oninput="save('m3')" placeholder="Was sagt diese Namenswahl über Erinnerung und Identität aus?"></textarea>
 </div>
 
-<div id="kap4" class="locked">
+<div class="chapter locked" id="chap4">
 <h2>4. Überblendungen</h2>
-<p>Wie ist Zeit organisiert?</p>
-<label><input type="radio" name="q4" value="a"> linear</label><br>
-<label><input type="radio" name="q4" value="b"> überlagernd</label><br>
-<button onclick="check('q4','b','Gegenwart und Vergangenheit koexistieren.')">prüfen</button>
-<span id="q4out"></span>
-<div class="solution">Lösung: Überlagerung.</div>
-<textarea id="notes4" oninput="save('notes4')"></textarea>
+<p>Wie greifen Vergangenheit und Gegenwart ineinander?</p>
+<textarea id="q4a" oninput="save('q4a')"></textarea>
+<button onclick="checkText(4,'q4a')">überprüfen</button><div class="feedback" id="q4afb"></div>
+
+<p>Warum ist „Rückblende“ unzutreffend?</p>
+<textarea id="q4b" oninput="save('q4b')"></textarea>
+<button onclick="checkText(4,'q4b')">überprüfen</button><div class="feedback" id="q4bfb"></div>
+
+<p><strong>Beobachtung:</strong></p>
+<textarea class="big" id="o4" oninput="save('o4')"></textarea>
+<button onclick="toggleHints('h4')">Hinweise einblenden</button>
+<div class="hints" id="h4">Gleichzeitigkeit – Übergang – Struktur</div>
+
+<p><strong>Meta-Reflexion:</strong></p>
+<textarea class="meta" id="m4" oninput="save('m4')" placeholder="Wie verändert diese Zeitstruktur dein Lesen des Textes?"></textarea>
 </div>
 
-<div id="kap5" class="locked">
+<div class="chapter locked" id="chap5">
 <h2>5. Die Mädchen</h2>
-<p>Warum werden sie erinnert?</p>
-<label><input type="radio" name="q5" value="a"> Heroisierung</label><br>
-<label><input type="radio" name="q5" value="b"> Bewahrung</label><br>
-<button onclick="check('q5','b','Erinnerung rettet ohne Heroisierung.')">prüfen</button>
-<span id="q5out"></span>
-<div class="solution">Lösung: Bewahrung ohne Verklärung.</div>
+<p>Warum werden die Mädchen erinnert?</p>
+<textarea id="q5a" oninput="save('q5a')"></textarea>
+<button onclick="checkText(5,'q5a')">überprüfen</button><div class="feedback" id="q5afb"></div>
+
+<p>Welche Haltung zur Geschichte zeigt sich?</p>
+<textarea id="q5b" oninput="save('q5b')"></textarea>
+<button onclick="checkText(5,'q5b')">überprüfen</button><div class="feedback" id="q5bfb"></div>
+
+<p><strong>Beobachtung:</strong></p>
+<textarea class="big" id="o5" oninput="save('o5')"></textarea>
+<button onclick="toggleHints('h5')">Hinweise einblenden</button>
+<div class="hints" id="h5">Bewahrung – Verantwortung – Ethik</div>
+
+<p><strong>Meta-Reflexion:</strong></p>
+<textarea class="meta" id="m5" oninput="save('m5')" placeholder="Was bedeutet diese Form des Erinnerns für dich als Leserin oder Leser?"></textarea>
 </div>
 
-<p><a href="essay.html">→ Essay-Modul</a></p>
-<button onclick="window.print()">Notizen als PDF exportieren</button>
+<p><a href="essay.html">→ Zum Essay-Modul</a></p>
+<button onclick="window.print()">Als PDF drucken</button>
 </body>
 </html>

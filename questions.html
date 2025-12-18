@@ -1,41 +1,175 @@
+
 <!DOCTYPE html>
 <html lang="de">
 <head>
 <meta charset="UTF-8">
-<title>Alle Lektürefragen – Anna Seghers</title>
+<title>Anna Seghers – Ausflug der toten Mädchen | Fragen</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
 <style>
-body{font-family:Georgia,serif;margin:0}
-.hero{position:relative;min-height:40vh;
-background:linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)),url("img/Anna_Seghers.jpg") center/cover no-repeat;}
-.hero::after{content:"";position:absolute;inset:0;backdrop-filter:blur(6px);}
-.hero h1{position:relative;color:white;padding:3rem;font-weight:normal}
-.section{padding:2rem}
-textarea{width:100%;min-height:160px;font-family:Georgia,serif}
-.feedback{margin-top:0.5rem;font-size:0.9rem}
-.correct{color:green}
-.hint{color:#444}
-button{margin-top:0.5rem}
-@media print{button,.feedback{display:none}}
-</style>
-<script>
-function check(id,groups,hint){
-const t=document.getElementById(id).value.toLowerCase();
-let score=0;
-groups.forEach(g=>{g.forEach(w=>{if(t.includes(w))score++;});});
-const fb=document.getElementById(id+"_fb");
-if(score>=2){fb.innerHTML="✔ Antwort geht in eine stimmige Richtung.";fb.className="feedback correct";}
-else{fb.innerHTML="✖ Hinweis: "+hint;fb.className="feedback hint";}
+:root{
+  --overlay: rgba(255,255,255,0.88);
+  --student-bg: #fdf6e8;
 }
+
+body{
+  margin:0;
+  font-family: Georgia, serif;
+  background:
+    linear-gradient(var(--overlay),var(--overlay)),
+    url('Anna_Seghers.jpg') center/cover no-repeat fixed;
+}
+
+.hero{
+  min-height:70vh;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  padding:4rem 2rem;
+}
+
+.hero h1{
+  font-size:3rem;
+  margin-bottom:1rem;
+}
+
+.hero p{
+  font-size:1.2rem;
+  max-width:700px;
+}
+
+main{
+  max-width:1100px;
+  margin:0 auto;
+  padding:3rem 2rem 5rem;
+}
+
+.question{
+  margin-bottom:3rem;
+}
+
+.question h2{
+  margin-bottom:.5rem;
+}
+
+textarea{
+  width:100%;
+  min-height:160px;
+  padding:1rem;
+  font-family: Georgia, serif;
+  font-size:1rem;
+  background:var(--student-bg);
+  border:1px solid #aaa;
+  border-radius:10px;
+}
+
+.feedback{
+  margin-top:.5rem;
+  font-style:italic;
+}
+
+.correct{ color:#1a6f3c; }
+.hint{ color:#6b4f00; }
+
+@media print{
+  body{ background:white; }
+  .hero{ min-height:auto; }
+}
+</style>
+
+<script>
+/*
+  Very tolerant checking logic.
+  We do NOT check for one solution,
+  but for semantic fields.
+*/
+
+const questions = {
+  q1:{
+    keywords:[
+      ["erinnerung","gedächtnis","rückblick"],
+      ["gegenwart","jetzt","exil"],
+      ["vergangenheit","kindheit","schulzeit"]
+    ],
+    hint:"Achte auf die Überlagerung von Erinnerungszeit und Erzählgegenwart."
+  },
+  q2:{
+    keywords:[
+      ["hitze","wärme","sommer"],
+      ["erschöpfung","benommen","trägheit","flimmern"],
+      ["erinnerung","auflösung","verzerrung"]
+    ],
+    hint:"Welche Wirkung hat die Hitze auf Wahrnehmung und Denken?"
+  }
+};
+
+function normalize(text){
+  return text.toLowerCase()
+    .replace(/ä/g,"ae").replace(/ö/g,"oe").replace(/ü/g,"ue");
+}
+
+function check(id){
+  const text = normalize(document.getElementById(id).value);
+  let matchedFields = 0;
+
+  questions[id].keywords.forEach(field=>{
+    if(field.some(word => text.includes(word))) matchedFields++;
+  });
+
+  const fb = document.getElementById(id+"_fb");
+
+  if(matchedFields >= 2){
+    fb.textContent = "Deine Antwort deckt zentrale Bedeutungsfelder ab.";
+    fb.className = "feedback correct";
+  }else{
+    fb.textContent = questions[id].hint;
+    fb.className = "feedback hint";
+  }
+}
+
+// LocalStorage
+function save(id){
+  localStorage.setItem(id, document.getElementById(id).value);
+}
+function load(){
+  document.querySelectorAll("textarea").forEach(t=>{
+    const v = localStorage.getItem(t.id);
+    if(v) t.value = v;
+  });
+}
+window.onload = load;
 </script>
 </head>
+
 <body>
-<div class="hero"><h1>Alle Lektürefragen<br><small>Anna Seghers – Der Ausflug der toten Mädchen</small></h1></div>
-<div class="section">
-<h2>Frage 1</h2>
-<p>Welche Funktion hat die Gegenwartssituation in Mexiko für die Erinnerungserzählung?</p>
-<textarea id="q1"></textarea>
-<button onclick="check('q1',[['mexiko','exil','wüste'],['erinnerung','vergangenheit','gegenwart']], 'Achte auf den Kontrast zwischen äußerer Situation und innerem Erinnerungsraum.')">Antwort prüfen</button>
-<div id="q1_fb" class="feedback"></div>
-</div>
+
+<section class="hero">
+  <h1>Ausflug der toten Mädchen</h1>
+  <p>Close-Reading-Fragen zu Anna Seghers’ Text.  
+  Gegenwart und Vergangenheit überlagern sich.</p>
+</section>
+
+<main>
+
+<section class="question">
+  <h2>1. Erzählsituation und Erinnerung</h2>
+  <p>Beschreibe, von welchem Zeitpunkt aus erzählt wird und wie Erinnerung und Gegenwart ineinandergreifen.</p>
+  <textarea id="q1" oninput="save('q1'); check('q1');"></textarea>
+  <div id="q1_fb" class="feedback"></div>
+</section>
+
+<section class="question">
+  <h2>2. Motiv der Hitze</h2>
+  <p>Welche Funktion übernimmt die Hitze im Text? Beziehe Wahrnehmung, Stimmung und Erinnerung ein.</p>
+  <textarea id="q2" oninput="save('q2'); check('q2');"></textarea>
+  <div id="q2_fb" class="feedback"></div>
+</section>
+
+<p><em>Hinweis: Es gibt keine Musterlösung. Rückmeldungen helfen dir, deine Antwort zu schärfen.</em></p>
+
+</main>
+
 </body>
 </html>

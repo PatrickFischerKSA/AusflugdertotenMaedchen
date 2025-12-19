@@ -2,106 +2,130 @@
 <html lang="de">
 <head>
 <meta charset="UTF-8">
-<title>Close Reading – Anna Seghers</title>
+<title>Close Reading – Der Ausflug der toten Mädchen</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
 body{
   margin:0;
   font-family: Georgia, serif;
-  background: url("img/mexiko_wueste_blur.jpg") center/cover fixed;
+  background:
+    linear-gradient(rgba(255,255,255,0.92), rgba(255,255,255,0.92)),
+    url('img/mexiko_wueste_blur.jpg') center/cover fixed;
 }
 main{
-  max-width: 900px;
-  margin: 3rem auto;
-  padding: 2.5rem;
-  background: rgba(255,255,255,0.95);
+  max-width:980px;
+  margin:0 auto;
+  padding:3.5rem 2rem 5rem 2rem;
 }
-h1{margin-top:0;}
-h2{margin-top:2.5rem;}
-p.lead{
-  font-style:italic;
-}
+h1{font-size:2.6rem;margin:0 0 2rem 0}
+section{margin:0 0 3.5rem 0; padding-bottom:3.5rem; border-bottom:1px solid rgba(0,0,0,.15)}
+section:last-child{border-bottom:none}
+h2{font-size:1.55rem;margin:0 0 .8rem 0}
+p.lead{font-style:italic;margin:.25rem 0 1.25rem 0}
 textarea{
   width:100%;
   min-height:180px;
   font-family: Georgia, serif;
   font-size:1rem;
+  padding:.9rem;
+  border:1px solid #888;
+  border-radius:6px;
+  background:#fff;
 }
 button{
-  margin-top:.5rem;
+  margin-top:.75rem;
+  padding:.5rem 1rem;
+  font-family: Georgia, serif;
   font-size:1rem;
 }
 .feedback{
   margin-top:1rem;
   padding:1rem;
-  background:#f3f3f3;
-  border-left:5px solid #555;
+  border-left:5px solid #444;
+  background:#f2f2f2;
   font-style:italic;
 }
 </style>
 <script>
-function showHint(id, text){
-  document.getElementById(id).innerHTML = text;
+function hint(id, txt){
+  document.getElementById(id).innerHTML = txt;
 }
 </script>
 </head>
-
 <body>
 <main>
 
 <h1>Close Reading</h1>
-<p class="lead">
-Untersuchen Sie zentrale Textstellen genau. Arbeiten Sie sprachliche Details, Motive und erzählerische Verfahren heraus.
-</p>
 
-<h2>Kapitel 1 – Hitze und Stillstand</h2>
-<p>Analysieren Sie, wie die Hitze sprachlich dargestellt wird und welche Wirkung sie auf Wahrnehmung und Denken hat.</p>
-<textarea></textarea><br>
-<button onclick="showHint('c1',
-'Stichworte: Hitze als Lähmung, Körperempfinden, verlangsamte Wahrnehmung, Stillstand als Voraussetzung des Erinnerns.')">Rückmeldung anzeigen</button>
-<div id="c1" class="feedback"></div>
+<section>
+<h2>1. Ausgangssituation: Hitze und Stillstand</h2>
+<p class="lead">Untersuchen Sie die ersten Absätze genau.</p>
+<p>Wie wird die Hitze beschrieben, und welche Wirkung hat sie auf Wahrnehmung, Körper und Denken der Erzählerin?</p>
+<textarea></textarea>
+<br>
+<button onclick="hint('h1','Stichworte: Hitze als Lähmung; Stillstand des Körpers; verlangsamte Wahrnehmung; Voraussetzung des Erinnerns.')">Hinweise anzeigen</button>
+<div id="h1" class="feedback"></div>
+</section>
 
-<h2>Kapitel 2 – Auslösung der Erinnerung</h2>
-<p>Untersuchen Sie den Moment, in dem die Erinnerung einsetzt. Ist er bewusst gesteuert oder unwillkürlich?</p>
-<textarea></textarea><br>
-<button onclick="showHint('c2',
-'Stichworte: plötzlicher Erinnerungsimpuls, unwillkürlich, sinnliche Wahrnehmung als Auslöser, Gegenwart öffnet Vergangenheit.')">Rückmeldung anzeigen</button>
-<div id="c2" class="feedback"></div>
+<section>
+<h2>2. Auslösung der Erinnerung</h2>
+<p class="lead">Achten Sie auf den Übergang von Gegenwart zu Vergangenheit.</p>
+<p>Ist der Erinnerungsprozess bewusst gesteuert oder ereignet er sich unwillkürlich? Begründen Sie am Text.</p>
+<textarea></textarea>
+<br>
+<button onclick="hint('h2','Stichworte: unwillkürlicher Erinnerungsimpuls; sinnliche Wahrnehmung; kein aktives Wollen; Überfall der Erinnerung.')">Hinweise anzeigen</button>
+<div id="h2" class="feedback"></div>
+</section>
 
-<h2>Kapitel 3 – Überblendung von Zeiten</h2>
-<p>Beschreiben Sie, wie Gegenwart und Vergangenheit im Erzählen ineinander übergehen.</p>
-<textarea></textarea><br>
-<button onclick="showHint('c3',
-'Stichworte: Überblendung, keine klare Trennung der Zeitebenen, Gleichzeitigkeit, erinnerndes Erzählen.')">Rückmeldung anzeigen</button>
-<div id="c3" class="feedback"></div>
+<section>
+<h2>3. Überblendung der Zeitebenen</h2>
+<p class="lead">Beobachten Sie die Textbewegung zwischen Jetzt und Damals.</p>
+<p>Wie werden Gegenwart (Mexiko) und Vergangenheit (Mainz) ineinander verschränkt?</p>
+<textarea></textarea>
+<br>
+<button onclick="hint('h3','Stichworte: gleitender Übergang; keine klare Zäsur; Gleichzeitigkeit von Zeiten; erzählerische Überblendung.')">Hinweise anzeigen</button>
+<div id="h3" class="feedback"></div>
+</section>
 
-<h2>Kapitel 4 – Die Mädchen als Figuren</h2>
-<p>Analysieren Sie die Darstellung der Mädchen. Welche erzählerische Funktion erfüllen sie?</p>
-<textarea></textarea><br>
-<button onclick="showHint('c4',
-'Stichworte: kollektive Erinnerung, Individualisierung durch Namen, verlorene Generation, emotionale Verdichtung.')">Rückmeldung anzeigen</button>
-<div id="c4" class="feedback"></div>
+<section>
+<h2>4. Die Mädchen</h2>
+<p class="lead">Fokussieren Sie die Darstellung der Mädchenfiguren.</p>
+<p>Welche Funktion erfüllen die Mädchen im Erinnerungsprozess der Erzählerin?</p>
+<textarea></textarea>
+<br>
+<button onclick="hint('h4','Stichworte: kollektive Erinnerung; Individualisierung durch Namen; verlorene Generation; emotionale Verdichtung.')">Hinweise anzeigen</button>
+<div id="h4" class="feedback"></div>
+</section>
 
-<h2>Kapitel 5 – Erzählinstanz und Perspektive</h2>
-<p>Untersuchen Sie die Rolle der Ich-Erzählerin im Close Reading.</p>
-<textarea></textarea><br>
-<button onclick="showHint('c5',
-'Stichworte: Ich-Erzählung, retrospektiv, subjektiv, reflektierend, Nähe und Distanz zugleich.')">Rückmeldung anzeigen</button>
-<div id="c5" class="feedback"></div>
+<section>
+<h2>5. Erzählinstanz und Perspektive</h2>
+<p class="lead">Analysieren Sie die Rolle des erzählenden Ichs.</p>
+<p>Wie wirkt sich die Ich-Perspektive auf Nähe, Distanz und Bewertung des Erinnerten aus?</p>
+<textarea></textarea>
+<br>
+<button onclick="hint('h5','Stichworte: retrospektive Ich-Erzählung; subjektiv; reflektierend; Spannung zwischen Nähe und Distanz.')">Hinweise anzeigen</button>
+<div id="h5" class="feedback"></div>
+</section>
 
-<h2>Kapitel 6 – Sprache des Verlusts</h2>
-<p>Analysieren Sie, wie Tod und Verlust sprachlich gefasst werden.</p>
-<textarea></textarea><br>
-<button onclick="showHint('c6',
-'Stichworte: Andeutung statt Ausformulierung, Nachträglichkeit, leise Sprache, Trauer durch Erinnerung.')">Rückmeldung anzeigen</button>
-<div id="c6" class="feedback"></div>
+<section>
+<h2>6. Sprache des Verlusts</h2>
+<p class="lead">Achten Sie auf Tonfall und Wortwahl.</p>
+<p>Wie wird der Tod der Mädchen sprachlich gefasst, und was sagt das über den Umgang mit Verlust aus?</p>
+<textarea></textarea>
+<br>
+<button onclick="hint('h6','Stichworte: Andeutung statt Pathos; Nachträglichkeit des Wissens; leiser Ton; Trauerarbeit durch Erinnerung.')">Hinweise anzeigen</button>
+<div id="h6" class="feedback"></div>
+</section>
 
+<section>
 <h2>Meta-Reflexion</h2>
-<p>Was leistet das Close Reading für das Verständnis des Textes insgesamt?</p>
-<textarea></textarea><br>
-<button onclick="showHint('c7',
-'Stichworte: vertieftes Textverständnis, Wahrnehmung sprachlicher Details, Zusammenhang von Form und Inhalt.')">Rückmeldung anzeigen</button>
-<div id="c7" class="feedback"></div>
+<p class="lead">Blick auf das Verfahren.</p>
+<p>Was leistet das Close Reading für das Verständnis der Erzählung insgesamt?</p>
+<textarea></textarea>
+<br>
+<button onclick="hint('h7','Stichworte: vertieftes Textverständnis; Zusammenspiel von Form und Inhalt; Bedeutung der Erzählweise.')">Hinweise anzeigen</button>
+<div id="h7" class="feedback"></div>
+</section>
 
 </main>
 </body>

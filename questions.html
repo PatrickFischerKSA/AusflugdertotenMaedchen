@@ -2,100 +2,250 @@
 <html lang="de">
 <head>
 <meta charset="UTF-8">
-<title>Alle Lektürefragen – Anna Seghers</title>
+<title>Alle Lektürefragen – Der Ausflug der toten Mädchen</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
 body{
   margin:0;
   font-family: Georgia, serif;
-  background: url("img/mexiko_wueste_blur.jpg") center/cover fixed;
+  background:
+    linear-gradient(rgba(255,255,255,0.92), rgba(255,255,255,0.92)),
+    url('img/mexiko_wueste_blur.jpg') center/cover fixed;
 }
 main{
-  max-width: 900px;
-  margin: 3rem auto;
-  padding: 2.5rem;
-  background: rgba(255,255,255,0.95);
+  max-width:1000px;
+  margin:0 auto;
+  padding:3.5rem 2rem 5rem 2rem;
 }
-h1{margin-top:0;}
-h2{margin-top:2.5rem;}
+h1{font-size:2.6rem;margin:0 0 2.5rem 0}
+section{margin:0 0 3.5rem 0;padding-bottom:3.5rem;border-bottom:1px solid rgba(0,0,0,.15)}
+section:last-child{border-bottom:none}
+h2{font-size:1.55rem;margin:0 0 1rem 0}
+.question{margin:1.25rem 0}
 textarea{
   width:100%;
-  min-height:160px;
-  font-family: Georgia, serif;
+  min-height:140px;
+  font-family:Georgia, serif;
   font-size:1rem;
+  padding:.85rem;
+  border:1px solid #888;
+  border-radius:6px;
 }
 button{
-  margin-top:.5rem;
-  font-size:1rem;
+  margin-top:.4rem;
+  padding:.4rem .8rem;
+  font-family:Georgia, serif;
 }
 .feedback{
-  margin-top:1rem;
-  padding:1rem;
-  background:#f3f3f3;
-  border-left:5px solid #555;
+  margin-top:.6rem;
+  padding:.8rem;
+  background:#f2f2f2;
+  border-left:5px solid #444;
   font-style:italic;
 }
 </style>
 <script>
-function showHint(id, text){
+function hint(id, text){
   document.getElementById(id).innerHTML = text;
 }
 </script>
 </head>
-
 <body>
 <main>
 
 <h1>Alle Lektürefragen</h1>
 
-<h2>1. Ausgangssituation</h2>
-<p>Kommentieren Sie die Ausgangssituation der Erzählung. Wo befindet sich das Ich und wodurch wird der Erinnerungsprozess ausgelöst?</p>
-<textarea></textarea><br>
-<button onclick="showHint('h1',
-'Stichworte: Exil in Mexiko, Hitze, körperlicher Stillstand, Erinnerungsimpuls, Gegenwart vs. Vergangenheit.')">Antwort prüfen</button>
-<div id="h1" class="feedback"></div>
+<section>
+<h2>Kapitel 1 – Ausgangssituation in Mexiko</h2>
 
-<h2>2. Erinnerung und Zeitstruktur</h2>
-<p>Beschreiben Sie, wie Vergangenheit und Gegenwart im Text ineinander übergehen.</p>
-<textarea></textarea><br>
-<button onclick="showHint('h2',
-'Stichworte: Überblendung, keine lineare Chronologie, Gleichzeitigkeit, Erinnern als Bewegung.')">Antwort prüfen</button>
-<div id="h2" class="feedback"></div>
+<div class="question">
+<p>1. Beschreiben Sie den Schauplatz der Rahmenhandlung.</p>
+<textarea></textarea>
+<button onclick="hint('k1q1','Stichworte: Mexiko, Hitze, Stillstand, Exil, körperliche Erschöpfung.')">Hinweise</button>
+<div id="k1q1" class="feedback"></div>
+</div>
 
-<h2>3. Die Mädchen</h2>
-<p>Welche Funktion haben die Mädchenfiguren innerhalb der Erinnerung?</p>
-<textarea></textarea><br>
-<button onclick="showHint('h3',
-'Stichworte: Kollektiv, Individualisierung, verlorene Generation, Kontrast zur Gegenwart.')">Antwort prüfen</button>
-<div id="h3" class="feedback"></div>
+<div class="question">
+<p>2. Welche Wirkung hat die Hitze auf Wahrnehmung und Denken?</p>
+<textarea></textarea>
+<button onclick="hint('k1q2','Stichworte: Lähmung, verlangsamte Wahrnehmung, Stillstand als Voraussetzung des Erinnerns.')">Hinweise</button>
+<div id="k1q2" class="feedback"></div>
+</div>
 
-<h2>4. Erzählinstanz</h2>
-<p>Charakterisieren Sie die Erzählperspektive und ihre Wirkung.</p>
-<textarea></textarea><br>
-<button onclick="showHint('h4',
-'Stichworte: Ich-Erzählerin, retrospektiv, subjektiv, reflektierend.')">Antwort prüfen</button>
-<div id="h4" class="feedback"></div>
+<div class="question">
+<p>3. Inwiefern steht die Gegenwartssituation bereits im Kontrast zur erinnerten Vergangenheit?</p>
+<textarea></textarea>
+<button onclick="hint('k1q3','Stichworte: Einsamkeit vs. Gemeinschaft, Stillstand vs. Bewegung, Exil vs. Heimat.')">Hinweise</button>
+<div id="k1q3" class="feedback"></div>
+</div>
 
-<h2>5. Sprache und Bilder</h2>
-<p>Analysieren Sie die Bildsprache zu Hitze, Körper und Bewegung.</p>
-<textarea></textarea><br>
-<button onclick="showHint('h5',
-'Stichworte: Hitze als Lähmung, Körperempfinden, Stillstand vs. innere Bewegung.')">Antwort prüfen</button>
-<div id="h5" class="feedback"></div>
+<div class="question">
+<p><strong>Beobachtungsfrage:</strong> Welche Funktion hat die Rahmensituation für den gesamten Text?</p>
+<textarea></textarea>
+<button onclick="hint('k1q4','Stichworte: Erinnerungsrahmen, Kontrastfolie, Ausgangspunkt der Trauerarbeit.')">Hinweise</button>
+<div id="k1q4" class="feedback"></div>
+</div>
+</section>
 
-<h2>6. Tod und Verlust</h2>
-<p>Wie wird der Tod der Mädchen sprachlich und erzählerisch verarbeitet?</p>
-<textarea></textarea><br>
-<button onclick="showHint('h6',
-'Stichworte: Andeutung, Nachträglichkeit des Wissens, Trauerarbeit durch Erinnerung.')">Antwort prüfen</button>
-<div id="h6" class="feedback"></div>
+<section>
+<h2>Kapitel 2 – Einsetzen der Erinnerung</h2>
 
-<h2>7. Bedeutung des Erinnerns</h2>
-<p>Welche Funktion hat das Erinnern für das erzählende Ich?</p>
-<textarea></textarea><br>
-<button onclick="showHint('h7',
-'Stichworte: Identität, Selbstvergewisserung, Widerstand gegen das Vergessen.')">Antwort prüfen</button>
-<div id="h7" class="feedback"></div>
+<div class="question">
+<p>1. Beschreiben Sie den Moment, in dem die Erinnerung einsetzt.</p>
+<textarea></textarea>
+<button onclick="hint('k2q1','Stichworte: plötzlicher Impuls, unwillkürlich, sinnliche Wahrnehmung.')">Hinweise</button>
+<div id="k2q1" class="feedback"></div>
+</div>
+
+<div class="question">
+<p>2. Ist das Erinnern ein bewusster oder ein unbewusster Vorgang?</p>
+<textarea></textarea>
+<button onclick="hint('k2q2','Stichworte: kein aktives Wollen, Überfall der Erinnerung.')">Hinweise</button>
+<div id="k2q2" class="feedback"></div>
+</div>
+
+<div class="question">
+<p>3. Welche Rolle spielen äußere Reize für den Erinnerungsprozess?</p>
+<textarea></textarea>
+<button onclick="hint('k2q3','Stichworte: Hitze, Körperempfinden, Atmosphäre.')">Hinweise</button>
+<div id="k2q3" class="feedback"></div>
+</div>
+
+<div class="question">
+<p><strong>Beobachtungsfrage:</strong> Wie unterscheidet sich diese Erinnerungssituation von einem bewussten Rückblick?</p>
+<textarea></textarea>
+<button onclick="hint('k2q4','Stichworte: Unverfügbarkeit der Erinnerung, Eigenlogik des Gedächtnisses.')">Hinweise</button>
+<div id="k2q4" class="feedback"></div>
+</div>
+</section>
+
+<section>
+<h2>Kapitel 3 – Die Mädchen</h2>
+
+<div class="question">
+<p>1. Wie werden die Mädchen zunächst eingeführt?</p>
+<textarea></textarea>
+<button onclick="hint('k3q1','Stichworte: Gruppe, Schulklasse, Alltäglichkeit.')">Hinweise</button>
+<div id="k3q1" class="feedback"></div>
+</div>
+
+<div class="question">
+<p>2. Welche Unterschiede zwischen den Mädchen werden sichtbar?</p>
+<textarea></textarea>
+<button onclick="hint('k3q2','Stichworte: Individualisierung, Namen, Charakterzüge.')">Hinweise</button>
+<div id="k3q2" class="feedback"></div>
+</div>
+
+<div class="question">
+<p>3. Welche Bedeutung hat die Gemeinschaft der Mädchen für die Erzählerin?</p>
+<textarea></textarea>
+<button onclick="hint('k3q3','Stichworte: Zugehörigkeit, Jugend, Unbeschwertheit.')">Hinweise</button>
+<div id="k3q3" class="feedback"></div>
+</div>
+
+<div class="question">
+<p><strong>Beobachtungsfrage:</strong> Warum ist die Erinnerung an die Mädchen so zentral für den Text?</p>
+<textarea></textarea>
+<button onclick="hint('k3q4','Stichworte: verlorene Generation, persönlicher Verlust, historische Dimension.')">Hinweise</button>
+<div id="k3q4" class="feedback"></div>
+</div>
+</section>
+
+<section>
+<h2>Kapitel 4 – Wissen um den Tod</h2>
+
+<div class="question">
+<p>1. Wann erfährt die Leserin vom Tod der Mädchen?</p>
+<textarea></textarea>
+<button onclick="hint('k4q1','Stichworte: nachträgliches Wissen, zeitliche Distanz.')">Hinweise</button>
+<div id="k4q1" class="feedback"></div>
+</div>
+
+<div class="question">
+<p>2. Wie verändert dieses Wissen den Blick auf die Erinnerungen?</p>
+<textarea></textarea>
+<button onclick="hint('k4q2','Stichworte: Überschattung, Tragik, Vorwissen.')">Hinweise</button>
+<div id="k4q2" class="feedback"></div>
+</div>
+
+<div class="question">
+<p>3. Welche erzählerische Wirkung hat diese zeitliche Verschiebung?</p>
+<textarea></textarea>
+<button onclick="hint('k4q3','Stichworte: Spannung, Trauer, Reflexion.')">Hinweise</button>
+<div id="k4q3" class="feedback"></div>
+</div>
+
+<div class="question">
+<p><strong>Beobachtungsfrage:</strong> Warum wird der Tod nicht unmittelbar erzählt?</p>
+<textarea></textarea>
+<button onclick="hint('k4q4','Stichworte: Schutz der Erinnerung, Vermeidung von Pathos, Trauerarbeit.')">Hinweise</button>
+<div id="k4q4" class="feedback"></div>
+</div>
+</section>
+
+<section>
+<h2>Kapitel 5 – Erzählinstanz und Haltung</h2>
+
+<div class="question">
+<p>1. Aus welcher Perspektive wird erzählt?</p>
+<textarea></textarea>
+<button onclick="hint('k5q1','Stichworte: Ich-Erzählung, retrospektiv.')">Hinweise</button>
+<div id="k5q1" class="feedback"></div>
+</div>
+
+<div class="question">
+<p>2. Wie reflektierend ist das erzählende Ich?</p>
+<textarea></textarea>
+<button onclick="hint('k5q2','Stichworte: Nachdenken, Einordnung, Distanz.')">Hinweise</button>
+<div id="k5q2" class="feedback"></div>
+</div>
+
+<div class="question">
+<p>3. Welche emotionale Haltung nimmt die Erzählerin ein?</p>
+<textarea></textarea>
+<button onclick="hint('k5q3','Stichworte: leise Trauer, Zurückhaltung, Ernst.')">Hinweise</button>
+<div id="k5q3" class="feedback"></div>
+</div>
+
+<div class="question">
+<p><strong>Beobachtungsfrage:</strong> Wie beeinflusst die Erzählhaltung die Wirkung des Textes?</p>
+<textarea></textarea>
+<button onclick="hint('k5q4','Stichworte: Glaubwürdigkeit, Eindringlichkeit, Vermeidung von Sentimentalität.')">Hinweise</button>
+<div id="k5q4" class="feedback"></div>
+</div>
+</section>
+
+<section>
+<h2>Kapitel 6 – Bedeutung des Erinnerns</h2>
+
+<div class="question">
+<p>1. Welche Funktion hat das Erinnern für die Erzählerin?</p>
+<textarea></textarea>
+<button onclick="hint('k6q1','Stichworte: Selbstvergewisserung, Identität.')">Hinweise</button>
+<div id="k6q1" class="feedback"></div>
+</div>
+
+<div class="question">
+<p>2. Inwiefern ist Erinnern auch ein Akt gegen das Vergessen?</p>
+<textarea></textarea>
+<button onclick="hint('k6q2','Stichworte: Bewahren, Zeugnis ablegen.')">Hinweise</button>
+<div id="k6q2" class="feedback"></div>
+</div>
+
+<div class="question">
+<p>3. Welche Verbindung besteht zwischen persönlicher und historischer Erinnerung?</p>
+<textarea></textarea>
+<button onclick="hint('k6q3','Stichworte: individuelles Schicksal, Geschichte, Nationalsozialismus.')">Hinweise</button>
+<div id="k6q3" class="feedback"></div>
+</div>
+
+<div class="question">
+<p><strong>Beobachtungsfrage:</strong> Welche Bedeutung hat der Text für heutige Leserinnen und Leser?</p>
+<textarea></textarea>
+<button onclick="hint('k6q4','Stichworte: Erinnerungskultur, Verantwortung, Aktualität.')">Hinweise</button>
+<div id="k6q4" class="feedback"></div>
+</div>
+</section>
 
 </main>
 </body>

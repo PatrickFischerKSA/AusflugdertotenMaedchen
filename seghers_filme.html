@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Filme – Anna Seghers</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
 body{
   margin:0;
@@ -12,55 +13,74 @@ body{
     url('img/anna_seghers_portrait_blur.jpg') center/cover fixed;
 }
 main{
-  max-width:900px;
+  max-width:980px;
   margin:0 auto;
-  padding:4rem 2rem;
+  padding:3.5rem 2rem 5rem 2rem;
 }
-h1{font-size:2.6rem;margin-bottom:3rem}
-section{margin-bottom:4rem}
-h2{font-size:1.5rem;margin-bottom:1rem}
-iframe{width:100%;height:460px;border:none;margin-bottom:1rem}
+h1{font-size:2.6rem;margin:0 0 2.5rem 0}
+section{margin:0 0 3.5rem 0; padding-bottom:3.5rem; border-bottom:1px solid rgba(0,0,0,.15)}
+section:last-child{border-bottom:none}
+h2{font-size:1.55rem;margin:0 0 .8rem 0}
+.meta{margin:0 0 1rem 0; opacity:.85}
+iframe{width:100%; height:480px; border:none; border-radius:6px; background:#000}
+.btn{
+  display:inline-block;
+  padding:.6rem 1rem;
+  border:1px solid #444;
+  border-radius:6px;
+  background:#f3f3f3;
+  color:#000;
+  text-decoration:none;
+  margin-bottom:1rem;
+}
 textarea{
   width:100%;
-  min-height:130px;
-  font-family:Georgia, serif;
+  min-height:140px;
+  margin-top:1rem;
+  font-family: Georgia, serif;
   font-size:1rem;
-  padding:.8rem;
+  padding:.85rem;
   border:1px solid #888;
+  border-radius:6px;
+  background:rgba(255,255,255,.95);
 }
 </style>
 </head>
 <body>
 <main>
 
-<h1>Filme zu Anna Seghers</h1>
+<h1>Filme</h1>
 
 <section>
-<h2>SWR – Anna Seghers in Mainz</h2>
-<iframe 
-  src="https://www.ardmediathek.de/embed/Y3JpZDovL3N3ci5kZS9hZXgvbzEzMjQ0NzQ"
-  allowfullscreen>
-</iframe>
-<textarea placeholder="Eindrücke / Notizen zum Film"></textarea>
+  <h2>Anna Seghers in Mainz (SWR – Abendschau)</h2>
+  <p class="meta">Film aus der ARD-Mediathek (externer Link).</p>
+  <a class="btn" href="https://www.ardmediathek.de/video/swr-retro-abendschau/anna-seghers-in-mainz/swr/Y3JpZDovL3N3ci5kZS9hZXgvbzEzMjQ0NzQ" target="_blank" rel="noopener">▶ Film in der ARD-Mediathek öffnen</a>
+  <textarea placeholder="Eindrücke / Notizen zum Film"></textarea>
 </section>
 
 <section>
-<h2>NDR – Autorin Anna Seghers spricht über ihr Werk</h2>
-<iframe 
-  src="https://www.ardmediathek.de/embed/Y3JpZDovL25kci5kZS8xZjllZTYxNy03NGEzLTQ4MTUtYWUxMi1lNzA3NDIxOWM5MmI"
-  allowfullscreen>
-</iframe>
-<textarea placeholder="Eindrücke / Notizen zum Film"></textarea>
+  <h2>Autorin Anna Seghers spricht über ihr Werk (NDR – Kultur im Norden)</h2>
+  <p class="meta">Film aus der ARD-Mediathek (externer Link).</p>
+  <a class="btn" href="https://www.ardmediathek.de/video/kultur-im-norden/autorin-anna-seghers-spricht-ueber-ihr-werk/ndr/Y3JpZDovL25kci5kZS8xZjllZTYxNy03NGEzLTQ4MTUtYWUxMi1lNzA3NDIxOWM5MmI" target="_blank" rel="noopener">▶ Film in der ARD-Mediathek öffnen</a>
+  <textarea placeholder="Eindrücke / Notizen zum Film"></textarea>
 </section>
 
 <section>
-<h2>YouTube – Dokumentation / Gespräch zu Anna Seghers</h2>
-<iframe 
-  src="https://www.youtube.com/embed/Tc4q6SLRCQY"
-  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-  allowfullscreen>
-</iframe>
-<textarea placeholder="Eindrücke / Notizen zum Film"></textarea>
+  <h2>Das alte Mainz in Farbe</h2>
+  <p class="meta">YouTube-Video (eingebettet).</p>
+  <iframe src="https://www.youtube.com/embed/Tc4q6SLRCQY"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowfullscreen></iframe>
+  <textarea placeholder="Eindrücke / Notizen zum Film"></textarea>
+</section>
+
+<section>
+  <h2>Anna Seghers liest „Der Ausflug der toten Mädchen“</h2>
+  <p class="meta">YouTube-Video (eingebettet).</p>
+  <iframe src="https://www.youtube.com/embed/OtBP7T33W0o"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowfullscreen></iframe>
+  <textarea placeholder="Eindrücke / Notizen zum Film"></textarea>
 </section>
 
 </main>

@@ -2,35 +2,147 @@
 <html lang="de">
 <head>
 <meta charset="UTF-8">
-<title>Essay-Modul</title>
+<title>Essay-Modul – Der Ausflug der toten Mädchen</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
-body{font-family:Georgia,serif;padding:2rem;background:#fdfdfb
-  background-image: url('img/anna_seghers_portrait_blur.jpg');
-  background-size: cover;
-  background-attachment: fixed;
-  background-position: center;
+body{
+  margin:0;
+  font-family: Georgia, serif;
+  background:
+    linear-gradient(rgba(255,255,255,0.92), rgba(255,255,255,0.92)),
+    url('img/anna_seghers_portrait_blur.jpg') center/cover fixed;
 }
-textarea{width:100%;height:140px;margin-bottom:1.5rem}
-h2{margin-top:2rem}
-@media print{button{display:none}}
+main{
+  max-width:1000px;
+  margin:0 auto;
+  padding:3.5rem 2rem 5rem 2rem;
+}
+h1{font-size:2.6rem;margin:0 0 2rem 0}
+section{margin:0 0 3.5rem 0;padding-bottom:3.5rem;border-bottom:1px solid rgba(0,0,0,.15)}
+section:last-child{border-bottom:none}
+h2{font-size:1.6rem;margin:0 0 .8rem 0}
+p.lead{font-style:italic;margin:.25rem 0 1.25rem 0}
+textarea{
+  width:100%;
+  min-height:160px;
+  font-family:Georgia, serif;
+  font-size:1rem;
+  padding:.9rem;
+  border:1px solid #888;
+  border-radius:6px;
+  background:#fff;
+}
+button{
+  margin-top:.75rem;
+  padding:.45rem .9rem;
+  font-family:Georgia, serif;
+  font-size:1rem;
+}
+.feedback{
+  margin-top:1rem;
+  padding:1rem;
+  background:#f2f2f2;
+  border-left:5px solid #444;
+  font-style:italic;
+}
+.export{
+  margin-top:1.5rem;
+}
 </style>
 <script>
-function save(id){localStorage.setItem(id,document.getElementById(id).value);}
-function load(id){if(localStorage.getItem(id))document.getElementById(id).value=localStorage.getItem(id);}
+function hint(id, txt){
+  document.getElementById(id).innerHTML = txt;
+}
+
+function exportJSON(){
+  const data = {};
+  document.querySelectorAll('textarea').forEach((ta,i)=>{
+    data['feld_'+(i+1)] = ta.value;
+  });
+  const blob = new Blob([JSON.stringify(data, null, 2)], {type:'application/json'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'essay_fortschritt.json';
+  a.click();
+  URL.revokeObjectURL(url);
+}
 </script>
+
+<style>
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: url("img/anna_seghers_portrait_blur.jpg") center / cover no-repeat;
+  z-index: -1;
+}
+</style>
+
 </head>
-<body onload="['these','argument','textbezug'].forEach(load)">
-<h1>Essay</h1>
+<body>
+<main>
 
-<h2>These</h2>
-<textarea id="these" oninput="save('these')"></textarea>
+<h1>Essay-Modul</h1>
+<p class="lead">
+Formulieren Sie auf dieser Seite einen literarischen Essay zu <em>Der Ausflug der toten Mädchen</em>.
+Das Modul folgt der Struktur <strong>These → Argument → Textbezug</strong>.
+</p>
 
-<h2>Argument</h2>
-<textarea id="argument" oninput="save('argument')"></textarea>
+<section>
+<h2>1. These</h2>
+<p>Formulieren Sie eine präzise, diskutierbare These zum Text.</p>
+<textarea></textarea>
+<button onclick="hint('t1','Stichworte: Deutungsaussage, nicht Inhaltsangabe; Bezug auf Erinnerung, Verlust, Zeitstruktur.')">Hinweise</button>
+<div id="t1" class="feedback"></div>
+</section>
 
-<h2>Textbezug</h2>
-<textarea id="textbezug" oninput="save('textbezug')"></textarea>
+<section>
+<h2>2. Argument I</h2>
+<p>Entfalten Sie Ihr erstes Argument zur Stützung der These.</p>
+<textarea></textarea>
+<button onclick="hint('a1','Stichworte: nachvollziehbare Begründung; Bezug auf Erzählweise oder Motiv.')">Hinweise</button>
+<div id="a1" class="feedback"></div>
+</section>
 
-<button onclick="window.print()">Essay als PDF</button>
+<section>
+<h2>3. Textbezug I</h2>
+<p>Belegen Sie Argument I mit einer konkreten Textstelle.</p>
+<textarea></textarea>
+<button onclick="hint('b1','Stichworte: kurze Zitate; genaue Verortung; Erklärung der Textstelle.')">Hinweise</button>
+<div id="b1" class="feedback"></div>
+</section>
+
+<section>
+<h2>4. Argument II</h2>
+<p>Entfalten Sie ein weiteres, vertiefendes Argument.</p>
+<textarea></textarea>
+<button onclick="hint('a2','Stichworte: Erweiterung oder Differenzierung; neue Perspektive.')">Hinweise</button>
+<div id="a2" class="feedback"></div>
+</section>
+
+<section>
+<h2>5. Textbezug II</h2>
+<p>Belegen Sie Argument II mit einer weiteren Textstelle.</p>
+<textarea></textarea>
+<button onclick="hint('b2','Stichworte: Vergleich mit erster Textstelle; Wirkung erläutern.')">Hinweise</button>
+<div id="b2" class="feedback"></div>
+</section>
+
+<section>
+<h2>6. Meta-Reflexion</h2>
+<p>Reflektieren Sie Ihr Vorgehen und Ihre Deutung.</p>
+<textarea></textarea>
+<button onclick="hint('m1','Stichworte: Grenzen der Interpretation; persönliche Erkenntnisse.')">Hinweise</button>
+<div id="m1" class="feedback"></div>
+</section>
+
+<section>
+<h2>Export</h2>
+<p>Exportieren Sie Ihren Arbeitsstand.</p>
+<button class="export" onclick="exportJSON()">Arbeitsstand als JSON exportieren</button>
+</section>
+
+</main>
 </body>
 </html>

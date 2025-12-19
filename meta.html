@@ -1,3 +1,36 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<title>Meta-Reflexion – Anna Seghers</title>
+<style>
+
+.pdf-links{margin:0.8rem 0 1.6rem 0;font-size:1.02rem}
+.pdf-links a{color:#4b2e83;text-decoration:none}
+.pdf-links a:hover{text-decoration:underline}
+
+
+body{font-family:Georgia,serif;padding:2rem;background:#fafafa}
+textarea{width:100%;min-height:200px;font-family:Georgia,serif;font-size:1rem}
+.teacher{display:none;background:#eef0ff;padding:1rem}
+button{margin:0.5rem 0}
+@media print{button{display:none}}
+</style>
+<script>
+function save(){document.querySelectorAll("textarea").forEach(t=>localStorage.setItem(t.id,t.value));}
+function load(){document.querySelectorAll("textarea").forEach(t=>{const v=localStorage.getItem(t.id);if(v)t.value=v;});}
+function teacher(){
+  const pw=prompt("Passwort:");
+  if(pw===(localStorage.getItem("teacher_pw")||"seghers")){
+    document.querySelector(".teacher").style.display="block";
+  }
+}
+function pdf(){window.print()}
+window.onload=load;
+</script>
+</head>
+<body>
+<a href="index.html">← Start</a>
 <h1>Meta-Reflexion</h1>
 
 <div class="pdf-links">
@@ -8,3 +41,12 @@
     Helmut Weidermann: <em>Brennendes Licht</em>
   </a></p>
 </div>
+
+
+<button onclick="pdf()">🖨️ PDF</button>
+<button onclick="teacher()">🔐 Lehrer:innen-Modus</button>
+<h2>Übergreifende Reflexion</h2>
+<textarea id="meta_student" oninput="save()"></textarea>
+<div class="teacher"><h2>Kommentar (Lehrer:in)</h2><textarea id="meta_teacher" oninput="save()"></textarea></div>
+</body>
+</html>

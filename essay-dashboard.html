@@ -1,4 +1,45 @@
-<h1>Essay</h1>
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<title>Essay-Dashboard – Anna Seghers</title>
+<style>
+
+.pdf-links{margin:0.8rem 0 1.6rem 0;font-size:1.02rem}
+.pdf-links a{color:#4b2e83;text-decoration:none}
+.pdf-links a:hover{text-decoration:underline}
+
+
+body{font-family:Georgia,serif;padding:2rem;background:#fcfcf8}
+.block{background:#f1f1ec;padding:1rem;margin-bottom:2rem}
+textarea{width:100%;min-height:120px;font-family:Georgia,serif;font-size:1rem}
+.teacher{display:none;background:#eef0ff;padding:1rem;margin-top:1rem}
+button{margin:0.5rem 0}
+@media print{button{display:none}}
+</style>
+<script>
+function save(){document.querySelectorAll("textarea").forEach(t=>localStorage.setItem(t.id,t.value));}
+function load(){document.querySelectorAll("textarea").forEach(t=>{const v=localStorage.getItem(t.id);if(v)t.value=v;});}
+function teacher(){
+  const pw=prompt("Passwort:");
+  if(pw===(localStorage.getItem("teacher_pw")||"seghers")){
+    document.querySelector(".teacher").style.display="block";
+  }
+}
+function json(){
+  const d={};
+  document.querySelectorAll("textarea").forEach(t=>d[t.id]=t.value);
+  const b=new Blob([JSON.stringify(d,null,2)],{type:"application/json"});
+  const a=document.createElement("a");
+  a.href=URL.createObjectURL(b);a.download="essay.json";a.click();
+}
+function pdf(){window.print()}
+window.onload=load;
+</script>
+</head>
+<body>
+<a href="index.html">← Start</a>
+<h1>Essay-Dashboard</h1>
 
 <div class="pdf-links">
   <p>📄 <a href="pdf/Seghers_Der-Ausflug-der-toten-Maedchen_9783841213549.pdf" target="_blank">
@@ -8,3 +49,14 @@
     Helmut Weidermann: <em>Brennendes Licht</em>
   </a></p>
 </div>
+
+
+<button onclick="pdf()">🖨️ PDF</button>
+<button onclick="json()">📥 JSON</button>
+<button onclick="teacher()">🔐 Lehrer:innen-Modus</button>
+<div class="block"><h2>These</h2><textarea id="essay_these" oninput="save()"></textarea></div>
+<div class="block"><h2>Argument</h2><textarea id="essay_argument" oninput="save()"></textarea></div>
+<div class="block"><h2>Textbezug</h2><textarea id="essay_text" oninput="save()"></textarea></div>
+<div class="teacher"><h2>Kommentar (Lehrer:in)</h2><textarea id="essay_teacher" oninput="save()"></textarea></div>
+</body>
+</html>

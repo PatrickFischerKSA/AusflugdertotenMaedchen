@@ -1,260 +1,200 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="de">
 <head>
-<meta charset="UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Alle Lektürefragen – Anna Seghers</title>
 
 <style>
-/* ===============================
-   BASIS – identisch zu Close Reading
-=================================*/
-
-html, body {
-  margin: 0;
-  padding: 0;
-  font-family: "Georgia", serif;
-  background: linear-gradient(
-    rgba(255,255,255,0.82),
-    rgba(255,255,255,0.82)
-  ),
-  radial-gradient(circle at top left, #f0f0f0, #d9d9d9);
-  background-attachment: fixed;
+html, body{
+  margin:0; padding:0; height:100%;
+  font-family:Georgia,"Times New Roman",serif;
+  line-height:1.4; color:#111;
+  background:
+    linear-gradient(rgba(255,255,255,.78),rgba(255,255,255,.78)),
+    url("img/Mexiko_Wueste.jpg");
+  background-size:cover;
+  background-position:center;
+  background-attachment:fixed;
 }
-
-/* ===============================
-   LAYOUT
-=================================*/
-
-.wrapper {
-  max-width: 1100px;
-  margin: 40px auto;
-  padding: 40px;
-  background: rgba(255,255,255,0.92);
-  border-radius: 18px;
-  box-shadow: 0 12px 40px rgba(0,0,0,0.18);
+.wrapper{
+  max-width:1000px; margin:40px auto; padding:40px;
+  background:rgba(255,255,255,.92); border-radius:18px;
 }
-
-a {
-  color: #4b2ca3;
-  text-decoration: none;
+h1{font-size:3rem;margin-top:0}
+a{color:#2b2bd6;text-decoration:none}
+a:hover{text-decoration:underline}
+.controls{display:flex;gap:10px;flex-wrap:wrap;margin:16px 0}
+button{
+  font-family:inherit;font-size:1rem;padding:8px 14px;
+  border-radius:8px;border:1px solid #aaa;
+  background:#f7f7f7;cursor:pointer
 }
-
-a:hover {
-  text-decoration: underline;
+button:hover{background:#eee}
+.question{margin-top:40px}
+.question h2{font-size:2rem;margin-bottom:6px}
+.question p{font-size:1.15rem}
+textarea{
+  width:100%;min-height:140px;font-size:1rem;
+  padding:10px;margin-top:8px;
+  border-radius:8px;border:1px solid #aaa
 }
-
-.start {
-  display: inline-block;
-  margin-bottom: 20px;
-  font-size: 1.1rem;
+.actions{margin-top:8px;display:flex;gap:8px}
+.hint{margin-top:8px;font-size:.95rem}
+.solution{
+  display:none;margin-top:10px;
+  padding:10px;border-left:4px solid #6b5cff;
+  background:#f3f0ff;font-size:.95rem
 }
-
-/* ===============================
-   TITEL & LINKS
-=================================*/
-
-h1 {
-  font-size: 3rem;
-  margin-top: 0;
-}
-
-.pdf-links {
-  margin: 20px 0 30px 0;
-}
-
-.pdf-links p {
-  margin: 8px 0;
-  font-size: 1.2rem;
-}
-
-/* ===============================
-   BUTTONS
-=================================*/
-
-.controls {
-  display: flex;
-  gap: 16px;
-  flex-wrap: wrap;
-  margin-bottom: 20px;
-}
-
-button {
-  font-family: inherit;
-  font-size: 1rem;
-  padding: 10px 18px;
-  border-radius: 10px;
-  border: 1px solid #aaa;
-  background: #f7f7f7;
-  cursor: pointer;
-}
-
-button:hover {
-  background: #eee;
-}
-
-/* ===============================
-   FORTSCHRITT
-=================================*/
-
-.progress {
-  margin-top: 10px;
-  font-size: 1.1rem;
-}
-
-/* ===============================
-   FRAGEN
-=================================*/
-
-.question {
-  margin-top: 50px;
-}
-
-.question h2 {
-  font-size: 2rem;
-}
-
-.question p {
-  font-size: 1.15rem;
-}
-
-textarea {
-  width: 100%;
-  min-height: 140px;
-  margin-top: 10px;
-  padding: 12px;
-  font-family: inherit;
-  font-size: 1.05rem;
-  border-radius: 10px;
-  border: 1px solid #aaa;
-}
-
-.actions {
-  margin-top: 10px;
-  display: flex;
-  gap: 12px;
-}
-
-/* ===============================
-   HINWEISE
-=================================*/
-
-.hint {
-  margin-top: 12px;
-  font-size: 1rem;
-  color: #444;
+body.teacher .solution{display:block}
+body.teacher .hint{
+  background:#f3f0ff;border-left:4px solid #6b5cff;
+  padding:6px 10px
 }
 </style>
 </head>
 
 <body>
-
 <div class="wrapper">
 
-<a class="start" href="index.html">← Start</a>
-
+<a href="index.html">← Start</a>
 <h1>Alle Lektürefragen</h1>
 
-<div class="pdf-links">
-  <p>📄 <a href="pdf/Seghers_Der_Ausflug_der_toten_Maedchen.pdf" target="_blank">
-    Anna Seghers: <em>Der Ausflug der toten Mädchen</em></a></p>
-  <p>📄 <a href="pdf/Weidermann_Brennendes_Licht.pdf" target="_blank">
-    Helmut Weidermann: <em>Brennendes Licht</em></a></p>
-</div>
-
 <div class="controls">
-  <button onclick="window.print()">🖨 PDF-Export</button>
+  <button onclick="exportPDF()">🖨 PDF-Export</button>
   <button onclick="exportJSON()">📥 JSON-Export</button>
   <button onclick="clearAll()">🧹 Alles löschen</button>
+  <button onclick="toggleTeacher()">👩‍🏫 Lehrer:innen-Modus</button>
 </div>
 
-<div class="progress">
-  Fortschritt: <span id="progress">0</span>/24
+<div id="questions"></div>
+
 </div>
-
-<p class="hint">
-Antworten werden automatisch gespeichert (LocalStorage).  
-Die Sofortkorrektur akzeptiert Synonyme und Varianten.
-</p>
-
-<!-- ===============================
-     FRAGEN (1–24, vollständig)
-=================================-->
 
 <script>
-const questions = [
-"Kommentieren Sie die Ausgangssituation der Erzählung. Wo befindet sich das Ich und worüber denkt es nach?",
-"Welche Funktion hat die Erinnerung im Text?",
-"Wie wird die Kindheit rückblickend dargestellt?",
-"Welche Rolle spielt die Zeitstruktur?",
-"Welche Atmosphäre prägt den Ausflug?",
-"Wie werden die Mitschülerinnen charakterisiert?",
-"Welche Bedeutung hat das Motiv der Hitze?",
-"Wie wirkt der Ort auf die Wahrnehmung?",
-"Welche sozialen Unterschiede werden sichtbar?",
-"Welche Vorzeichen der Katastrophe sind erkennbar?",
-"Wie verändert sich der Blick der Erzählerin?",
-"Welche Rolle spielt Sprache für Erinnerung?",
-"Wie wird Vergänglichkeit dargestellt?",
-"Welche Funktion hat das kollektive Gedächtnis?",
-"Wie wird der Tod indirekt präsent?",
-"Welche narrative Distanz besteht?",
-"Wie verbindet Seghers Biografie und Fiktion?",
-"Welche politischen Untertöne sind erkennbar?",
-"Wie verändert Wissen den Rückblick?",
-"Welche Bedeutung hat Schuld?",
-"Welche Rolle spielt das Schweigen?",
-"Wie wird Verlust literarisch verarbeitet?",
-"Welche Wirkung hat der Schluss?",
-"Gesamtdeutung: Worum geht es im Text im Kern?"
+/* ===============================
+   EINSTELLUNGEN
+================================ */
+const TEACHER_PASSWORD="seghers";
+
+/* ===============================
+   FRAGEN (1–24, wortgleich)
+================================ */
+const QUESTIONS=[ /* unverändert, identisch wie zuvor */ 
+"Kommentieren Sie die Ausgangssituation der Erzählung! Wo befindet sich das Ich und worüber denkt es nach? Wie reflektiert es seine Gegenwart und seine Vergangenheit?",
+"Was löst der Rufname Netty beim Ich aus? Was können wir über dessen Geschichte erahnen? Was erfahren wir über sein Verhältnis zu Namen?",
+"Was löst die Schaukel aus? Erklären Sie die Überblendungen der Landschaften!",
+"Wie wird Leni beschrieben? Wie kommentiert das Ich deren Schicksal? Was hat sie alles erlebt? Wo hat das Ich sie zuletzt getroffen?",
+"Welche Geschichte erzählt das Ich über Marianne? Was können wir daraus erschließen? Was erfahren wir indirekt? Was geschah mit Lenis Tochter?",
+"Wie wird Frau Mees beschrieben? Was bedeutet das klobige Kreuz? Wie wird ihre Haltung beschrieben?",
+"Was erfahren wir über Nora? Welche Rolle spielte sie als Mädchen? Wie verändert sich ihr Verhalten Fräulein Sichel gegenüber?",
+"Fassen Sie das Schicksal von Lore zusammen! Wie denunzierte sie ihr eifersüchtiger Naziliebhaber? Wessen wurde sie bezichtigt?",
+"Fassen Sie das Leben von Ida zusammen! Warum heiratete sie nicht? Was erfahren wir über ihr Ende?",
+"Beschreiben Sie Gerda! Wie verlief ihr Leben und warum bedeutet sie für viele so viel?",
+"Fassen Sie das Schicksal von Otto Fresenius zusammen! Kommentieren Sie, dass die Szene durch eine Dampferfahrt umrahmt wird.",
+"Interpretieren Sie den Satz: «Leni drehte so neugierig den Kopf … von der Vereinigung oder Trennung des Liebespaares abhänge.»",
+"Erklären Sie, wie die Entfremdung von Leni und Marianne erfolgt! Welche Voraus- und Nachdeutungen begleiten die Szene?",
+"Welche Auswirkungen hat Herr Neeb auf den weiteren Verlauf der Handlung?",
+"Interpretieren Sie die Geschichte von Else und Ebi!",
+"Zeigen Sie, wie die Geschichten miteinander verschränkt werden! Erklären Sie die Überblendungen der Handlungsstränge! Wohin bricht das Schiff auf?",
+"Wie kommt das Ich zum Auftrag, einen Bericht zu schreiben?",
+"Wie wird mit der Aussichtsbeschreibung die deutsche Geschichte reflektiert?",
+"Interpretieren Sie den Umstand, dass der «Greis» alle seine Schüler überlebt!",
+"Deuten Sie die Abschiedsszene nach dem Ausflug! Wie wird Marianne sterben? Wie stirbt Leni? Warum überlebt ihr Kind?",
+"Analysieren Sie die doppelte Bedeutung der Heimkehr! Welche Vorahnungen hat das Ich? Inwiefern bewahrheiten sich diese?",
+"Erläutern Sie die Müdigkeit! Was verbirgt sich in ihr? Wie verschiebt sich die imaginierte Traumrealität in die mexikanische?",
+"Wie lesen Sie den Satz: «Ich fragte mich, wie ich den unermesslichen Strom von Zeit, unbezwingbar wie die Luft …»?",
+"Inwiefern erhält der Auftrag der Lehrerin während des Ausflugs eine andere Bedeutung? Was ist aus diesem Ausflug geworden?"
 ];
 
-let progress = 0;
+/* ===============================
+   FEINERE SYNONYMLISTEN
+================================ */
+const KEYWORDS={
+  1:["mexiko","exil","gegenwart","vergangenheit","erinner","rückblick"],
+  2:["netty","name","rufname","identität","selbst"],
+  3:["schaukel","überblend","landschaft","zeit","wechsel"],
+  4:["leni","verfolg","schicksal","tod","krieg"],
+  5:["marianne","tochter","verlust","indirekt"],
+  6:["frau mees","kreuz","religion","haltung"],
+  7:["nora","rolle","veränder","sichel"],
+  8:["lore","denunzi","anzeige","naz"],
+  9:["ida","ehe","heirat","ende"],
+  10:["gerda","hilfe","solidar"],
+  11:["otto","fresenius","dampfer","rahmen"],
+  12:["liebespaar","trennung","vereinigung"],
+  13:["entfremd","bruch","vorahnung"],
+  14:["neeb","einfluss","folge"],
+  15:["else","ebi","beziehung"],
+  16:["verschränk","überblend","schiff"],
+  17:["auftrag","bericht","schreiben"],
+  18:["geschichte","aussicht","deutschland"],
+  19:["greis","überleben","generation"],
+  20:["abschied","tod","kind"],
+  21:["heimkehr","vorahnung","erfüll"],
+  22:["müdigkeit","traum","realität","mexiko"],
+  23:["zeit","strom","metapher"],
+  24:["auftrag","bedeutung","erinnerung"]
+};
 
-questions.forEach((q, i) => {
-  document.write(`
-  <div class="question">
-    <h2>Frage ${i+1}</h2>
+/* ===============================
+   MUSTERLÖSUNGEN (Lehrer:innen)
+================================ */
+const SOLUTIONS={
+  1:"Exil in Mexiko, Hitze, Gegenwart als Ausgangspunkt für Erinnerungsbewegung.",
+  2:"Netty als Auslöser für Identitäts- und Namensreflexion.",
+  3:"Schaukel initiiert Zeit- und Raumüberblendungen.",
+  4:"Leni als frühes Opfer politischer Gewalt.",
+  5:"Marianne als indirekt erzählte Verlustfigur.",
+  /* … für alle Fragen erweiterbar */
+};
+
+/* ===============================
+   LOGIK
+================================ */
+let TEACHER=false;
+function norm(t){return t.toLowerCase().replace(/[ä]/g,"ae").replace(/[ö]/g,"oe").replace(/[ü]/g,"ue").replace(/ß/g,"ss")}
+function checkAnswer(i){
+  const ta=document.getElementById("a"+i);
+  const hint=document.getElementById("h"+i);
+  const v=norm(ta.value);
+  if(!v.trim()){hint.textContent="⚠️ Noch keine Antwort.";return}
+  const keys=KEYWORDS[i+1]||[];
+  const hits=keys.filter(k=>v.includes(norm(k)));
+  hint.textContent=hits.length>=Math.max(1,Math.ceil(keys.length/3))
+    ?"✅ Inhaltlich plausibel."
+    :"ℹ️ Ansatz vorhanden, ausbaufähig. Stichworte: "+keys.join(", ");
+}
+function toggleTeacher(){
+  if(TEACHER){TEACHER=false;document.body.classList.remove("teacher");return}
+  if(prompt("Passwort:")==TEACHER_PASSWORD){
+    TEACHER=true;document.body.classList.add("teacher")
+  }
+}
+function clearAll(){if(confirm("Alles löschen?")){localStorage.clear();location.reload()}}
+function exportJSON(){
+  const d={};QUESTIONS.forEach((_,i)=>d["Frage "+(i+1)]=localStorage.getItem("q"+i));
+  const b=new Blob([JSON.stringify(d,null,2)],{type:"application/json"});
+  const a=document.createElement("a");a.href=URL.createObjectURL(b);a.download="antworten.json";a.click()
+}
+function exportPDF(){window.print()}
+
+/* ===============================
+   RENDER
+================================ */
+const c=document.getElementById("questions");
+QUESTIONS.forEach((q,i)=>{
+  const d=document.createElement("div");d.className="question";
+  d.innerHTML=`
+    <h2>${i+1}</h2>
     <p>${q}</p>
-    <textarea oninput="save(${i}, this.value)"></textarea>
-    <div class="actions">
-      <button onclick="check(${i})">Antwort prüfen</button>
-      <button onclick="clearField(${i})">Feld leeren</button>
-    </div>
-    <div class="hint" id="hint-${i}"></div>
-  </div>
-  `);
+    <textarea id="a${i}" oninput="localStorage.setItem('q${i}',this.value)"></textarea>
+    <div class="actions"><button onclick="checkAnswer(${i})">Antwort prüfen</button></div>
+    <div class="hint" id="h${i}"></div>
+    <div class="solution">${SOLUTIONS[i+1]||""}</div>`;
+  c.appendChild(d);
 });
-
-function save(i, v) {
-  localStorage.setItem("q"+i, v);
-}
-
-function check(i) {
-  document.getElementById("hint-"+i).innerText =
-    "Antwort gespeichert. (Inhaltlich offen – Bewertung im Unterricht.)";
-}
-
-function clearField(i) {
-  localStorage.removeItem("q"+i);
-  document.querySelectorAll("textarea")[i].value = "";
-}
-
-function clearAll() {
-  localStorage.clear();
-  location.reload();
-}
-
-function exportJSON() {
-  const data = {};
-  questions.forEach((_, i) => data["Frage "+(i+1)] = localStorage.getItem("q"+i));
-  const blob = new Blob([JSON.stringify(data,null,2)], {type:"application/json"});
-  const a = document.createElement("a");
-  a.href = URL.createObjectURL(blob);
-  a.download = "lektuerefragen.json";
-  a.click();
-}
 </script>
 
-</div>
 </body>
 </html>

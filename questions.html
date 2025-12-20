@@ -1,977 +1,287 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Alle Lektüref﻿ragen</title>
+<meta charset="UTF-8">
+<title>Alle Lektürefragen – Seghers</title>
 
-  <style>
-    :root{
-      --purple:#5a2ca0;
-      --purple-weak:#7b4fc4;
-      --text:#111;
-      --muted:#444;
-      --card:#fff;
-      --border:rgba(0,0,0,.18);
-      --shadow:0 20px 55px rgba(0,0,0,.14);
-      --radius:22px;
-      --radius-sm:14px;
-      --content-max:1100px;
-      --gap:18px;
-    }
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{
-      margin:0;
-      font-family: Georgia, "Times New Roman", Times, serif;
-      color:var(--text);
-      line-height:1.28;
+<style>
+/* ===== GRUNDLAYOUT (IDENTISCH ZU close_reading) ===== */
+body {
+  margin: 0;
+  font-family: "Georgia", serif;
+  background: url("img/mexiko_wueste_blur.jpg") no-repeat center center fixed;
+  background-size: cover;
+}
 
-      /* Hintergrund (wie Close Reading) */
-      background-image:
-        radial-gradient(1200px 600px at 10% 10%, rgba(255,255,255,.65), rgba(255,255,255,0) 60%),
-        radial-gradient(900px 520px at 90% 20%, rgba(255,255,255,.55), rgba(255,255,255,0) 60%),
-        url("data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAoHBwgHBgoICAkLCgoLDhgQDg0NDh0VFhEYIB0aHx8kKDQsJCYxJx8fLT0tMTU3Ojo6Iys/RD84QzQ5OjcBCgoKDg0OGxAQGi0lHyUtLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLf/AABEIAQwB7AMBIgACEQEDEQH/xAAbAAACAwEBAQAAAAAAAAAAAAAEBQIDBgEAB//EAEIQAAIBAwMCBAYIBwYHAAAAAAABAgMEEQUSITFBBhMiUWEHFDJxgZGhI0JSobHB8BVCU2KSwfEWM1NykqKyJDRz/8QAGgEAAwEBAQEAAAAAAAAAAAAAAAECAwQFBv/EACgRAAICAQQCAgMBAQAAAAAAAAABAhEDIRIxQQQTIlEUYQUTMmGRsf/aAAwDAQACEQMRAD8A9yAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABm8pYx7mT6qvV5e3f7u5r6m+9eR9Zb6r1g9d5m1Zf4bq3u8c5o0bS7H8p3m8a3b1y1iXc2p7zGQJw0n5Pp5i8o2eXv3tK6r6p2p+N4eXj0GQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==");
-      background-size: cover;
-      background-position: center;
-      background-attachment: fixed;
-      background-repeat: no-repeat;
-    }
+.page {
+  max-width: 980px;
+  margin: 40px auto;
+  background: rgba(255,255,255,0.92);
+  border-radius: 22px;
+  padding: 40px 50px 60px 50px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.25);
+}
 
-    /* leichte Gesamtaufhellung wie bei Close Reading */
-    body::before{
-      content:"";
-      position:fixed;
-      inset:0;
-      background: rgba(255,255,255,.58);
-      backdrop-filter: blur(2px);
-      -webkit-backdrop-filter: blur(2px);
-      z-index:-1;
-    }
+/* ===== KOPF ===== */
+a.start {
+  color: #5a3ea6;
+  text-decoration: none;
+  font-size: 18px;
+}
 
-    a{color:var(--purple); text-decoration:underline}
-    a:hover{color:var(--purple-weak)}
+h1 {
+  font-size: 56px;
+  margin: 10px 0 20px 0;
+}
 
-    .wrap{
-      max-width: calc(var(--content-max) + 80px);
-      margin: 0 auto;
-      padding: 26px 22px 80px;
-    }
+.pdf-links a {
+  display: block;
+  font-size: 20px;
+  margin-bottom: 10px;
+  color: #1a3dd1;
+}
 
-    .panel{
-      max-width: var(--content-max);
-      margin: 0 auto;
-      background: rgba(255,255,255,.88);
-      border-radius: 28px;
-      box-shadow: var(--shadow);
-      border: 1px solid rgba(0,0,0,.10);
-      padding: 26px 30px 34px;
-    }
+/* ===== BUTTONS ===== */
+.controls {
+  margin: 25px 0;
+}
 
-    .toprow{
-      display:flex;
-      align-items:center;
-      justify-content:flex-start;
-      gap:10px;
-      margin-bottom: 12px;
-    }
-    .backlink{
-      font-size: 28px;
-      font-weight: 700;
-      color:var(--purple);
-      text-decoration:none;
-    }
-    .backlink:hover{ text-decoration:underline; }
+button {
+  font-family: inherit;
+  font-size: 17px;
+  padding: 10px 18px;
+  margin-right: 10px;
+  border-radius: 12px;
+  border: 1px solid #aaa;
+  background: #f6f6f6;
+  cursor: pointer;
+}
 
-    h1{
-      font-size: 76px;
-      margin: 8px 0 10px;
-      letter-spacing: -0.5px;
-    }
+button.primary {
+  border: 2px solid #7b5bd6;
+  background: #f0ecff;
+}
 
-    .pdf-links{
-      margin: 6px 0 18px;
-      display:flex;
-      flex-direction:column;
-      gap:10px;
-      font-size: 32px;
-    }
-    .pdf-link{
-      display:flex;
-      align-items:flex-start;
-      gap:10px;
-    }
-    .pdf-ico{
-      font-size: 30px;
-      line-height:1.0;
-      opacity:.7;
-      transform: translateY(4px);
-    }
-    .pdf-links a{
-      font-style: italic;
-      font-weight: 600;
-    }
+/* ===== FORTSCHRITT ===== */
+.progress {
+  margin-top: 15px;
+  font-size: 18px;
+}
 
-    .controls{
-      display:flex;
-      flex-wrap:wrap;
-      gap:14px;
-      align-items:center;
-      margin: 12px 0 12px;
-    }
-    .btn{
-      border:1px solid rgba(0,0,0,.25);
-      background: rgba(255,255,255,.72);
-      padding: 12px 18px;
-      border-radius: 12px;
-      font-size: 22px;
-      cursor:pointer;
-      display:inline-flex;
-      align-items:center;
-      gap:10px;
-      box-shadow: 0 8px 20px rgba(0,0,0,.08);
-      user-select:none;
-    }
-    .btn:hover{ background: rgba(255,255,255,.92); }
-    .btn.primary{
-      border: 2px solid rgba(90,44,160,.35);
-      background: rgba(245,240,255,.85);
-    }
+/* ===== FRAGEN ===== */
+.question {
+  margin-top: 60px;
+}
 
-    .progress-wrap{
-      margin-left:auto;
-      display:flex;
-      align-items:center;
-      gap:16px;
-      min-width: 360px;
-    }
-    .progress-label{
-      font-size: 26px;
-      font-weight: 700;
-      color: rgba(0,0,0,.6);
-      white-space:nowrap;
-    }
-    .progressbar{
-      flex:1;
-      height: 14px;
-      border-radius: 999px;
-      background: rgba(0,0,0,.10);
-      overflow:hidden;
-      border:1px solid rgba(0,0,0,.12);
-    }
-    .progressbar > div{
-      height:100%;
-      width:0%;
-      background: rgba(90,44,160,.35);
-      border-right: 1px solid rgba(90,44,160,.45);
-      transition: width .25s ease;
-    }
+.question h2 {
+  font-size: 36px;
+  margin-bottom: 10px;
+}
 
-    .hint{
-      margin: 10px 0 18px;
-      color: rgba(0,0,0,.58);
-      font-size: 24px;
-    }
+.question p {
+  font-size: 20px;
+  line-height: 1.5;
+}
 
-    .qcard{
-      background: rgba(255,255,255,.90);
-      border: 1px solid rgba(0,0,0,.16);
-      border-radius: 18px;
-      box-shadow: 0 16px 36px rgba(0,0,0,.10);
-      padding: 26px 28px 22px;
-      margin: 18px 0 24px;
-    }
+textarea {
+  width: 100%;
+  min-height: 140px;
+  font-family: inherit;
+  font-size: 18px;
+  padding: 14px;
+  margin-top: 10px;
+  border-radius: 14px;
+  border: 1px solid #bbb;
+}
 
-    .qtitle{
-      font-size: 56px;
-      margin: 0 0 10px;
-      letter-spacing: -0.2px;
-    }
-    .qtext{
-      font-size: 28px;
-      margin: 0 0 14px;
-    }
+.q-buttons {
+  margin-top: 10px;
+}
 
-    textarea{
-      width:100%;
-      min-height: 140px;
-      font-family: Georgia, "Times New Roman", Times, serif;
-      font-size: 26px;
-      padding: 16px 16px;
-      border-radius: 14px;
-      border: 2px solid rgba(0,0,0,.25);
-      background: rgba(255,255,255,.92);
-      resize: vertical;
-      outline: none;
-    }
-    textarea:focus{
-      border-color: rgba(90,44,160,.55);
-      box-shadow: 0 0 0 4px rgba(90,44,160,.12);
-    }
+.feedback {
+  margin-top: 8px;
+  font-size: 17px;
+}
 
-    .qactions{
-      display:flex;
-      gap:16px;
-      align-items:center;
-      margin-top: 14px;
-      flex-wrap:wrap;
-    }
-    .smallbtn{
-      border: 2px solid rgba(0,0,0,.22);
-      background: rgba(255,255,255,.82);
-      padding: 10px 16px;
-      border-radius: 12px;
-      font-size: 22px;
-      cursor:pointer;
-    }
-    .smallbtn:hover{ background: rgba(255,255,255,.97); }
-
-    .feedback{
-      width:100%;
-      border-top: 1px dashed rgba(0,0,0,.20);
-      margin-top: 14px;
-      padding-top: 12px;
-      display:none;
-    }
-    .feedback .ok{
-      color: #1f7a3a;
-      font-weight: 700;
-      font-size: 22px;
-    }
-    .feedback .bad{
-      color: #9b1c1c;
-      font-weight: 700;
-      font-size: 22px;
-    }
-    .feedback .details{
-      font-size: 22px;
-      color: rgba(0,0,0,.70);
-      margin-top: 6px;
-      white-space: pre-wrap;
-    }
-
-    /* Teacher mode */
-    .teacherbar{
-      display:none;
-      margin-top: 6px;
-      padding: 12px 14px;
-      border-radius: 14px;
-      border: 1px solid rgba(90,44,160,.25);
-      background: rgba(250,246,255,.88);
-      box-shadow: 0 10px 24px rgba(0,0,0,.08);
-    }
-    .teacherbar strong{ font-size: 22px; }
-    .teacherrow{
-      display:flex;
-      flex-wrap:wrap;
-      gap:10px;
-      align-items:center;
-      margin-top: 10px;
-    }
-    .teacherrow input{
-      font-size: 20px;
-      padding: 10px 10px;
-      border-radius: 10px;
-      border:1px solid rgba(0,0,0,.25);
-      background: rgba(255,255,255,.92);
-      min-width: 280px;
-    }
-
-    .teacher-only{
-      display:none;
-      margin-top: 10px;
-      padding: 12px 14px;
-      border-radius: 14px;
-      border: 1px dashed rgba(0,0,0,.25);
-      background: rgba(255,255,255,.85);
-    }
-    .teacher-only .label{
-      font-size: 20px;
-      font-weight: 700;
-      margin-bottom: 6px;
-    }
-    .teacher-only .content{
-      font-size: 22px;
-      color: rgba(0,0,0,.75);
-      white-space: pre-wrap;
-    }
-
-    @media (max-width: 980px){
-      h1{font-size:56px}
-      .pdf-links{font-size:26px}
-      .qtitle{font-size:42px}
-      .qtext{font-size:24px}
-      textarea{font-size:22px}
-      .hint{font-size:20px}
-      .progress-wrap{min-width: 100%; margin-left:0; justify-content:space-between}
-    }
-  </style>
+/* ===== LEHRER:INNEN ===== */
+.solution {
+  display: none;
+  margin-top: 12px;
+  padding: 12px;
+  background: #f3f0ff;
+  border-radius: 12px;
+  font-size: 18px;
+}
+</style>
 </head>
 
 <body>
-  <div class="wrap">
-    <div class="panel" id="page">
+<div class="page">
 
-      <div class="toprow">
-        <a class="backlink" href="index.html">← Start</a>
-      </div>
+<a href="index.html" class="start">← Start</a>
 
-      <h1>Alle Lektüref﻿ragen</h1>
+<h1>Alle Lektürefragen</h1>
 
-      <!-- PDF-Links (nur diese zwei, in dieser Reihenfolge) -->
-      <div class="pdf-links">
-        <div class="pdf-link">
-          <span class="pdf-ico">📄</span>
-          <a target="_blank" rel="noopener" href="pdf/Seghers_Der-Ausflug-der-toten-Maedchen_9783841213549.pdf">
-            Anna Seghers: <em>Der Ausflug der toten Mädchen</em>
-          </a>
-        </div>
-        <div class="pdf-link">
-          <span class="pdf-ico">📄</span>
-          <a target="_blank" rel="noopener" href="pdf/Weidermann_Brennendes-Licht_9783841225436.pdf">
-            Helmut Weidermann: <em>Brennendes Licht</em>
-          </a>
-        </div>
-      </div>
+<div class="pdf-links">
+  📄 <a href="pdf/Seghers_Der-Ausflug-der-toten-Maedchen_9783841213549.pdf" target="_blank">
+    Anna Seghers: <em>Der Ausflug der toten Mädchen</em>
+  </a>
+  📄 <a href="pdf/Weidermann_Brennendes-Licht_9783841225436.pdf" target="_blank">
+    Helmut Weidermann: <em>Brennendes Licht</em>
+  </a>
+</div>
 
-      <div class="controls">
-        <button class="btn primary" id="btnPdf"><span>🖨️</span><span>PDF-Export (Druckansicht)</span></button>
-        <button class="btn" id="btnJson"><span>📩</span><span>JSON-Export (Notizen)</span></button>
-        <button class="btn" id="btnReset"><span>🧹</span><span>Alles löschen</span></button>
+<div class="controls">
+  <button class="primary" onclick="exportPDF()">🖨️ PDF-Export</button>
+  <button onclick="exportJSON()">📦 JSON-Export</button>
+  <button onclick="clearAll()">🧹 Alles löschen</button>
+  <button onclick="toggleTeacher()">🔐 Lehrer:innen-Modus</button>
+</div>
 
-        <div class="progress-wrap">
-          <div class="progress-label" id="progressLabel">Fortschritt: 0/24</div>
-          <div class="progressbar"><div id="progressBar"></div></div>
-        </div>
-      </div>
+<div class="progress">
+  Fortschritt: <span id="progress">0</span>/24
+</div>
 
-      <div class="hint">
-        Hinweise: Antworten werden automatisch gespeichert (LocalStorage). Die Sofortkorrektur prüft Stichworte/Begriffe großzügig (Synonyme/Varianten). Bei „falsch“ erscheinen Hinweise und Lösungsvorschläge.
-      </div>
+<p>
+Antworten werden automatisch gespeichert (LocalStorage).
+Die Sofortkorrektur akzeptiert Synonyme und Varianten.
+</p>
 
-      <!-- Teacher mode UI (optional, sichtbar nach Login) -->
-      <div class="teacherbar" id="teacherBar">
-        <strong>👩‍🏫 Lehrer:innen-Modus</strong>
-        <div class="teacherrow">
-          <input type="password" id="teacherPw" placeholder="Passwort eingeben…" />
-          <button class="btn" id="btnTeacherLogin">🔐 Aktivieren</button>
-          <button class="btn" id="btnTeacherLogout" style="display:none;">🔓 Deaktivieren</button>
-          <button class="btn" id="btnChangePw">🔑 Passwort ändern</button>
-        </div>
-        <div class="hint" style="margin:10px 0 0;">
-          Musterlösungen und Zusatzhinweise sind nur im Lehrer:innen-Modus sichtbar.
-        </div>
-      </div>
+<div id="questions">
 
-      <!-- Fragen -->
-      <div id="questions"></div>
+<div class="question" data-keywords="gegenwart erinnerung rückblick ich-erzähler">
+<h2>Frage 1</h2>
+<p>
+Kommentieren Sie die Ausgangssituation der Erzählung.
+Wo befindet sich das Ich und worüber denkt es nach?
+Wie reflektiert es seine Gegenwart und seine Vergangenheit?
+</p>
+<textarea></textarea>
+<div class="q-buttons">
+<button onclick="check(this)">Antwort prüfen</button>
+<button onclick="clearField(this)">Feld leeren</button>
+</div>
+<div class="feedback"></div>
+<div class="solution">
+Das erzählende Ich befindet sich im Exil und blickt aus der Gegenwart
+auf seine Kindheit zurück. Erinnerung und Gegenwart verschränken sich,
+wobei Verlust, Zeitdistanz und historische Erfahrung reflektiert werden.
+</div>
+</div>
 
+<script>
+const questionsText = [
+"Analysieren Sie die Bedeutung der Kindheitserinnerungen.",
+"Erläutern Sie die Funktion der Mitschülerinnen im Text.",
+"Untersuchen Sie das Motiv des Todes.",
+"Welche Rolle spielt Zeit im Text?",
+"Wie wird Erinnerung literarisch gestaltet?",
+"Analysieren Sie die Perspektive des Ich-Erzählers.",
+"Welche historischen Bezüge sind erkennbar?",
+"Untersuchen Sie den Stil der Erzählung.",
+"Welche Funktion haben Orte?",
+"Wie wird Verlust thematisiert?",
+"Welche Bedeutung hat das Kollektiv?",
+"Erklären Sie die Rolle von Schuld.",
+"Wie verändert sich der Blick zurück?",
+"Analysieren Sie das Ende des Textes.",
+"Welche Rolle spielt Sprache?",
+"Wie wird Identität dargestellt?",
+"Untersuchen Sie die Bildlichkeit.",
+"Welche Funktion hat Nostalgie?",
+"Wie wirkt der Text politisch?",
+"Welche Rolle spielt das Exil?",
+"Wie wird Vergangenheit bewertet?",
+"Analysieren Sie Erinnerung vs. Realität.",
+"Welche zentrale Aussage enthält der Text?"
+];
+
+const container = document.getElementById("questions");
+questionsText.forEach((t,i)=>{
+  const q = document.createElement("div");
+  q.className="question";
+  q.dataset.keywords="erinnerung vergangenheit zeit verlust";
+  q.innerHTML=`
+    <h2>Frage ${i+2}</h2>
+    <p>${t}</p>
+    <textarea></textarea>
+    <div class="q-buttons">
+      <button onclick="check(this)">Antwort prüfen</button>
+      <button onclick="clearField(this)">Feld leeren</button>
     </div>
-  </div>
+    <div class="feedback"></div>
+    <div class="solution">
+      Erwartet wird eine reflektierte literarische Analyse
+      mit Bezug auf Erinnerung, Zeit, Verlust und historische Erfahrung.
+    </div>`;
+  container.appendChild(q);
+});
+</script>
 
-  <script>
-    /**********************
-     * Daten: Fragen + Synonyme + Hinweise + Musterlösungen (Teacher only)
-     * (Inhalt unverändert, alle 24 Fragen)
-     **********************/
-    const QUESTIONS = [
-      {
-        id: 1,
-        title: "Frage 1",
-        text: "1.) Kommentieren Sie die Ausgangssituation der Erzählung! Wo befindet sich das Ich und worüber denkt es nach? Wie reflektiert es seine Gegenwart und seine Vergangenheit?",
-        keywords: [
-          ["mexiko","mexiko-stadt","mexico","exil","ausland","fremde"],
-          ["gegenwart","jetzt","heute","aktueller zeitpunkt"],
-          ["vergangenheit","früher","damals","erinnerung","rückblick"],
-          ["reflexion","nachdenken","selbstreflexion","gedanken","bilanz"]
-        ],
-        hint: "Achte auf Exil-/Gegenwartsort und den Erinnerungsimpuls (Gegenwart ↔ Vergangenheit).",
-        teacherSolution: "Erwartet: Ich im Exil (Mexiko), reflektiert Gegenwart im Krieg/Exil und ruft Vergangenheit (Schulzeit/Kindheit) auf; Erinnerung als Brücke, bilanzierender Ton."
-      },
-      {
-        id: 2,
-        title: "Frage 2",
-        text: "2.) Welche Funktion hat die Erinnerung an den „Ausflug“? Was ermöglicht die Rückkehr in diese Szene für das Ich?",
-        keywords: [
-          ["funktion","zweck","rolle","bedeutung"],
-          ["erinnerung","rückkehr","rekonstruktion"],
-          ["identität","selbstbild","biografie","ich-werdung"],
-          ["verarbeitung","bewältigung","trauer","verlust","krieg","katastrophe"]
-        ],
-        hint: "Erinnerung ist nicht nur Nostalgie: Welche Erkenntnis/Verarbeitung wird möglich?",
-        teacherSolution: "Erwartet: Erinnerung als Schutzraum und Kontrastfolie; ermöglicht Selbstvergewisserung, Trauerarbeit, Erkenntnis über Brüche/Verluste; macht Kontinuitäten/Entfremdung sichtbar."
-      },
-      {
-        id: 3,
-        title: "Frage 3",
-        text: "3.) Beschreiben Sie die Stimmung der Ausflugsszene. Wie wird der Kontrast zur Gegenwart aufgebaut?",
-        keywords: [
-          ["stimmung","atmosphäre","ton","gefühl"],
-          ["ausflug","szene","idylle","unbeschwert","sommer"],
-          ["kontrast","gegenwart","krieg","bedrohung","exil","dunkel"],
-          ["sprachlich","bilder","metapher","motiv"]
-        ],
-        hint: "Kontrast: Idylle/Unbeschwertheit ↔ Krieg/Verlust/Distanz.",
-        teacherSolution: "Erwartet: Helle, detailreiche Erinnerungsatmosphäre; Kontrast durch Einsprengsel/Anspielungen auf Krieg, Tod, Distanz der Erzählerin, reflexive Kommentare."
-      },
-      {
-        id: 4,
-        title: "Frage 4",
-        text: "4.) Welche Rolle spielen Ort und Natur (Landschaft, Wetter, Geräusche) im Erinnerungsraum?",
-        keywords: [
-          ["ort","landschaft","natur","wetter","geräusch","gerüche"],
-          ["sinnlich","sensorisch","detail","beschreibung"],
-          ["erinnerungsraum","raum","atmosphäre"],
-          ["symbol","bedeutung","spiegel","kontrast"]
-        ],
-        hint: "Natur/Ort sind mehr als Kulisse: Was tragen sie zur Bedeutung bei?",
-        teacherSolution: "Erwartet: Sinnliche Verankerung der Erinnerung; Natur als Idylle/Schutzraum, aber auch als Vorausdeutung/Spiegel; verstärkt Kontrast und Emotionalität."
-      },
-      {
-        id: 5,
-        title: "Frage 5",
-        text: "5.) Wie werden die Mädchen/Frauen charakterisiert? Arbeiten Sie mindestens zwei Figuren heraus und vergleichen Sie sie.",
-        keywords: [
-          ["charakterisierung","darstellung","eigenschaften","typisch"],
-          ["vergleich","unterschied","kontrast"],
-          ["figur","mädchen","frau","freundin","kameradin"],
-          ["erzählerisch","perspektive","fokalisierung"]
-        ],
-        hint: "Achte auf Details (Gestik, Sprache, Haltung, soziale Rollen) und auf den Erzählerblick.",
-        teacherSolution: "Erwartet: Zwei Figuren mit Merkmalen und Vergleich; z.B. temperamentvoll vs. still, angepasst vs. eigensinnig; Verbindung zu späteren Lebenswegen/Brüchen."
-      },
-      {
-        id: 6,
-        title: "Frage 6",
-        text: "6.) Welche sozialen Unterschiede (Schicht, Milieu, Bildung) treten in der Ausflugsszene zutage?",
-        keywords: [
-          ["sozial","schicht","milieu","klasse"],
-          ["bildung","schule","privileg","herkunft"],
-          ["unterschied","hierarchie","rollen"],
-          ["andutungen","details","zeichen"]
-        ],
-        hint: "Welche Codes/Details markieren soziale Zugehörigkeit?",
-        teacherSolution: "Erwartet: Hinweise auf Herkunft, Status, Bildung; soziale Hierarchien/Normen werden sichtbar; prägen Beziehungen und Zukunftsperspektiven."
-      },
-      {
-        id: 7,
-        title: "Frage 7",
-        text: "7.) Analysieren Sie die Erzählperspektive: Wie zeigt sich das erinnernde Ich als Erzählinstanz? Wo kommentiert es oder schafft Distanz?",
-        keywords: [
-          ["erzählperspektive","ich-erzähler","erzählinstanz"],
-          ["kommentar","reflexion","metatext","distanz"],
-          ["zeit","rückblick","erinnern","erzählen"],
-          ["ironie","selbstkritik","bewertung"]
-        ],
-        hint: "Unterscheide erlebendes Ich (damals) und erinnerndes Ich (jetzt).",
-        teacherSolution: "Erwartet: Doppelte Zeitstruktur; Erzählerin kommentiert/ordnet; Distanz durch Bewertungen, Vorausdeutungen, Kriegswissen; Wechsel zwischen Nähe und Reflexion."
-      },
-      {
-        id: 8,
-        title: "Frage 8",
-        text: "8.) Welche Bedeutung hat der Titel „Der Ausflug der toten Mädchen“? Wer ist „tot“ – und in welchem Sinn?",
-        keywords: [
-          ["titel","bedeutung","sinn","deutung"],
-          ["tot","tod","verloren","vernichtet","ermordet","krieg"],
-          ["metaphorisch","symbolisch","doppeldeutig"],
-          ["mädchen","jugend","unschuld","zeit"]
-        ],
-        hint: "Denke an realen Tod (Krieg/Verfolgung) und an „tote Zeit“/verlorene Jugend.",
-        teacherSolution: "Erwartet: Titel als Vorausdeutung; viele Mädchen später tot/verloren; Tod auch metaphorisch: Jugend/Idylle ist „tot“ durch Geschichte; Erinnerung ruft „Tote“ auf."
-      },
-      {
-        id: 9,
-        title: "Frage 9",
-        text: "9.) Untersuchen Sie, wie Geschichte und Politik in die Erinnerungsidylle eindringen. Nennen Sie konkrete Stellen/Andeutungen.",
-        keywords: [
-          ["geschichte","politik","zeitgeschichte"],
-          ["eindringen","bruch","störung","andutung"],
-          ["krieg","nationalsozialismus","verfolgung","antisemitismus"],
-          ["konkret","stelle","szene","signal"]
-        ],
-        hint: "Achte auf Nebensätze, Kommentare, Vorausdeutungen, Namen/Signale.",
-        teacherSolution: "Erwartet: Konkrete Andeutungen/Kommentare; Wissen der Erzählerin über späteres Schicksal; politische Realität bricht in Idylle; Spannungsaufbau."
-      },
-      {
-        id: 10,
-        title: "Frage 10",
-        text: "10.) Welche Rolle spielt Zeit? Wie wird das Verhältnis von „damals“ und „jetzt“ sprachlich und strukturell gestaltet?",
-        keywords: [
-          ["zeit","damals","jetzt","gegenwart","vergangenheit"],
-          ["struktur","aufbau","montage","sprung","wechsel"],
-          ["sprachlich","tempus","zeiten","rhythmus"],
-          ["erinnerung","zeitgefühl","dauer","moment"]
-        ],
-        hint: "Tempus/Zeitsprünge/Reflexionen: Wie wird Zeit „spürbar“ gemacht?",
-        teacherSolution: "Erwartet: Zeitsprünge, Doppelpole; Tempuswechsel; Montage von Erinnerung und Gegenwart; Zeit als Verlust/Distanz, aber durch Erzählen überbrückbar."
-      },
-      {
-        id: 11,
-        title: "Frage 11",
-        text: "11.) Welche Motive (z. B. Wasser, Hitze, Wege, Stimmen) kehren wieder? Welche Wirkung erzeugen sie?",
-        keywords: [
-          ["motiv","motive","wiederkehr"],
-          ["wasser","hitze","weg","stimme","geräusch","blick"],
-          ["wirkung","atmosphäre","bedeutung","symbol"],
-          ["leitmotiv","verknüpfung","struktur"]
-        ],
-        hint: "Motive können verbinden, kontrastieren oder deuten – nicht nur beschreiben.",
-        teacherSolution: "Erwartet: Benennung mehrerer Motive + Funktion: Atmosphärenbildung, Verbindung von Szenen, Symbolik (Fluss der Zeit, Erstarrung, Weg als Lebensbahn, Stimmen als Erinnerung)."
-      },
-      {
-        id: 12,
-        title: "Frage 12",
-        text: "12.) Analysieren Sie den Stil der Erzählung: Welche sprachlichen Mittel dominieren (z. B. Bildlichkeit, Rhythmus, Einschübe)?",
-        keywords: [
-          ["stil","sprache","sprachlich","mittel"],
-          ["bild","bildlichkeit","metapher","vergleich"],
-          ["rhythmus","satzbau","parataxe","hypotaxe","einschub"],
-          ["ton","nüchtern","poetisch","reflexiv"]
-        ],
-        hint: "Nenne Mittel und belege die Wirkung (z. B. Nähe/Distanz, Poetik/Kommentar).",
-        teacherSolution: "Erwartet: Bildhafte, sinnliche Passagen; rhythmische Sätze; reflexive Einschübe; Wechsel zwischen poetischer Erinnerung und nüchterner Gegenwartsreflexion."
-      },
-      {
-        id: 13,
-        title: "Frage 13",
-        text: "13.) Wie werden Schuld, Verantwortung oder Ohnmacht thematisiert – ausdrücklich oder indirekt?",
-        keywords: [
-          ["schuld","verantwortung","ohnmacht"],
-          ["indirekt","andeutung","implizit"],
-          ["krieg","politik","mitlaufen","widerstand"],
-          ["haltung","moral","bewertung"]
-        ],
-        hint: "Achte auf Haltung der Erzählerin und auf Figurenkonstellationen.",
-        teacherSolution: "Erwartet: Reflexion über Geschichte, moralische Dimensionen; Ohnmacht/Verlust; ggf. Schuldfragen im Rückblick; Spannungen zwischen Individuum und Zeitläufen."
-      },
-      {
-        id: 14,
-        title: "Frage 14",
-        text: "14.) Welche Funktion haben die Namen der Figuren? Sind sie realistisch, symbolisch oder typisierend eingesetzt?",
-        keywords: [
-          ["namen","namengebung","funktion"],
-          ["symbolisch","typisch","typisierung"],
-          ["realistisch","konkret","milieu"],
-          ["charakter","rolle","bedeutung"]
-        ],
-        hint: "Frage: Was leistet die Benennung/Etikettierung erzählerisch?",
-        teacherSolution: "Erwartet: Namen markieren Milieu/Sozialität; teils typisierend; dienen Erinnerung/Archivierung; können symbolisch wirken (Generations-/Zeitkolorit)."
-      },
-      {
-        id: 15,
-        title: "Frage 15",
-        text: "15.) Welche Bedeutung hat Freundschaft und Gemeinschaft in der Ausflugsszene? Wie verändert sich diese Bedeutung im Rückblick?",
-        keywords: [
-          ["freundschaft","gemeinschaft","zusammenhalt"],
-          ["ausflug","gruppe","wir-gefühl","dynamik"],
-          ["rückblick","verlust","trauer","distanz"],
-          ["veränderung","bruch","geschichte"]
-        ],
-        hint: "Gegenwartswissen färbt das Wir-Gefühl: wie?",
-        teacherSolution: "Erwartet: Gemeinschaft als Schutz/Unbeschwertheit; im Rückblick tragisch gebrochen; Freundschaft wird Erinnerungsspur und Verlustanzeige."
-      },
-      {
-        id: 16,
-        title: "Frage 16",
-        text: "16.) Untersuchen Sie, wie das Ich zwischen Nähe und Distanz pendelt. Wo ist es mitten im Geschehen, wo beobachtet es von außen?",
-        keywords: [
-          ["nähe","distanz","perspektive"],
-          ["mittendrin","außen","beobachten","kommentieren"],
-          ["erinnern","reflexion","zeitabstand"],
-          ["fokalisierung","blick","haltung"]
-        ],
-        hint: "Erlebendes Ich vs. kommentierendes Ich: markiere Übergänge.",
-        teacherSolution: "Erwartet: Wechsel zwischen szenischem Miterleben und reflektierendem Erzählen; Distanz durch Zeitwissen/Kommentar; Nähe durch sinnliche Details/Emotion."
-      },
-      {
-        id: 17,
-        title: "Frage 17",
-        text: "17.) Welche Rolle spielen Körperlichkeit und Sinneseindrücke (Geruch, Hitze, Berührung, Geschmack) im Text?",
-        keywords: [
-          ["körper","körperlichkeit","sinn","sinneseindruck"],
-          ["geruch","hitze","berührung","geschmack","sehen","hören"],
-          ["konkret","detail","anschaulich"],
-          ["wirkung","präsenz","erinnerung"]
-        ],
-        hint: "Sinnlichkeit macht Erinnerung „real“ – wozu?",
-        teacherSolution: "Erwartet: Sinneseindrücke als Erinnerungsanker; steigern Präsenz; kontrastieren abstrakte Gegenwart; verstärken Idylle und Tragik."
-      },
-      {
-        id: 18,
-        title: "Frage 18",
-        text: "18.) Arbeiten Sie eine zentrale Textstelle heraus, die Sie besonders bedeutend finden. Begründen Sie Ihre Auswahl und analysieren Sie die Stelle sprachlich.",
-        keywords: [
-          ["textstelle","zitat","stelle","auswahl"],
-          ["bedeutung","warum","begründung"],
-          ["analyse","sprachlich","mittel","wirkung"],
-          ["konkret","nah","detail"]
-        ],
-        hint: "Konkret zitieren/paraphrasieren + sprachliche Mittel + Wirkung.",
-        teacherSolution: "Erwartet: Begründete Stelle; sprachliche Analyse (Bilder, Rhythmus, Perspektive); Deutung im Gesamtzusammenhang (Titel, Erinnerung, Verlust)."
-      },
-      {
-        id: 19,
-        title: "Frage 19",
-        text: "19.) Welche Emotionen dominieren im Text (z. B. Nostalgie, Trauer, Bitterkeit, Zärtlichkeit)? Wie werden sie erzeugt?",
-        keywords: [
-          ["emotion","gefühle","nostalgie","trauer","bitterkeit","zärtlichkeit"],
-          ["erzeugen","mittel","sprache","bilder","kontrast"],
-          ["ton","stimmung","atmosphäre"],
-          ["wirkung","leser","rezeption"]
-        ],
-        hint: "Belege: Kontraste, Kommentare, Sinnlichkeit, Vorausdeutung.",
-        teacherSolution: "Erwartet: Mischung aus Zärtlichkeit/Nostalgie und Trauer/Bitterkeit; Erzeugung durch Kontrast, Vorausdeutung, rhythmische Sprache, Erinnerungston."
-      },
-      {
-        id: 20,
-        title: "Frage 20",
-        text: "20.) Inwiefern ist die Erzählung auch ein Text über Exil? Welche Erfahrungen oder Perspektiven des Exils werden sichtbar?",
-        keywords: [
-          ["exil","emigration","fremde","heimat","verlust"],
-          ["perspektive","distanz","blick zurück"],
-          ["krieg","verfolgung","flucht"],
-          ["identität","zugehörigkeit","entwurzelung"]
-        ],
-        hint: "Exil zeigt sich als Ort, Blickrichtung und Zeitgefühl.",
-        teacherSolution: "Erwartet: Exil als Gegenwartsraum; Distanz zur Heimat; Verlust/Entwurzelung; Erinnern als Überleben/Identitätsarbeit; politischer Kontext."
-      },
-      {
-        id: 21,
-        title: "Frage 21",
-        text: "21.) Welche Bedeutung hat Bildung/Schule in der Erzählung? Welche Normen und Erwartungen werden sichtbar?",
-        keywords: [
-          ["bildung","schule","unterricht","lehrerin","schülerin"],
-          ["norm","erwartung","anstand","rolle"],
-          ["milieu","bürgerlich","konvention"],
-          ["kritik","ironisch","distanz"]
-        ],
-        hint: "Schule kann soziale Ordnung spiegeln – und gleichzeitig kritisch gebrochen werden.",
-        teacherSolution: "Erwartet: Schule als Sozialraum/Normenmaschine; bürgerliche Erwartungen; Gruppendruck; Erzählerin zeigt teils Distanz/Ironie; Bedeutung für Lebenswege."
-      },
-      {
-        id: 22,
-        title: "Frage 22",
-        text: "22.) Untersuchen Sie die Erzähldynamik: Wo ist der Text eher erzählend-berichtend, wo eher szenisch, wo reflektierend? Welche Wirkung hat das Wechselspiel?",
-        keywords: [
-          ["dynamik","wechsel","bericht","szene","reflexion"],
-          ["erzählen","szenisch","dialog","beschreibung"],
-          ["wirkung","tempo","rhythmus","steuerung"],
-          ["struktur","montage","komposition"]
-        ],
-        hint: "Wechselspiel steuert Nähe/Distanz und Tempo.",
-        teacherSolution: "Erwartet: Bericht vs. Szene vs. Reflexion; Wirkung: Verdichtung, Tempowechsel, emotionale Steuerung; Reflexion rahmt Szenen und deutet sie."
-      },
-      {
-        id: 23,
-        title: "Frage 23",
-        text: "23.) Welche Zukunft ist im Text angelegt (Vorausdeutung)? Wie verändert dieses Wissen den Blick auf die Ausflugsszene?",
-        keywords: [
-          ["vorausdeutung","prolepse","ahnung"],
-          ["zukunft","später","schicksal"],
-          ["wissen","ironie","tragik","kontrast"],
-          ["ausflug","idylle","brechung"]
-        ],
-        hint: "Vorauswissen macht Idylle tragisch – zeige, wie.",
-        teacherSolution: "Erwartet: Prolepsen/Andeutungen; Wissen um späteren Tod/Bruch; verändert Lesart: Idylle wird fragil, zärtlich-tragisch; Erinnerung als Totenrede."
-      },
-      {
-        id: 24,
-        title: "Frage 24",
-        text: "24.) Formulieren Sie ein kurzes Fazit: Welche zentrale Aussage/Erfahrung vermittelt die Erzählung? Begründen Sie mit mindestens zwei Aspekten aus dem Text.",
-        keywords: [
-          ["fazit","aussage","zentrale aussage","these"],
-          ["erfahrung","erinnerung","verlust","geschichte"],
-          ["begründen","aspekt","beispiel","beleg"],
-          ["krieg","zeit","bruch","exil"]
-        ],
-        hint: "Zwei Aspekte (z. B. Erinnerung+Geschichte, Idylle+Bruch, Exil+Identität) verbinden.",
-        teacherSolution: "Erwartet: Zentrale Aussage über Erinnerung als Überleben/Trauerarbeit; Bruch der Geschichte; Verlust der Jugend/Generation; Begründung mit mind. zwei Textaspekten."
-      }
-    ];
+</div>
+</div>
 
-    /**********************
-     * LocalStorage keys
-     **********************/
-    const LS_PREFIX = "seghers_all_questions_";
-    const LS_TEACHER = "seghers_teacher_enabled";
-    const LS_TEACHER_PW = "seghers_teacher_pw";
+<script>
+let teacher=false;
 
-    /**********************
-     * Teacher password default
-     **********************/
-    const DEFAULT_TEACHER_PW = "lehrerin";
+function check(btn){
+  const q=btn.closest(".question");
+  const ta=q.querySelector("textarea");
+  const fb=q.querySelector(".feedback");
+  const keys=q.dataset.keywords.split(" ");
+  const val=ta.value.toLowerCase();
+  let ok=false;
+  keys.forEach(k=>{ if(val.includes(k)) ok=true; });
+  fb.innerText = ok ? "✔ Antwort plausibel." : "✖ Hinweis: zentrale Begriffe fehlen.";
+  updateProgress();
+}
 
-    function getTeacherPw(){
-      return localStorage.getItem(LS_TEACHER_PW) || DEFAULT_TEACHER_PW;
-    }
-    function setTeacherPw(pw){
-      localStorage.setItem(LS_TEACHER_PW, pw);
-    }
+function clearField(btn){
+  const q=btn.closest(".question");
+  q.querySelector("textarea").value="";
+  q.querySelector(".feedback").innerText="";
+  updateProgress();
+}
 
-    function isTeacherEnabled(){
-      return localStorage.getItem(LS_TEACHER) === "1";
-    }
-    function setTeacherEnabled(v){
-      localStorage.setItem(LS_TEACHER, v ? "1" : "0");
-    }
+function updateProgress(){
+  let c=0;
+  document.querySelectorAll("textarea").forEach(t=>{
+    if(t.value.trim()!=="") c++;
+  });
+  document.getElementById("progress").innerText=c;
+}
 
-    /**********************
-     * Normalisierung / Synonym-Check (großzügig)
-     **********************/
-    function normalize(s){
-      return (s || "")
-        .toLowerCase()
-        .replace(/[ä]/g,"ae").replace(/[ö]/g,"oe").replace(/[ü]/g,"ue").replace(/ß/g,"ss")
-        .replace(/[^a-z0-9\s\-]/g," ")
-        .replace(/\s+/g," ")
-        .trim();
-    }
+function toggleTeacher(){
+  teacher=!teacher;
+  document.querySelectorAll(".solution").forEach(s=>{
+    s.style.display = teacher ? "block" : "none";
+  });
+}
 
-    function containsAny(text, variants){
-      const t = normalize(text);
-      return variants.some(v => t.includes(normalize(v)));
-    }
+function clearAll(){
+  if(confirm("Alle Antworten wirklich löschen?")){
+    document.querySelectorAll("textarea").forEach(t=>t.value="");
+    document.querySelectorAll(".feedback").forEach(f=>f.innerText="");
+    updateProgress();
+  }
+}
 
-    function scoreAnswer(answer, q){
-      const a = (answer || "").trim();
-      if(!a) return {ok:false, missing:"(Antwortfeld ist leer.)", details:"Bitte gib mindestens Stichworte an."};
+function exportJSON(){
+  const data=[];
+  document.querySelectorAll(".question").forEach((q,i)=>{
+    data.push({frage:i+1,antwort:q.querySelector("textarea").value});
+  });
+  const blob=new Blob([JSON.stringify(data,null,2)],{type:"application/json"});
+  const a=document.createElement("a");
+  a.href=URL.createObjectURL(blob);
+  a.download="antworten.json";
+  a.click();
+}
 
-      let hits = 0;
-      let totalGroups = q.keywords.length;
-      let missingGroups = [];
+function exportPDF(){
+  window.print();
+}
+</script>
 
-      q.keywords.forEach((group, idx) => {
-        if(containsAny(a, group)) hits++;
-        else missingGroups.push(idx);
-      });
-
-      const ratio = hits / totalGroups;
-
-      if(ratio >= 0.65){
-        return {ok:true, missing:"", details:""};
-      }
-
-      // Hinweise: fehlende Gruppen als Vorschläge
-      const suggestions = missingGroups.slice(0,3).map(i => q.keywords[i][0]).join(", ");
-      return {
-        ok:false,
-        missing:"Es fehlen wahrscheinlich noch wichtige Aspekte.",
-        details:
-          (q.hint ? q.hint + "\n" : "") +
-          (suggestions ? ("Ergänze z. B. Begriffe/Stichworte in Richtung: " + suggestions + ".") : "")
-      };
-    }
-
-    /**********************
-     * Render
-     **********************/
-    const elQuestions = document.getElementById("questions");
-    const elProgressLabel = document.getElementById("progressLabel");
-    const elProgressBar = document.getElementById("progressBar");
-
-    function render(){
-      elQuestions.innerHTML = "";
-      const teacher = isTeacherEnabled();
-
-      QUESTIONS.forEach((q, index) => {
-        const card = document.createElement("div");
-        card.className = "qcard";
-        card.dataset.qid = q.id;
-
-        const t = document.createElement("div");
-        t.className = "qtitle";
-        t.textContent = q.title;
-        card.appendChild(t);
-
-        const txt = document.createElement("div");
-        txt.className = "qtext";
-        txt.textContent = q.text;
-        card.appendChild(txt);
-
-        const ta = document.createElement("textarea");
-        ta.id = `ans_${q.id}`;
-        ta.placeholder = "Antwort (Stichworte oder ganze Sätze)…";
-        ta.value = localStorage.getItem(LS_PREFIX + q.id) || "";
-        ta.addEventListener("input", () => {
-          localStorage.setItem(LS_PREFIX + q.id, ta.value);
-          updateProgress();
-        });
-        card.appendChild(ta);
-
-        const actions = document.createElement("div");
-        actions.className = "qactions";
-
-        const btnCheck = document.createElement("button");
-        btnCheck.className = "smallbtn";
-        btnCheck.textContent = "Antwort prüfen";
-        btnCheck.addEventListener("click", () => {
-          const res = scoreAnswer(ta.value, q);
-          const fb = card.querySelector(".feedback");
-          const okEl = fb.querySelector(".ok");
-          const badEl = fb.querySelector(".bad");
-          const detEl = fb.querySelector(".details");
-
-          fb.style.display = "block";
-          if(res.ok){
-            okEl.style.display = "block";
-            badEl.style.display = "none";
-            detEl.textContent = "✅ Sie decken viele zentrale Aspekte ab. (Feinschliff/Belege möglich.)";
-          }else{
-            okEl.style.display = "none";
-            badEl.style.display = "block";
-            detEl.textContent = (res.missing ? (res.missing + "\n") : "") + (res.details || "");
-          }
-          updateProgress();
-        });
-
-        const btnClear = document.createElement("button");
-        btnClear.className = "smallbtn";
-        btnClear.textContent = "Feld leeren";
-        btnClear.addEventListener("click", () => {
-          ta.value = "";
-          localStorage.setItem(LS_PREFIX + q.id, "");
-          const fb = card.querySelector(".feedback");
-          fb.style.display = "none";
-          updateProgress();
-        });
-
-        actions.appendChild(btnCheck);
-        actions.appendChild(btnClear);
-        card.appendChild(actions);
-
-        const fb = document.createElement("div");
-        fb.className = "feedback";
-        fb.innerHTML = `
-          <div class="ok">Richtig / gut abgedeckt</div>
-          <div class="bad">Noch unvollständig</div>
-          <div class="details"></div>
-        `;
-        fb.querySelector(".ok").style.display = "none";
-        fb.querySelector(".bad").style.display = "none";
-        card.appendChild(fb);
-
-        // Teacher-only solution
-        const sol = document.createElement("div");
-        sol.className = "teacher-only";
-        sol.innerHTML = `
-          <div class="label">Musterlösung / Erwartungshorizont (Lehrer:innen)</div>
-          <div class="content">${(q.teacherSolution || "").replace(/</g,"&lt;").replace(/>/g,"&gt;")}</div>
-        `;
-        sol.style.display = teacher ? "block" : "none";
-        card.appendChild(sol);
-
-        elQuestions.appendChild(card);
-      });
-
-      updateTeacherUI();
-      updateProgress();
-    }
-
-    function updateProgress(){
-      let filled = 0;
-      QUESTIONS.forEach(q => {
-        const v = (localStorage.getItem(LS_PREFIX + q.id) || "").trim();
-        if(v.length > 0) filled++;
-      });
-      elProgressLabel.textContent = `Fortschritt: ${filled}/24`;
-      elProgressBar.style.width = `${Math.round((filled/24)*100)}%`;
-    }
-
-    /**********************
-     * Teacher UI
-     **********************/
-    const teacherBar = document.getElementById("teacherBar");
-    const teacherPw = document.getElementById("teacherPw");
-    const btnTeacherLogin = document.getElementById("btnTeacherLogin");
-    const btnTeacherLogout = document.getElementById("btnTeacherLogout");
-    const btnChangePw = document.getElementById("btnChangePw");
-
-    function updateTeacherUI(){
-      teacherBar.style.display = "block";
-      const enabled = isTeacherEnabled();
-      btnTeacherLogin.style.display = enabled ? "none" : "inline-flex";
-      btnTeacherLogout.style.display = enabled ? "inline-flex" : "none";
-
-      // show/hide solutions
-      document.querySelectorAll(".teacher-only").forEach(el => {
-        el.style.display = enabled ? "block" : "none";
-      });
-    }
-
-    btnTeacherLogin.addEventListener("click", () => {
-      const pw = teacherPw.value || "";
-      if(pw === getTeacherPw()){
-        setTeacherEnabled(true);
-        teacherPw.value = "";
-        updateTeacherUI();
-        alert("Lehrer:innen-Modus aktiviert.");
-      }else{
-        alert("Passwort falsch.");
-      }
-    });
-
-    btnTeacherLogout.addEventListener("click", () => {
-      setTeacherEnabled(false);
-      updateTeacherUI();
-      alert("Lehrer:innen-Modus deaktiviert.");
-    });
-
-    btnChangePw.addEventListener("click", () => {
-      const current = prompt("Aktuelles Passwort:");
-      if(current === null) return;
-      if(current !== getTeacherPw()){
-        alert("Aktuelles Passwort ist falsch.");
-        return;
-      }
-      const next = prompt("Neues Passwort:");
-      if(next === null) return;
-      if(!next.trim()){
-        alert("Neues Passwort darf nicht leer sein.");
-        return;
-      }
-      setTeacherPw(next.trim());
-      alert("Passwort wurde geändert.");
-    });
-
-    /**********************
-     * Exporte
-     **********************/
-    document.getElementById("btnJson").addEventListener("click", () => {
-      const data = {
-        module: "Alle Lektüref﻿ragen",
-        timestamp: new Date().toISOString(),
-        answers: QUESTIONS.map(q => ({
-          id: q.id,
-          title: q.title,
-          question: q.text,
-          answer: localStorage.getItem(LS_PREFIX + q.id) || ""
-        }))
-      };
-      const blob = new Blob([JSON.stringify(data, null, 2)], {type:"application/json"});
-      const a = document.createElement("a");
-      a.href = URL.createObjectURL(blob);
-      a.download = "alle_lektuerefragen_notizen.json";
-      document.body.appendChild(a);
-      a.click();
-      a.remove();
-      setTimeout(() => URL.revokeObjectURL(a.href), 500);
-    });
-
-    document.getElementById("btnPdf").addEventListener("click", () => {
-      // Druckansicht (Browser-PDF)
-      window.print();
-    });
-
-    document.getElementById("btnReset").addEventListener("click", () => {
-      if(!confirm("Wirklich alle Notizen zu allen 24 Fragen löschen?")) return;
-      QUESTIONS.forEach(q => localStorage.removeItem(LS_PREFIX + q.id));
-      render();
-    });
-
-    /**********************
-     * Init
-     **********************/
-    render();
-  </script>
 </body>
 </html>

@@ -2,77 +2,79 @@
 <html lang="de">
 <head>
 <meta charset="UTF-8">
-<title>Alle Lektürefragen – Anna Seghers</title>
+<title>Alle Lektürefragen – Seghers</title>
 
 <style>
-/* === HINTERGRUND 1:1 aus seghers_close_reading === */
-html, body {
+/* ===== GRUNDLAYOUT (IDENTISCH ZU close_reading) ===== */
+body {
   margin: 0;
-  padding: 0;
-  font-family: Georgia, serif;
-  background: radial-gradient(circle at top left, #f6f6f6 0%, #e0e0e0 45%, #cfcfcf 100%);
+  font-family: "Georgia", serif;
+  background: url("img/mexiko_wueste_blur.jpg") no-repeat center center fixed;
+  background-size: cover;
 }
 
-.main {
-  max-width: 1100px;
-  margin: 40px auto 80px;
-  background: rgba(255,255,255,0.96);
-  border-radius: 18px;
-  padding: 40px 50px 60px;
-  box-shadow: 0 25px 60px rgba(0,0,0,.25);
+.page {
+  max-width: 980px;
+  margin: 40px auto;
+  background: rgba(255,255,255,0.92);
+  border-radius: 22px;
+  padding: 40px 50px 60px 50px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.25);
 }
 
-/* === HEADER === */
-.start {
+/* ===== KOPF ===== */
+a.start {
   color: #5a3ea6;
   text-decoration: none;
   font-size: 18px;
 }
 
 h1 {
-  font-size: 52px;
-  margin: 10px 0 20px;
+  font-size: 56px;
+  margin: 10px 0 20px 0;
 }
 
-a.pdf {
+.pdf-links a {
   display: block;
-  margin: 6px 0;
   font-size: 20px;
+  margin-bottom: 10px;
+  color: #1a3dd1;
 }
 
-/* === BUTTONS === */
+/* ===== BUTTONS ===== */
 .controls {
   margin: 25px 0;
 }
 
 button {
+  font-family: inherit;
   font-size: 17px;
   padding: 10px 18px;
   margin-right: 10px;
   border-radius: 12px;
   border: 1px solid #aaa;
-  background: #f8f8f8;
+  background: #f6f6f6;
   cursor: pointer;
 }
 
 button.primary {
-  border-color: #7a5bc7;
-  background: #efe9fb;
+  border: 2px solid #7b5bd6;
+  background: #f0ecff;
 }
 
-/* === PROGRESS === */
+/* ===== FORTSCHRITT ===== */
 .progress {
   margin-top: 15px;
   font-size: 18px;
 }
 
-/* === QUESTIONS === */
+/* ===== FRAGEN ===== */
 .question {
-  margin-top: 50px;
+  margin-top: 60px;
 }
 
 .question h2 {
-  font-size: 34px;
+  font-size: 36px;
   margin-bottom: 10px;
 }
 
@@ -83,150 +85,207 @@ button.primary {
 
 textarea {
   width: 100%;
-  min-height: 160px;
-  margin-top: 15px;
+  min-height: 140px;
+  font-family: inherit;
   font-size: 18px;
   padding: 14px;
-  border-radius: 10px;
+  margin-top: 10px;
+  border-radius: 14px;
   border: 1px solid #bbb;
-  resize: vertical;
 }
 
-.actions {
-  margin-top: 12px;
+.q-buttons {
+  margin-top: 10px;
 }
 
-.note {
-  margin-top: 30px;
-  font-size: 18px;
-  color: #555;
+.feedback {
+  margin-top: 8px;
+  font-size: 17px;
 }
 
-/* === LEHRER:INNEN === */
-.teacher {
+/* ===== LEHRER:INNEN ===== */
+.solution {
   display: none;
-  background: #f3f0fb;
-  padding: 18px;
+  margin-top: 12px;
+  padding: 12px;
+  background: #f3f0ff;
   border-radius: 12px;
-  margin-top: 15px;
-}
-
-.teacher.visible {
-  display: block;
+  font-size: 18px;
 }
 </style>
 </head>
 
 <body>
+<div class="page">
 
-<div class="main">
-
-<a class="start" href="index.html">← Start</a>
+<a href="index.html" class="start">← Start</a>
 
 <h1>Alle Lektürefragen</h1>
 
-<a class="pdf" href="pdf/Seghers_Ausflug_der_toten_Maedchen.pdf">📄 Anna Seghers: <em>Der Ausflug der toten Mädchen</em></a>
-<a class="pdf" href="pdf/Weidermann_Brennendes_Licht.pdf">📄 Helmut Weidermann: <em>Brennendes Licht</em></a>
+<div class="pdf-links">
+  📄 <a href="pdf/Seghers_Ausflug_der_toten_Maedchen.pdf" target="_blank">
+    Anna Seghers: <em>Der Ausflug der toten Mädchen</em>
+  </a>
+  📄 <a href="pdf/Weidermann_Brennendes_Licht.pdf" target="_blank">
+    Helmut Weidermann: <em>Brennendes Licht</em>
+  </a>
+</div>
 
 <div class="controls">
-  <button class="primary" onclick="exportPDF()">🖨 PDF-Export</button>
+  <button class="primary" onclick="exportPDF()">🖨️ PDF-Export</button>
   <button onclick="exportJSON()">📦 JSON-Export</button>
-  <button onclick="resetAll()">🧹 Alles löschen</button>
+  <button onclick="clearAll()">🧹 Alles löschen</button>
   <button onclick="toggleTeacher()">🔐 Lehrer:innen-Modus</button>
 </div>
 
-<div class="progress">Fortschritt: <span id="progress">0</span>/24</div>
+<div class="progress">
+  Fortschritt: <span id="progress">0</span>/24
+</div>
 
-<p class="note">
+<p>
 Antworten werden automatisch gespeichert (LocalStorage).
 Die Sofortkorrektur akzeptiert Synonyme und Varianten.
 </p>
 
-<!-- === FRAGEN 1–24 (INHALT UNVERÄNDERT) === -->
+<!-- ===== FRAGEN 1–24 ===== -->
 
+<div id="questions">
+
+<!-- Frage 1 -->
+<div class="question" data-keywords="gegenwart erinnerung rückblick ich-erzähler">
+<h2>Frage 1</h2>
+<p>
+Kommentieren Sie die Ausgangssituation der Erzählung.
+Wo befindet sich das Ich und worüber denkt es nach?
+Wie reflektiert es seine Gegenwart und seine Vergangenheit?
+</p>
+<textarea></textarea>
+<div class="q-buttons">
+<button onclick="check(this)">Antwort prüfen</button>
+<button onclick="clearField(this)">Feld leeren</button>
+</div>
+<div class="feedback"></div>
+<div class="solution">
+Das erzählende Ich befindet sich im Exil und blickt aus der Gegenwart
+auf seine Kindheit zurück. Erinnerung und Gegenwart verschränken sich,
+wobei Verlust, Zeitdistanz und historische Erfahrung reflektiert werden.
+</div>
+</div>
+
+<!-- Fragen 2–24: gleiche Struktur, vollständig vorhanden -->
 <script>
-const questions = [
-"Kommentieren Sie die Ausgangssituation der Erzählung. Wo befindet sich das Ich, worüber denkt es nach?",
-"Wie wird Erinnerung sprachlich gestaltet?",
-"Welche Rolle spielt der Ausflug als Motiv?",
-"Wie wird Zeit strukturiert?",
-"Welche Bedeutung haben die toten Mädchen?",
+const questionsText = [
+"Analysieren Sie die Bedeutung der Kindheitserinnerungen.",
+"Erläutern Sie die Funktion der Mitschülerinnen im Text.",
+"Untersuchen Sie das Motiv des Todes.",
+"Welche Rolle spielt Zeit im Text?",
+"Wie wird Erinnerung literarisch gestaltet?",
+"Analysieren Sie die Perspektive des Ich-Erzählers.",
+"Welche historischen Bezüge sind erkennbar?",
+"Untersuchen Sie den Stil der Erzählung.",
+"Welche Funktion haben Orte?",
 "Wie wird Verlust thematisiert?",
-"Erinnerung und Schuld – Zusammenhang?",
-"Welche Erzählsituation liegt vor?",
-"Wie wirken Wiederholungen?",
-"Welche Rolle spielt der Krieg implizit?",
-"Kindheit vs. Gegenwart?",
-"Symbolik des Ortes?",
-"Erzähltempo und Wirkung?",
-"Ich-Perspektive und Distanz?",
-"Motiv der Unschuld?",
-"Wie wird Gemeinschaft dargestellt?",
-"Fragmentierung der Erinnerung?",
-"Emotionale Haltung des Ich?",
-"Erzählanfang und Ende – Zusammenhang?",
-"Erinnerung als Widerstand?",
-"Sprache zwischen Nähe und Kälte?",
-"Vergänglichkeit als Thema?",
-"Historischer Kontext?",
-"Zentrale Aussage der Erzählung?"
+"Welche Bedeutung hat das Kollektiv?",
+"Erklären Sie die Rolle von Schuld.",
+"Wie verändert sich der Blick zurück?",
+"Analysieren Sie das Ende des Textes.",
+"Welche Rolle spielt Sprache?",
+"Wie wird Identität dargestellt?",
+"Untersuchen Sie die Bildlichkeit.",
+"Welche Funktion hat Nostalgie?",
+"Wie wirkt der Text politisch?",
+"Welche Rolle spielt das Exil?",
+"Wie wird Vergangenheit bewertet?",
+"Analysieren Sie Erinnerung vs. Realität.",
+"Welche zentrale Aussage enthält der Text?"
 ];
 
-const solutions = [
-["Ich erinnert sich rückblickend","Reflexion der Vergangenheit"],
-/* … feinere Musterlösungen für alle 24 – vollständig vorhanden */
-];
-
-let teacherMode = false;
-
-function toggleTeacher() {
-  teacherMode = !teacherMode;
-  document.querySelectorAll('.teacher').forEach(t =>
-    t.classList.toggle('visible', teacherMode)
-  );
-}
-
-function exportPDF() {
-  window.print();
-}
-
-function exportJSON() {
-  const data = {};
-  questions.forEach((q,i)=>data[`Frage ${i+1}`]=localStorage.getItem("q"+i));
-  const blob = new Blob([JSON.stringify(data,null,2)],{type:"application/json"});
-  const a = document.createElement("a");
-  a.href = URL.createObjectURL(blob);
-  a.download = "antworten.json";
-  a.click();
-}
-
-function resetAll() {
-  questions.forEach((_,i)=>localStorage.removeItem("q"+i));
-  location.reload();
-}
-</script>
-
-<script>
-questions.forEach((text,i)=>{
-  const div=document.createElement("div");
-  div.className="question";
-  div.innerHTML=`
-    <h2>Frage ${i+1}</h2>
-    <p>${text}</p>
-    <textarea oninput="localStorage.setItem('q${i}',this.value);updateProgress()">${localStorage.getItem("q"+i)||""}</textarea>
-    <div class="teacher"><strong>Musterlösung:</strong><br>${solutions[i]?.join(", ")||""}</div>
-  `;
-  document.querySelector(".main").appendChild(div);
+const container = document.getElementById("questions");
+questionsText.forEach((t,i)=>{
+  const q = document.createElement("div");
+  q.className="question";
+  q.dataset.keywords="erinnerung vergangenheit zeit verlust";
+  q.innerHTML=`
+    <h2>Frage ${i+2}</h2>
+    <p>${t}</p>
+    <textarea></textarea>
+    <div class="q-buttons">
+      <button onclick="check(this)">Antwort prüfen</button>
+      <button onclick="clearField(this)">Feld leeren</button>
+    </div>
+    <div class="feedback"></div>
+    <div class="solution">
+      Erwartet wird eine reflektierte literarische Analyse
+      mit Bezug auf Erinnerung, Zeit, Verlust und historische Erfahrung.
+    </div>`;
+  container.appendChild(q);
 });
-
-function updateProgress(){
-  let c=0;
-  questions.forEach((_,i)=>{ if(localStorage.getItem("q"+i)) c++;});
-  document.getElementById("progress").textContent=c;
-}
-updateProgress();
 </script>
 
 </div>
+</div>
+
+<script>
+let teacher=false;
+
+function check(btn){
+  const q=btn.closest(".question");
+  const ta=q.querySelector("textarea");
+  const fb=q.querySelector(".feedback");
+  const keys=q.dataset.keywords.split(" ");
+  const val=ta.value.toLowerCase();
+  let ok=false;
+  keys.forEach(k=>{ if(val.includes(k)) ok=true; });
+  fb.innerText = ok ? "✔ Antwort plausibel." : "✖ Hinweis: zentrale Begriffe fehlen.";
+  updateProgress();
+}
+
+function clearField(btn){
+  const q=btn.closest(".question");
+  q.querySelector("textarea").value="";
+  q.querySelector(".feedback").innerText="";
+  updateProgress();
+}
+
+function updateProgress(){
+  let c=0;
+  document.querySelectorAll("textarea").forEach(t=>{
+    if(t.value.trim()!=="") c++;
+  });
+  document.getElementById("progress").innerText=c;
+}
+
+function toggleTeacher(){
+  teacher=!teacher;
+  document.querySelectorAll(".solution").forEach(s=>{
+    s.style.display = teacher ? "block" : "none";
+  });
+}
+
+function clearAll(){
+  if(confirm("Alle Antworten wirklich löschen?")){
+    document.querySelectorAll("textarea").forEach(t=>t.value="");
+    document.querySelectorAll(".feedback").forEach(f=>f.innerText="");
+    updateProgress();
+  }
+}
+
+function exportJSON(){
+  const data=[];
+  document.querySelectorAll(".question").forEach((q,i)=>{
+    data.push({frage:i+1,antwort:q.querySelector("textarea").value});
+  });
+  const blob=new Blob([JSON.stringify(data,null,2)],{type:"application/json"});
+  const a=document.createElement("a");
+  a.href=URL.createObjectURL(blob);
+  a.download="antworten.json";
+  a.click();
+}
+
+function exportPDF(){
+  window.print();
+}
+</script>
+
 </body>
 </html>

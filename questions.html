@@ -101,6 +101,7 @@ textarea {
 .feedback {
   margin-top: 8px;
   font-size: 17px;
+  white-space: pre-line;
 }
 
 /* ===== LEHRER:INNEN ===== */
@@ -123,87 +124,74 @@ textarea {
 <h1>Alle Lektürefragen</h1>
 
 <div class="pdf-links">
-  📄 <a href="pdf/Seghers_Der-Ausflug-der-toten-Maedchen_9783841213549.pdf" target="_blank">
-    Anna Seghers: <em>Der Ausflug der toten Mädchen</em>
-  </a>
-  📄 <a href="pdf/Weidermann_Brennendes-Licht_9783841225436.pdf" target="_blank">
-    Helmut Weidermann: <em>Brennendes Licht</em>
-  </a>
+📄 <a href="pdf/Seghers_Der-Ausflug-der-toten-Maedchen_9783841213549.pdf" target="_blank">
+Anna Seghers: <em>Der Ausflug der toten Mädchen</em></a>
+
+📄 <a href="pdf/Weidermann_Brennendes-Licht_9783841225436.pdf" target="_blank">
+Helmut Weidermann: <em>Brennendes Licht</em></a>
 </div>
 
 <div class="controls">
-  <button class="primary" onclick="exportPDF()">🖨️ PDF-Export</button>
-  <button onclick="exportJSON()">📦 JSON-Export</button>
-  <button onclick="clearAll()">🧹 Alles löschen</button>
-  <button onclick="toggleTeacher()">🔐 Lehrer:innen-Modus</button>
+<button class="primary" onclick="exportPDF()">🖨️ PDF-Export</button>
+<button onclick="exportJSON()">📦 JSON-Export</button>
+<button onclick="clearAll()">🧹 Alles löschen</button>
+<button onclick="toggleTeacher()">🔐 Lehrer:innen-Modus</button>
 </div>
 
 <div class="progress">
-  Fortschritt: <span id="progress">0</span>/24
+Fortschritt: <span id="progress">0</span>/24
 </div>
 
 <p>
-Antworten werden automatisch gespeichert (LocalStorage).
-Die Sofortkorrektur akzeptiert Synonyme und Varianten.
+Antworten werden automatisch gespeichert (LocalStorage).  
+Die Sofortkorrektur prüft inhaltliche Aspekte und gibt gezielte Hinweise.
 </p>
 
-<div id="questions">
-
-<div class="question" data-keywords="gegenwart erinnerung rückblick ich-erzähler">
-<h2>Frage 1</h2>
-<p>
-Kommentieren Sie die Ausgangssituation der Erzählung.
-Wo befindet sich das Ich und worüber denkt es nach?
-Wie reflektiert es seine Gegenwart und seine Vergangenheit?
-</p>
-<textarea></textarea>
-<div class="q-buttons">
-<button onclick="check(this)">Antwort prüfen</button>
-<button onclick="clearField(this)">Feld leeren</button>
-</div>
-<div class="feedback"></div>
-<div class="solution">
-Das erzählende Ich befindet sich im Exil und blickt aus der Gegenwart
-auf seine Kindheit zurück. Erinnerung und Gegenwart verschränken sich,
-wobei Verlust, Zeitdistanz und historische Erfahrung reflektiert werden.
-</div>
+<div id="questions"></div>
 </div>
 
 <script>
+/* =========================
+   DEINE 24 FRAGEN (EXAKT)
+   ========================= */
 const questionsText = [
-"Analysieren Sie die Bedeutung der Kindheitserinnerungen.",
-"Erläutern Sie die Funktion der Mitschülerinnen im Text.",
-"Untersuchen Sie das Motiv des Todes.",
-"Welche Rolle spielt Zeit im Text?",
-"Wie wird Erinnerung literarisch gestaltet?",
-"Analysieren Sie die Perspektive des Ich-Erzählers.",
-"Welche historischen Bezüge sind erkennbar?",
-"Untersuchen Sie den Stil der Erzählung.",
-"Welche Funktion haben Orte?",
-"Wie wird Verlust thematisiert?",
-"Welche Bedeutung hat das Kollektiv?",
-"Erklären Sie die Rolle von Schuld.",
-"Wie verändert sich der Blick zurück?",
-"Analysieren Sie das Ende des Textes.",
-"Welche Rolle spielt Sprache?",
-"Wie wird Identität dargestellt?",
-"Untersuchen Sie die Bildlichkeit.",
-"Welche Funktion hat Nostalgie?",
-"Wie wirkt der Text politisch?",
-"Welche Rolle spielt das Exil?",
-"Wie wird Vergangenheit bewertet?",
-"Analysieren Sie Erinnerung vs. Realität.",
-"Welche zentrale Aussage enthält der Text?"
+"1.) Kommentieren Sie die Ausgangssituation der Erzählung! Wo befindet sich das Ich und worüber denkt es nach? Wie reflektiert es seine Gegenwart und seine Vergangenheit?",
+"2.) Was löst der Rufname Netty beim Ich aus? Was können wir über seine Vorgeschichte erahnen? Was erfahren wir über sein Verhältnis zu Namen?",
+"3.) Was löst die Schaukel aus? Erklären Sie die Überblendungen der Landschaften!",
+"4.) Wie wird Leni beschrieben? Wie kommentiert das Ich deren Sorglosigkeit? Was hat sie alles erlebt? Wo hat das Ich sie zuletzt getroffen?",
+"5.) Welche Geschichte erzählt das Ich über Marianne? Was können wir über ihr Verhalten während der NS-Zeit erahnen? Was erfahren wir indirekt? Was geschah mit Lenis Tochter?",
+"6.) Wie wird Frau Mees beschrieben? Was bedeutet das klobige Kreuz? Wie wird ihre Haltung beschrieben?",
+"7.) Was erfährt das Ich über Nora? Welche Rolle spielte sie als Mädchen und wie entwickelte sie sich als Erwachsene während der NS-Zeit? Wie verändert sich ihr Verhalten Fräulein Sichel gegenüber?",
+"8.) Fassen Sie das Schicksal von Lore zusammen! Wie denunzierte sie ihr eifersüchtiger Naziliebhaber? Wessen wurde sie bezichtigt?",
+"9.) Fassen Sie das Leben von Ida zusammen! Warum heiratete sie nicht? Was erfahren wir über ihr Ende?",
+"10.) Beschreiben Sie Gerda! Wie verlief ihr Leben und warum beendete sie es? Interpretieren Sie den Satz: «Ihr Leben selbst war leichter vertilgbar als Spuren ihres Lebens, die im Gedächtnis von vielen sind, denen sie einmal zufällig geholfen hat.»",
+"11.) Fassen Sie das Schicksal von Otto Fresenius zusammen! Kommentieren Sie, dass die Szene durch eine Dampferfahrt umrahmt wird.",
+"12.) Interpretieren Sie den Satz: «Leni drehte so neugierig den Kopf, als ob sie ahne, dass auch ihre eigene Zukunft, der Ablauf ihres eigenen Schicksals, von der Vereinigung oder Trennung des Liebespaares abhänge.»",
+"13.) Erklären Sie, wie die Entfremdung von Leni und Marianne erzählerisch dargestellt wird. Was erfahren wir weiteres über Otto Fresenius? Was unterscheidet ihn vom gewissen Gustav Liebig? Welche Voraus- und Nachdeutungen begleiten die Szene?",
+"14.) Welche Auswirkungen hat Herr Neeb auf den weiteren Verlauf der Handlung?",
+"15.) Interpretieren Sie die Geschichte von Else und Ebi!",
+"16.) Zeigen Sie, wie die Geschichten miteinander verschränkt werden! Erklären Sie die Überblendungen der Handlungsstränge! Wohin bricht das Schiff auf?",
+"17.) Wie kommt das Ich zum Auftrag, einen Bericht zu schreiben?",
+"18.) Wie wird mit der Aussichtsbeschreibung die deutsche Geschichte kommentiert? Interpretieren Sie folgenden Satz: «Wie viele Aufsätze noch geschrieben wurden über die Heimat und die Geschichte der Heimat und die Liebe zur Heimat, nie wurde erwähnt, dass vornehmlich unser Schwarm aneinandergelehnter Mädchen, stromaufwärts im schrägen Nachmittagslicht, zur Heimat gehörte.»",
+"19.) Interpretieren Sie den Umstand, dass der «Greis» alle seine Schüler überlebt!",
+"20.) Deuten Sie die Abschiedsszene nach dem Ausflug! Wie wird Marianne sterben? Wie stirbt Leni? Warum überlebt ihr Kind?",
+"21.) Analysieren Sie die doppelte Bedeutung der Heimkehr! Wie erlebt das Ich den Weg? Welche Vorahnungen hat es? Inwiefern bewahrheiten sich diese?",
+"22.) Erläutern Sie die Müdigkeit! Was verbirgt sich in ihr? Wie transponiert sich die imaginierte Traumrealität in die mexikanische zurück?",
+"23.) Wie lesen Sie folgenden Satz? «Ich fragte mich, wie ich die Zeit verbringen sollte, heute und morgen, hier und dort, denn ich spürte jetzt einen unermesslichen Strom von Zeit, unbezwingbar wie die Luft.»",
+"24.) Inwiefern kriegt der Auftrag der Lehrerin während des Ausflugs eine andere Bedeutung? Was ist aus diesem Ausflug geworden?"
 ];
 
+/* ===== FRAGEN RENDERN (1–24) ===== */
 const container = document.getElementById("questions");
-questionsText.forEach((t,i)=>{
+questionsText.forEach((t, idx) => {
+  const qid = idx + 1;
   const q = document.createElement("div");
-  q.className="question";
-  q.dataset.keywords="erinnerung vergangenheit zeit verlust";
-  q.innerHTML=`
-    <h2>Frage ${i+2}</h2>
-    <p>${t}</p>
+  q.className = "question";
+  q.dataset.id = String(qid);
+  q.dataset.keywords = "erinnerung zeit exil kindheit ns schicksal";
+  q.innerHTML = `
+    <h2>Frage ${qid}</h2>
+    <p>${escapeHTML(t)}</p>
     <textarea></textarea>
     <div class="q-buttons">
       <button onclick="check(this)">Antwort prüfen</button>
@@ -211,28 +199,219 @@ questionsText.forEach((t,i)=>{
     </div>
     <div class="feedback"></div>
     <div class="solution">
-      Erwartet wird eine reflektierte literarische Analyse
-      mit Bezug auf Erinnerung, Zeit, Verlust und historische Erfahrung.
-    </div>`;
+      (Musterlösung nur im Lehrer:innen-Modus – hier kannst du später pro Frage eine echte Musterlösung eintragen.)
+    </div>
+  `;
   container.appendChild(q);
 });
-</script>
 
-</div>
-</div>
+/* ===== FRAGENSPEZIFISCHE HINWEISE ===== */
+const hintBank = {
+  1: {
+    missing: ["Ort/Situation des Ichs (Gegenwartsebene)", "Auslöser des Rückblicks", "Verschränkung von Gegenwart und Vergangenheit"],
+    questions: ["Wo ist das Ich jetzt?", "Was denkt es konkret in der Gegenwart?", "Wie wird der Übergang in die Erinnerung markiert?"],
+    starter: "Beginne z.B.: „Aus der Gegenwart (Exil) blickt das erzählende Ich …“"
+  },
+  2: {
+    missing: ["Wirkung des Namens „Netty“ (Trigger)", "Andeutung Vorgeschichte/Beziehung", "Reflexion über Namen/Namensmacht"],
+    questions: ["Welche Erinnerung wird durch den Rufnamen aktiviert?", "Was sagt die Namensreaktion über Verlust/Distanz?", "Welche Bedeutung haben Namen im Text insgesamt?"],
+    starter: "Nutze Signalwörter wie: „Rufname“, „Auslöser“, „Identität“, „Erinnerungsstoß“."
+  },
+  3: {
+    missing: ["Schaukel als Auslöser", "Mechanik der Überblendung", "zwei Landschaften/Zeitebenen klar benennen"],
+    questions: ["Welche Sinneswahrnehmung startet die Überblendung?", "Wie springt der Text zwischen Orten/Zeiten?", "Welche Wirkung hat das auf Leser:innen?"],
+    starter: "Beschreibe zuerst die Szene (Schaukel) – dann das Übergehen in die andere Landschaft."
+  },
+  4: {
+    missing: ["Lenis Charakterisierung", "Kommentar/Urteil des Ichs", "biografische Stationen (Erlebtes)", "letztes Treffen (Ort/Zeit)"],
+    questions: ["Welche Adjektive/Verhaltensweisen markieren Lenis Sorglosigkeit?", "Wie wertet das Ich diese Haltung?", "Was erfahren wir über Lenis spätere Lebensbahn?"],
+    starter: "Strukturiere: (1) Beschreibung – (2) Kommentar – (3) Biografie – (4) letztes Treffen."
+  },
+  5: {
+    missing: ["Marianne-Geschichte (Inhalt)", "Andeutungen zu NS-Verhalten", "indirekte Informationen (Zwischenräume)", "Schicksal von Lenis Tochter"],
+    questions: ["Was wird ausdrücklich erzählt – was nur angedeutet?", "Welche Indizien sprechen für Anpassung/Verstrickung/Opferrolle?", "Welche Funktion hat das Auslassen/Andeuten?"],
+    starter: "Arbeite mit: explizit / implizit / Indizien / Leerstellen."
+  },
+  6: {
+    missing: ["Beschreibung Frau Mees", "Symbolik des klobigen Kreuzes", "Haltung/Ideologie/Disposition"],
+    questions: ["Wofür kann das Kreuz stehen (Religiosität, Repräsentation, Starrheit)?", "Wie beschreibt der Text ihre Körperlichkeit/Art?", "Wie zeigt sich ihre Haltung im Verhalten?"],
+    starter: "Unterscheide: äußeres Zeichen (Kreuz) vs. innere Haltung."
+  },
+  7: {
+    missing: ["Was erfährt das Ich über Nora", "Noras Rolle als Mädchen", "Entwicklung als Erwachsene in der NS-Zeit", "Verhalten ggü. Frl. Sichel (Vorher/Nachher)"],
+    questions: ["Welche sozialen Rollen nimmt Nora ein?", "Wie verändert sich ihr Ton/Handeln im Verlauf?", "Was verrät das über Macht/Anpassung?"],
+    starter: "Vergleiche: Kindheitsbild vs. Erwachsenenbild."
+  },
+  8: {
+    missing: ["Lore – Schicksal in Kurzform", "Denunziation (Wer? warum?)", "Beschuldigung (Wessen bezichtigt?)"],
+    questions: ["Welche Motive hat der Naziliebhaber?", "Welche Folgen hat Denunziation im System?", "Welche Art von Vorwurf wird erhoben?"],
+    starter: "Dreischritt: (1) Lore – (2) Denunziant – (3) Anschuldigung/Folge."
+  },
+  9: {
+    missing: ["Idas Lebenslauf kurz", "Warum keine Heirat", "Informationen über ihr Ende"],
+    questions: ["Welche sozialen Normen/Umstände wirken auf Ida?", "Ist Verzicht Wahl oder Zwang?", "Wie wird ihr Ende erzählt/gerahmt?"],
+    starter: "Formuliere klar: Grund der Nicht-Heirat + Wirkung auf Lebensweg."
+  },
+  10: {
+    missing: ["Gerda – Beschreibung", "Lebensverlauf", "Grund für Suizid", "Satzinterpretation (Spuren vs. Leben)"],
+    questions: ["Warum bleiben „Spuren“ länger als das Leben?", "Welche Form von Hilfe/Wirksamkeit hatte Gerda?", "Was sagt der Satz über Erinnerung/Gedächtnis?"],
+    starter: "Deute die Metapher: „leichter vertilgbar“ vs. „Spuren im Gedächtnis“."
+  },
+  11: {
+    missing: ["Otto Fresenius – Schicksal", "Dampferfahrt als Rahmung", "Wirkung der Rahmung (Kontrast/Idylle/Ironie)"],
+    questions: ["Was macht die Dampferfahrt mit dem Ton?", "Wird Gewalt/Schicksal ästhetisch kontrastiert?", "Welche Funktion hat das „Umrahmen“?"],
+    starter: "Nenne zuerst Ottos Schicksal, dann deute die Rahmungsfunktion."
+  },
+  12: {
+    missing: ["Satz paraphrasieren", "Bedeutung für Lenis Zukunft", "Vorausdeutung/Schicksalslogik", "Liebespaar als Scharnier"],
+    questions: ["Warum hängt Lenis Schicksal am Liebespaar?", "Welche Form von Ahnungswissen wird gezeigt?", "Wie arbeitet der Text mit Vorausdeutung?"],
+    starter: "Zeige: Neugier → Ahnung → Schicksalsverkettung."
+  },
+  13: {
+    missing: ["Entfremdung erzählerisch (Technik)", "mehr über Otto Fresenius", "Abgrenzung zu Gustav Liebig", "Voraus-/Nachdeutungen (Indizien)"],
+    questions: ["Wie wird Distanz sichtbar (Blick, Ton, Auslassungen)?", "Was macht Otto „anders“ als Liebig?", "Welche Zeichen kündigen Kommendes an?"],
+    starter: "Arbeite mit Begriffen: Fokalisierung, Kontrastfigur, Vorausdeutung."
+  },
+  14: {
+    missing: ["Herr Neeb – konkrete Auswirkungen", "Handlungslenkung (Kausalität)", "Folgen für Figurenbeziehungen/Schicksale"],
+    questions: ["Was verändert Neeb unmittelbar?", "Welche Kette setzt er in Gang?", "Warum ist er narrativ wichtig?"],
+    starter: "Formuliere als Ursache-Wirkung: Neeb → X → Y."
+  },
+  15: {
+    missing: ["Else/Ebi – Inhalt der Geschichte", "Deutung (Symbolik/Sozialkritik)", "Einbettung in Gesamttext"],
+    questions: ["Was erzählt die Episode wörtlich?", "Welche zweite Ebene (Deutung) liegt darunter?", "Warum steht diese Geschichte genau hier?"],
+    starter: "Kurz nacherzählen, dann interpretieren (nicht umgekehrt)."
+  },
+  16: {
+    missing: ["Verschränkung der Geschichten", "Überblendungen konkret erklären", "Ziel/Route des Schiffs (Wohin?)"],
+    questions: ["Welche Übergangssignale nutzt der Text?", "Wie springen Perspektive/Ort/Zeit?", "Welche Bedeutung hat die Schiffbewegung?"],
+    starter: "Nenne 2–3 konkrete Übergänge (Szene A → Szene B)."
+  },
+  17: {
+    missing: ["Auftrag: Wer gibt ihn? warum?", "Kontext (Bericht)", "Funktion des Auftrags im Text"],
+    questions: ["Was soll berichtet werden?", "Wie positioniert das den Erzähler (Rolle/Funktion)?", "Welche Spannung entsteht daraus?"],
+    starter: "Kläre: Auftraggeber – Anlass – Zweck."
+  },
+  18: {
+    missing: ["Aussichtsbeschreibung + Kommentar zur Geschichte", "Satzinterpretation (Heimat-Aufsätze)", "Bedeutung des Mädchenschwarms als „Heimat“"],
+    questions: ["Welche Heimat wird kritisiert (ideologisch/abstrakt)?", "Warum wird der Mädchen-Schwarm als Heimat gesetzt?", "Welche Ironie liegt im Verschweigen?"],
+    starter: "Setze Gegensatz: offizielle Heimat-Rhetorik vs. gelebte Heimat."
+  },
+  19: {
+    missing: ["Greis als Figur (Bedeutung)", "Überleben aller Schüler (Paradox)", "Deutung: Zeit/Schuld/Erinnerung"],
+    questions: ["Warum ist dieses Überleben erzählerisch so hart?", "Welche historische Realität steht dahinter?", "Welche Funktion hat das Paradox?"],
+    starter: "Deute als bitteres Zeichen von Zeit- und Vernichtungserfahrung."
+  },
+  20: {
+    missing: ["Abschiedsszene deuten", "Mariannes Tod (wie?)", "Lenis Tod (wie?)", "Warum überlebt das Kind?"],
+    questions: ["Wie wird der Abschied tonal gestaltet?", "Welche Schicksalslinien werden geschlossen?", "Welche Bedeutung hat das überlebende Kind (Zukunft/Rest/Zeugnis)?"],
+    starter: "Strukturiere nach Figuren: Marianne – Leni – Kind."
+  },
+  21: {
+    missing: ["doppelte Heimkehr (zwei Ebenen)", "Weg-Erlebnis des Ichs", "Vorahnungen", "Bewahrheitung (was tritt ein?)"],
+    questions: ["Welche Heimkehr ist real, welche imaginär/innerlich?", "Welche Vorzeichen werden gesetzt?", "Wie bestätigt die Zukunft die Ahnung?"],
+    starter: "Zwei Ebenen sauber trennen: physisch vs. existenziell."
+  },
+  22: {
+    missing: ["Müdigkeit erklären", "was steckt darunter (psychisch/historisch)", "Rücktransposition Traum → Mexiko"],
+    questions: ["Ist Müdigkeit Schutz, Zusammenbruch oder Erkenntnis?", "Was wird in ihr „verborgen“?", "Wie kippt Traumlogik zurück in die Gegenwart?"],
+    starter: "Zeige den Übergang: Imagination (Traum) → Rückkehr (mexikanische Realität)."
+  },
+  23: {
+    missing: ["Satz auslegen (Zeit als Strom)", "Wirkung auf Ich", "Bezug auf Exil/Leere/Planlosigkeit", "Metapher deuten"],
+    questions: ["Warum ist Zeit hier „unermesslich“?", "Wieso „unbezwingbar wie die Luft“?", "Was sagt das über Sinn/Orientierung?"],
+    starter: "Interpretation: Zeitfülle ≠ erfüllte Zeit, sondern lastende Weite."
+  },
+  24: {
+    missing: ["Auftrag der Lehrerin neu deuten", "Bedeutungswandel des Ausflugs", "Was ist „aus dem Ausflug geworden“ (historisch/moralisch)"],
+    questions: ["Welche ursprüngliche Bedeutung hatte der Auftrag?", "Wie verändert Geschichte/NS den Sinn?", "Was bleibt vom Ausflug als Erinnerungs- und Schuldfigur?"],
+    starter: "Zeige den Bruch: Schulauftrag → geschichtliches Zeugnis/Trauerarbeit."
+  }
+};
 
-<script>
+/* ===== UTIL ===== */
+function escapeHTML(str){
+  return str
+    .replaceAll("&","&amp;")
+    .replaceAll("<","&lt;")
+    .replaceAll(">","&gt;");
+}
+
+/* ===== LOCALSTORAGE (Auto-Save) ===== */
+const LS_KEY="seghers_questions_answers_v1";
+
+function loadAnswers(){
+  try{
+    const raw=localStorage.getItem(LS_KEY);
+    if(!raw) return;
+    const data=JSON.parse(raw);
+    document.querySelectorAll(".question").forEach(q=>{
+      const id=q.dataset.id;
+      if(data[id]!==undefined){
+        q.querySelector("textarea").value=data[id];
+      }
+    });
+  }catch(e){}
+  updateProgress();
+}
+
+function saveAnswers(){
+  const data={};
+  document.querySelectorAll(".question").forEach(q=>{
+    data[q.dataset.id]=q.querySelector("textarea").value;
+  });
+  try{ localStorage.setItem(LS_KEY, JSON.stringify(data)); }catch(e){}
+}
+
+/* ===== HINWEISTEXT ===== */
+function buildHints(qid){
+  const h=hintBank[qid];
+  if(!h){
+    return "✖ Antwort noch zu knapp.\nTipp: Nennen Sie mindestens zwei zentrale Aspekte und erläutern Sie diese.";
+  }
+  return `✖ Antwort noch ungenügend.
+
+Was noch fehlt:
+• ${h.missing.join("\n• ")}
+
+Leitfragen:
+• ${h.questions.join("\n• ")}
+
+Formulierungshilfe:
+• ${h.starter}`;
+}
+
+/* ===== LOGIK ===== */
 let teacher=false;
 
 function check(btn){
   const q=btn.closest(".question");
   const ta=q.querySelector("textarea");
   const fb=q.querySelector(".feedback");
-  const keys=q.dataset.keywords.split(" ");
-  const val=ta.value.toLowerCase();
-  let ok=false;
-  keys.forEach(k=>{ if(val.includes(k)) ok=true; });
-  fb.innerText = ok ? "✔ Antwort plausibel." : "✖ Hinweis: zentrale Begriffe fehlen.";
+
+  const qid=parseInt(q.dataset.id,10);
+  const val=ta.value.toLowerCase().trim();
+
+  if(val.length<20){
+    fb.innerText=buildHints(qid);
+    saveAnswers();
+    updateProgress();
+    return;
+  }
+
+  const keys=(q.dataset.keywords||"").split(" ").filter(Boolean);
+  let hits=0;
+  for(const k of keys){
+    if(val.includes(k)) hits++;
+  }
+
+  if(hits>=2){
+    fb.innerText="✔ Antwort plausibel.";
+  }else{
+    fb.innerText=buildHints(qid);
+  }
+
+  saveAnswers();
   updateProgress();
 }
 
@@ -240,12 +419,13 @@ function clearField(btn){
   const q=btn.closest(".question");
   q.querySelector("textarea").value="";
   q.querySelector(".feedback").innerText="";
+  saveAnswers();
   updateProgress();
 }
 
 function updateProgress(){
   let c=0;
-  document.querySelectorAll("textarea").forEach(t=>{
+  document.querySelectorAll(".question textarea").forEach(t=>{
     if(t.value.trim()!=="") c++;
   });
   document.getElementById("progress").innerText=c;
@@ -254,14 +434,15 @@ function updateProgress(){
 function toggleTeacher(){
   teacher=!teacher;
   document.querySelectorAll(".solution").forEach(s=>{
-    s.style.display = teacher ? "block" : "none";
+    s.style.display=teacher?"block":"none";
   });
 }
 
 function clearAll(){
   if(confirm("Alle Antworten wirklich löschen?")){
-    document.querySelectorAll("textarea").forEach(t=>t.value="");
+    document.querySelectorAll(".question textarea").forEach(t=>t.value="");
     document.querySelectorAll(".feedback").forEach(f=>f.innerText="");
+    try{ localStorage.removeItem(LS_KEY); }catch(e){}
     updateProgress();
   }
 }
@@ -269,18 +450,32 @@ function clearAll(){
 function exportJSON(){
   const data=[];
   document.querySelectorAll(".question").forEach((q,i)=>{
-    data.push({frage:i+1,antwort:q.querySelector("textarea").value});
+    data.push({
+      frage:i+1,
+      text:q.querySelector("p").innerText,
+      antwort:q.querySelector("textarea").value
+    });
   });
   const blob=new Blob([JSON.stringify(data,null,2)],{type:"application/json"});
   const a=document.createElement("a");
   a.href=URL.createObjectURL(blob);
-  a.download="antworten.json";
+  a.download="antworten_seghers.json";
   a.click();
 }
 
 function exportPDF(){
   window.print();
 }
+
+/* ===== AUTO-SAVE HOOK ===== */
+document.addEventListener("input",(e)=>{
+  if(e.target && e.target.tagName==="TEXTAREA"){
+    saveAnswers();
+    updateProgress();
+  }
+});
+
+loadAnswers();
 </script>
 
 </body>
